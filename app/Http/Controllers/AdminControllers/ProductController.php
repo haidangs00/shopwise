@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Color;
+use App\Models\Image;
+use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
+use App\Http\Requests\Product\StoreRequest;
 
 class ProductController extends Controller
 {
@@ -14,7 +21,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        $categories = Category::all();
+        return view('admin.pages.product.index', compact('categories', 'products'));
     }
 
     /**
@@ -24,7 +33,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $brands = Brand::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+        return view('admin.pages.product.create', compact('categories', 'brands', 'colors', 'sizes'));
     }
 
     /**
@@ -33,9 +46,20 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+//        $fileName = $request->image->getClientOriginalName();
+//        $request->image->move(public_path('uploads'),$fileName);
+
+//        Product::create([$request->all()]);
+//        foreach($request->images as $image) {
+//            $name = $image->getClientOriginalName();
+//            Image::create([
+//                'path' => $name,
+//                'product_id' =>
+//            ]);
+//        }
+        dd($request);
     }
 
     /**
@@ -82,4 +106,5 @@ class ProductController extends Controller
     {
         //
     }
+
 }
