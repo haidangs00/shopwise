@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Color;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,17 +24,19 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required',
-            'category_id' => 'bail|required|numeric|exists:categories,id',
-            'brand_id' => 'bail|required|numeric|exists:,id',
-brandsadasd
+            'name' => "required|unique:colors,name,{$this->route('color', 'NULL')},id",
+            'color_code' => "required|unique:colors,color_code,{$this->route('color', 'NULL')},id",
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Bạn chưa nhập tên sản phẩm',
+            'name.required' => 'Bạn chua nhập tên màu',
+            'name.unique' => 'Tên màu đã tồn tại',
+
+            'color_code.required' => 'Bạn chọn mã màu',
+            'color_code.unique' => 'Mã màu đã tồn tại',
         ];
     }
 }

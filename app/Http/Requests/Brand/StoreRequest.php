@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Brand;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,17 +24,15 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required',
-            'category_id' => 'bail|required|numeric|exists:categories,id',
-            'brand_id' => 'bail|required|numeric|exists:,id',
-brandsadasd
+            'name' => "required|unique:brands,name,{$this->route('brand', 'NULL')},id",
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Bạn chưa nhập tên sản phẩm',
+            'name.required' => 'Bạn chưa nhập tên nhãn hàng',
+            'name.unique' => 'Tên nhãn hàng đã tồn tại',
         ];
     }
 }

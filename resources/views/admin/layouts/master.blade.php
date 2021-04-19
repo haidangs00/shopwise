@@ -41,6 +41,10 @@
 
     <!-- menu css  -->
     <link rel="stylesheet" href="{{url('backend')}}/css/metisMenu.css">
+
+    <!-- text editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <!-- style CSS -->
     <link rel="stylesheet" href="{{url('backend')}}/css/style.css" />
     <link rel="stylesheet" href="{{url('backend')}}/css/colors/default.css" id="colorSkinCSS">
@@ -80,6 +84,9 @@
             <ul>
                 <li><a class="" href="{{route('categories.index')}}">Danh mục</a></li>
                 <li><a href="{{route('products.index')}}">Sản phẩm</a></li>
+                <li><a href="{{route('colors.index')}}">Màu</a></li>
+                <li><a href="{{route('sizes.index')}}">Size</a></li>
+                <li><a href="{{route('brands.index')}}">Nhãn hàng</a></li>
             </ul>
         </li>
 
@@ -276,23 +283,19 @@
 <script src="{{url('backend')}}/js/custom.js"></script>
 
 <!-- active_chart js -->
-<script src="{{url('backend')}}/js/active_chart.js"></script>
-<script src="{{url('backend')}}/vendors/apex_chart/radial_active.js"></script>
-<script src="{{url('backend')}}/vendors/apex_chart/stackbar.js"></script>
-<script src="{{url('backend')}}/vendors/apex_chart/area_chart.js"></script>
+{{--<script src="{{url('backend')}}/js/active_chart.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/apex_chart/radial_active.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/apex_chart/stackbar.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/apex_chart/area_chart.js"></script>--}}
 <!-- <script src="vendors/apex_chart/pie.js"></script> -->
-<script src="{{url('backend')}}/vendors/apex_chart/bar_active_1.js"></script>
-<script src="{{url('backend')}}/vendors/chartjs/chartjs_active.js"></script>
+{{--<script src="{{url('backend')}}/vendors/apex_chart/bar_active_1.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/chartjs/chartjs_active.js"></script>--}}
+
+<!-- ck js -->
+<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 <!-- script js -->
 <script src="{{url('backend')}}/js/script.js"></script>
-
-<!-- filepond js -->
-<script src="{{url('backend')}}/js/filepond/filepond.min.js"></script>
-<script src="{{url('backend')}}/js/filepond/filepond-plugin-image-preview.min.js"></script>
-<script src="{{url('backend')}}/js/filepond/filepond-plugin-image-exif-orientation.min.js"></script>
-<script src="{{url('backend')}}/js/filepond/filepond-plugin-file-validate-size.min.js"></script>
-<script src="{{url('backend')}}/js/filepond/filepond-plugin-file-encode.min.js"></script>
 
 </body>
 

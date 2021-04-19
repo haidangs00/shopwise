@@ -43,32 +43,42 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
-//        $fileName = $request->image->getClientOriginalName();
-//        $request->image->move(public_path('uploads'),$fileName);
+        if ($request->has('file')) {
+            $file = $request->file;
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $fileName);
+            $request->merge(['image' => $fileName]);
 
-//        Product::create([$request->all()]);
-//        foreach($request->images as $image) {
-//            $name = $image->getClientOriginalName();
-//            Image::create([
-//                'path' => $name,
-//                'product_id' =>
-//            ]);
-//        }
-        dd($request);
+        }
+        $product = Product::create($request->all());
+
+        if ($request->has('images')) {
+
+            foreach ($request->images as $image) {
+                $name = $image->getClientOriginalName();
+                $image->move(public_path('uploads'), $name);
+                Image::create([
+                    'path' => $name,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+        return redirect()->route('products.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public
+    function show($id)
     {
         //
     }
@@ -76,22 +86,30 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all();
+        $brands = Brand::all();
+        $colors = Color::all();
+        $sizes = Size::all();
+        $images = Image::all();
+        return view('admin.pages.product.edit', compact('product', 'categories', 'brands', 'colors', 'sizes', 'images'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
@@ -99,10 +117,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }

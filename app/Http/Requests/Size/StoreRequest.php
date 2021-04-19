@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Size;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,17 +24,16 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required',
-            'category_id' => 'bail|required|numeric|exists:categories,id',
-            'brand_id' => 'bail|required|numeric|exists:,id',
-brandsadasd
+            'name' => "required|unique:sizes,name,{$this->route('size', NULL)},id",
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Bạn chưa nhập tên sản phẩm',
+            'name.required' => 'Bạn chưa nhập tên size',
+            'name.unique' => 'Tên size đã tồn tại',
+
         ];
     }
 }

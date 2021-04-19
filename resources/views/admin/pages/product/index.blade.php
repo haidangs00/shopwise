@@ -40,16 +40,21 @@
                                 <th scope="col">Số sao</th>
                                 <th scope="col">Mô tả</th>
                                 <th scope="col">Trạng thái</th>
+                                <th scope="col">Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($products as $product)
                                 <tr>
-                                    <td>{{$product->image}}</td>
+                                    <td>
+                                        <div class="image-td">
+                                            <img class="w-100" src="{{url('uploads')}}/{{$product->image}}" alt="{{$product->name}}">
+                                        </div>
+                                    </td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->category_id}}</td>
-                                    <td>{{$product->color}}</td>
-                                    <td>{{$product->size}}</td>
+                                    <td>{{$product->color_id}}</td>
+                                    <td>{{$product->size_id}}</td>
                                     <td>{{$product->brand_id}}</td>
                                     <td>{{$product->regular_price}}</td>
                                     <td>{{$product->sale}}</td>
@@ -61,6 +66,14 @@
                                         @else
                                             <a href="#" class="status_btn">Inactive</a>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{route('products.edit', $product->id)}}" class="btn_edit">Sửa</a>
+                                        <form class="d-inline-block" action="{{route('products.destroy', $product->id)}}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn_delete">Xóa</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

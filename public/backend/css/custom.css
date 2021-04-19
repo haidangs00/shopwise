@@ -204,137 +204,182 @@
     transition: all .2s ease;
 }
 
-.file-upload {
-    background-color: #ffffff;
-    margin: 0 auto;
-    padding: 20px;
+/*Button upload multiple file */
+.btn-upload {
+    border: 1px solid #c5dbec;
+    background: #d0e5f5;
+    font-weight: bold;
+    color: #2e6e9e;
+}
+/* This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
 }
 
-.file-upload-btn {
-    width: 100%;
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
     margin: 0;
-    color: #fff;
-    background: #1FB264;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    border-bottom: 4px solid #15824B;
-    transition: all .2s ease;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.file-upload-btn:hover {
-    background: #1AA059;
-    color: #ffffff;
-    transition: all .2s ease;
+    opacity: 0;
+    -ms-filter: "alpha(opacity=0)";
+    font-size: 200px;
+    direction: ltr;
     cursor: pointer;
 }
 
-.file-upload-btn:active {
-    border: 0;
-    transition: all .2s ease;
+.thumb {
+    height: 80px;
+    width: 100px;
+    border: 1px solid #000;
 }
 
-.file-upload-content {
-    display: none;
-    text-align: center;
+ul.thumb-Images li {
+    width: 120px;
+    float: left;
+    display: inline-block;
+    vertical-align: top;
+    height: 120px;
 }
 
-.file-upload-input {
+.img-wrap {
+    position: relative;
+    display: inline-block;
+    font-size: 0;
+}
+
+.img-wrap .close {
     position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    background-color: #d0e5f5;
+    padding: 5px 3px;
+    color: #000;
+    font-weight: bolder;
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 23px;
+    line-height: 10px;
+    border-radius: 50%;
+}
+
+.img-wrap:hover .close {
+    opacity: 1;
+    background-color: #ff0000;
+}
+
+.FileNameCaptionStyle {
+    font-size: 12px;
+}
+
+
+/*Show color*/
+.show-color {
+    width: 30px;
+    height: 30px;
+    display: block;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    border: 3px solid #fff;
+}
+.image-td {
+    width: 50px;
+}
+.wh200 img {
+    width: 200px;
+    height: 200px;
+}
+/*Form checkbox*/
+.form-checkbox-label {
+    display: inline-block;
+    margin-right: 2rem;
+    position: relative;
+    cursor: pointer;
+    padding-left: 1.5rem;
+    text-align: left;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+.form-checkbox-label input {
+    width: auto;
+    opacity: 0.0001;
+    position: absolute;
+    left: 0;
+    top: 0;
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
-    outline: none;
+}
+.form-checkbox-button {
+    position: absolute;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: block;
+    color: #999;
+    left: 0;
+    top: 0;
+    width: 1rem;
+    height: 1rem;
+    z-index: 0;
+    border: 0.125rem solid currentColor;
+    border-radius: 0.0625rem;
+    transition: color 0.28s ease;
+    will-change: color;
+}
+.form-checkbox-label span {
+    display: block;
+}
+.form-checkbox-label:hover i {
+    color: #337ab7;
+}
+.form-checkbox-button::before,
+.form-checkbox-button::after {
+    position: absolute;
+    height: 0;
+    width: 0.2rem;
+    background-color: #337ab7;
+    display: block;
+    transform-origin: left top;
+    border-radius: 0.25rem;
+    content: "";
+    transition: opacity 0.28s ease, height 0s linear 0.28s;
     opacity: 0;
-    cursor: pointer;
+    will-change: opacity, height;
 }
 
-.image-upload-wrap {
-    margin-top: 20px;
-    border: 4px dashed #1FB264;
-    position: relative;
+.form-checkbox-button::before {
+    top: 0.65rem;
+    left: 0.38rem;
+    transform: rotate(-135deg);
+    box-shadow: 0 0 0 0.0625rem #fff;
 }
 
-.image-dropping,
-.image-upload-wrap:hover {
-    background-color: #1FB264;
-    border: 4px dashed #ffffff;
+.form-checkbox-button::after {
+    top: 0.3rem;
+    left: 0;
+    transform: rotate(-45deg);
+}
+.form-checkbox-field:checked ~ .form-checkbox-button {
+    color: #337ab7;
 }
 
-.image-title-wrap {
-    padding: 0 15px 15px 15px;
-    color: #222;
+.form-checkbox-field:checked ~ .form-checkbox-button::after,
+.form-checkbox-field:checked ~ .form-checkbox-button::before {
+    opacity: 1;
+    transition: height 0.28s ease;
 }
 
-.drag-text {
-    text-align: center;
+.form-checkbox-field:checked ~ .form-checkbox-button::after {
+    height: 0.5rem;
 }
 
-.drag-text h3 {
-    font-weight: 100;
-    text-transform: uppercase;
-    color: #15824B;
-    padding: 60px 0;
+.form-checkbox-field:checked ~ .form-checkbox-button::before {
+    height: 1.2rem;
+    transition-delay: 0.28s;
 }
-
-.file-upload-image {
-    max-height: 200px;
-    max-width: 200px;
-    margin: auto;
-    padding: 20px;
-}
-
-.remove-image {
-    width: 200px;
-    margin: 0;
-    color: #fff;
-    background: #cd4535;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    border-bottom: 4px solid #b02818;
-    transition: all .2s ease;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.remove-image:hover {
-    background: #c13b2a;
-    color: #ffffff;
-    transition: all .2s ease;
-    cursor: pointer;
-}
-
-.remove-image:active {
-    border: 0;
-    transition: all .2s ease;
-}
-/**
- * FilePond Custom Styles
- */
-.filepond--drop-label {
-    color: #4c4e53;
-}
-
-.filepond--label-action {
-    text-decoration-color: #babdc0;
-}
-
-.filepond--panel-root {
-    border-radius: 2em;
-    background-color: #edf0f4;
-    height: 1em;
-}
-
-.filepond--item-panel {
-    background-color: #595e68;
-}
-
-.filepond--drip-blob {
-    background-color: #7f8a9a;
+.custom-i {
+    top: 8px;
 }

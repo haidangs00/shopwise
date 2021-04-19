@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
+            'name' => "required|max:255|unique:categories,name,{$this->route('categories', NULL)},id",
         ];
     }
 
@@ -32,6 +32,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name.required' => 'Bạn chưa nhập tên danh mục sản phẩm',
+            'name.unique' => 'Tên danh mục sản phẩm đã tồn tại',
             'name.max' => 'Tên danh mục sản phẩm không hợp lệ',
 
         ];

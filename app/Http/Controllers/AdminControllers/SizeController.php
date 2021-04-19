@@ -4,6 +4,8 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Size\StoreRequest;
+use App\Models\Size;
 
 class SizeController extends Controller
 {
@@ -14,7 +16,8 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $sizes = Size::all();
+        return view('admin.pages.size.index', compact('sizes'));
     }
 
     /**
@@ -24,7 +27,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.size.create');
     }
 
     /**
@@ -33,9 +36,10 @@ class SizeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        Size::create($request->all());
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -57,7 +61,8 @@ class SizeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $size = Size::find($id);
+        return view('admin.pages.size.edit', compact('size'));
     }
 
     /**
@@ -67,9 +72,11 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        //
+        $size = Size::find($id);
+        $size->update($request->all());
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -80,6 +87,8 @@ class SizeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $size = Size::find($id);
+        $size->delete();
+        return redirect()->back();
     }
 }

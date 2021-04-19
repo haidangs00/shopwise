@@ -13,7 +13,8 @@
                                     <h5 class="modal-title form-title">Thêm mới sản phẩm</h5>
                                 </div>
                                 <div class="modal-body pd">
-                                    <form method="post" action="{{route('products.store')}}" enctype="multipart/form">
+                                    <form method="post" action="{{route('products.store')}}"
+                                          enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name">Tên sản phẩm:</label>
@@ -25,7 +26,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="parent_id">Danh mục:</label>
-                                            <select class="default_sel mb_30 w-100">
+                                            <select name="category_id" class="default_sel mb_30 w-100">
                                                 <option>--Chọn danh mục--</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{$category->id}}">{{$category->name}}</option>
@@ -34,7 +35,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="brand_id">Nhãn hàng:</label>
-                                            <select class="default_sel mb_30 w-100">
+                                            <select name="brand_id" class="default_sel mb_30 w-100">
                                                 <option>--Chọn nhãn hàng--</option>
                                                 @foreach($brands as $brand)
                                                     <option value="{{$brand->id}}">{{$brand->name}}</option>
@@ -46,6 +47,7 @@
                                             <input type="text" name="slug" class="form-control" placeholder="Nhập slug">
                                         </div>
                                         <div class="form-group">
+                                            <label for="slug">Ảnh sản phẩm:</label>
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <div class="file-upload">
@@ -54,7 +56,7 @@
                                                         </button>
 
                                                         <div class="image-upload-wrap">
-                                                            <input class="file-upload-input" type='file'
+                                                            <input class="file-upload-input" name="file" type='file'
                                                                    onchange="readURL(this);" accept="image/*"/>
                                                             <div class="drag-text">
                                                                 <h3>Kéo và thả tệp hoặc chọn thêm hình ảnh</h3>
@@ -64,7 +66,8 @@
                                                             <img class="file-upload-image" src="#" alt="your image"/>
                                                             <div class="image-title-wrap">
                                                                 <button type="button" onclick="removeUpload()"
-                                                                        class="remove-image">Remove <span class="image-title">Uploaded Image</span>
+                                                                        class="remove-image">Remove <span
+                                                                        class="image-title">Uploaded Image</span>
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -73,8 +76,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="slug">Ảnh liên quan:</label>
-
+                                            <label for="filepond">Ảnh liên quan:</label>
+                                            <span class="btn btn-upload fileinput-button">
+                                                <span>Chọn ảnh</span>
+                                                    <input type="file" name="images[]" id="files" multiple
+                                                           accept="image/jpeg, image/png, image/gif,"><br/>
+                                                </span>
+                                            <output id="Filelist" class="d-block mt-3"></output>
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Trạng thái:</label>
@@ -89,7 +97,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="color">Màu:</label>
-                                            <select class="default_sel mb_30 w-100">
+                                            <select name="color_id" class="default_sel mb_30 w-100">
                                                 <option>--Chọn màu--</option>
                                                 @foreach($colors as $color)
                                                     <option value="{{$color->id}}">{{$color->name}}</option>
@@ -97,8 +105,8 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="color">Size:</label>
-                                            <select class="default_sel mb_30 w-100">
+                                            <label for="size">Size:</label>
+                                            <select name="size_id" class="default_sel mb_30 w-100">
                                                 <option>--Chọn size--</option>
                                                 @foreach($sizes as $size)
                                                     <option value="{{$size->id}}">{{$size->name}}</option>
@@ -107,7 +115,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="price">Giá gốc:</label>
-                                            <input type="number" name="price" class="form-control"
+                                            <input type="number" name="regular_price" class="form-control"
                                                    placeholder="Nhập giá gốc">
                                         </div>
                                         <div class="form-group">
@@ -115,14 +123,17 @@
                                             <input type="number" name="sale" class="form-control"
                                                    placeholder="Nhập khuyến mãi">
                                         </div>
+                                        <div class="form-group">
+                                            <label>Giá khuyến mãi:</label>
+                                            <input type="number" value="30000" class="form-control"
+                                                   disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mô tả:</label>
+                                            <textarea name="description" id="product_description" rows="10" cols="80"></textarea>
+                                        </div>
                                         <input type="submit" class="btn btn-primary" value="Thêm mới">
                                     </form>
-                                    <input id="images-recent" type="file"
-                                           class="filepond"
-                                           name="filepond"
-                                           multiple
-                                           data-max-file-size="3MB"
-                                           data-max-files="3" />
                                 </div>
                             </div>
                         </div>
