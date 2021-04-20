@@ -97,21 +97,30 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="color">Màu:</label>
-                                            <select name="color_id" class="default_sel mb_30 w-100">
-                                                <option>--Chọn màu--</option>
+                                            <div>
                                                 @foreach($colors as $color)
-                                                    <option value="{{$color->id}}">{{$color->name}}</option>
+                                                    <label class="form-checkbox-label">
+                                                        <input name=color_id class="form-checkbox-field"
+                                                               type="checkbox" />
+                                                        <i class="form-checkbox-button custom-i"></i>
+                                                        <span class="show-color"
+                                                              style="background-color: {{$color->color_code}}"></span>
+                                                    </label>
                                                 @endforeach
-                                            </select>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="size">Size:</label>
-                                            <select name="size_id" class="default_sel mb_30 w-100">
-                                                <option>--Chọn size--</option>
+                                            <div>
                                                 @foreach($sizes as $size)
-                                                    <option value="{{$size->id}}">{{$size->name}}</option>
+                                                    <label class="form-checkbox-label">
+                                                        <input name=color_id class="form-checkbox-field"
+                                                               type="checkbox"/>
+                                                        <i class="form-checkbox-button"></i>
+                                                        <span>{{$size->name}}</span>
+                                                    </label>
                                                 @endforeach
-                                            </select>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="price">Giá gốc:</label>

@@ -126,7 +126,7 @@
                                                 @foreach($colors as $color)
                                                     <label class="form-checkbox-label">
                                                         <input name=color_id class="form-checkbox-field"
-                                                               type="checkbox" {{$color->id==}} />
+                                                               type="checkbox" {{$color->id==$product->id?'checked':''}} />
                                                         <i class="form-checkbox-button custom-i"></i>
                                                         <span class="show-color"
                                                               style="background-color: {{$color->color_code}}"></span>
