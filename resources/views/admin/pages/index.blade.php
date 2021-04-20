@@ -1,4 +1,4 @@
-@extends('admin.layouts.master', ['pageTitle'=>'Home'])
+@extends('admin.layouts.master', ['pageTitle'=>'Dashboard'])
 
 @section('content')
     <div class="container-fluid plr_30 body_white_bg pt_30">

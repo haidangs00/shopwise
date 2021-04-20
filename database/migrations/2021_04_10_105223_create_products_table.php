@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('image_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('color_id');
             $table->unsignedBigInteger('size_id');

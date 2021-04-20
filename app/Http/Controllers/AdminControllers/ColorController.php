@@ -4,6 +4,8 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Color\StoreRequest;
+use App\Models\Color;
 
 class ColorController extends Controller
 {
@@ -14,7 +16,8 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        $colors = Color::all();
+        return view('admin.pages.color.index', compact('colors'));
     }
 
     /**
@@ -24,7 +27,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.color.create');
     }
 
     /**
@@ -33,9 +36,10 @@ class ColorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        Color::create($request->all());
+        return redirect()->route('colors.index');
     }
 
     /**
@@ -57,7 +61,8 @@ class ColorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $color = Color::find($id);
+        return view('admin.pages.color.edit', compact('color'));
     }
 
     /**
@@ -67,9 +72,11 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        //
+        $color = Color::find($id);
+        $color->update($request->all());
+        return redirect()->route('colors.index');
     }
 
     /**
@@ -80,6 +87,8 @@ class ColorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $color = Color::find($id);
+        $color->delete();
+        return redirect()->back();
     }
 }

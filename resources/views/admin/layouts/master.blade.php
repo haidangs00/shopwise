@@ -10,40 +10,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>{{$pageTitle ?? 'Unknown'}}</title>
 
-    <link rel="icon" href="backend/images/favicon.png" type="image/png">
+    <link rel="icon" href="{{url('backend')}}/images/favicon.png" type="image/png">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="backend/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/css/bootstrap.min.css" />
     <!-- themefy CSS -->
-    <link rel="stylesheet" href="backend/vendors/themefy_icon/themify-icons.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/themefy_icon/themify-icons.css" />
     <!-- swiper slider CSS -->
-    <link rel="stylesheet" href="backend/vendors/swiper_slider/css/swiper.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/swiper_slider/css/swiper.min.css" />
     <!-- select2 CSS -->
-    <link rel="stylesheet" href="backend/vendors/select2/css/select2.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/select2/css/select2.min.css" />
     <!-- select2 CSS -->
-    <link rel="stylesheet" href="backend/vendors/niceselect/css/nice-select.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/niceselect/css/nice-select.css" />
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="backend/vendors/owl_carousel/css/owl.carousel.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/owl_carousel/css/owl.carousel.css" />
     <!-- gijgo css -->
-    <link rel="stylesheet" href="backend/vendors/gijgo/gijgo.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/gijgo/gijgo.min.css" />
     <!-- font awesome CSS -->
-    <link rel="stylesheet" href="backend/vendors/font_awesome/css/all.min.css" />
-    <link rel="stylesheet" href="backend/vendors/tagsinput/tagsinput.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/font_awesome/css/all.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/tagsinput/tagsinput.css" />
     <!-- datatable CSS -->
-    <link rel="stylesheet" href="backend/vendors/datatable/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="backend/vendors/datatable/css/responsive.dataTables.min.css" />
-    <link rel="stylesheet" href="backend/vendors/datatable/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/datatable/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/datatable/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/datatable/css/buttons.dataTables.min.css" />
     <!-- text editor css -->
-    <link rel="stylesheet" href="backend/vendors/text_editor/summernote-bs4.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/text_editor/summernote-bs4.css" />
     <!-- morris css -->
-    <link rel="stylesheet" href="backend/vendors/morris/morris.css">
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/morris/morris.css">
     <!-- metarial icon css -->
-    <link rel="stylesheet" href="backend/vendors/material_icon/material-icons.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/vendors/material_icon/material-icons.css" />
 
     <!-- menu css  -->
-    <link rel="stylesheet" href="backend/css/metisMenu.css">
+    <link rel="stylesheet" href="{{url('backend')}}/css/metisMenu.css">
+
+    <!-- text editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <!-- style CSS -->
-    <link rel="stylesheet" href="backend/css/style.css" />
-    <link rel="stylesheet" href="backend/css/colors/default.css" id="colorSkinCSS">
+    <link rel="stylesheet" href="{{url('backend')}}/css/style.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/css/colors/default.css" id="colorSkinCSS">
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="{{url('backend')}}/css/custom.css" />
+
 </head>
 <body class="crm_body_bg">
 
@@ -55,28 +62,37 @@
 <!-- sidebar part here -->
 <nav class="sidebar">
     <div class="logo d-flex justify-content-between">
-        <a href="index-2.html"><img src="backend/images/logo.png" alt=""></a>
+        <a href="index-2.html"><img src="{{url('backend')}}/images/logo.png" alt=""></a>
         <div class="sidebar_close_icon d-lg-none">
             <i class="ti-close"></i>
         </div>
     </div>
     <ul id="sidebar_menu">
         <li class="mm-active">
-            <a class="has-arrow"  href="#"  aria-expanded="false">
+            <a class=""  href="{{route('dashboard')}}"  aria-expanded="false">
                 <!-- <i class="fas fa-th"></i> -->
-                <img src="backend/images/menu-icon/1.svg" alt="">
+                <img src="{{url('backend')}}/images/menu-icon/1.svg" alt="">
                 <span>Dashboard</span>
             </a>
-            <ul>
-                <li><a class="active" href="index-2.html">Classic</a></li>
-                <li><a href="index_2.html">Minimal</a></li>
-            </ul>
-
         </li>
 
         <li class="">
             <a   class="has-arrow" href="#" aria-expanded="false">
-                <img src="backend/images/menu-icon/2.svg" alt="">
+                <img src="{{url('backend')}}/images/menu-icon/6.svg" alt="">
+                <span>Quản lý</span>
+            </a>
+            <ul>
+                <li><a class="" href="{{route('categories.index')}}">Danh mục</a></li>
+                <li><a href="{{route('products.index')}}">Sản phẩm</a></li>
+                <li><a href="{{route('colors.index')}}">Màu</a></li>
+                <li><a href="{{route('sizes.index')}}">Size</a></li>
+                <li><a href="{{route('brands.index')}}">Nhãn hàng</a></li>
+            </ul>
+        </li>
+
+        <li class="">
+            <a   class="has-arrow" href="#" aria-expanded="false">
+                <img src="{{url('backend')}}/images/menu-icon/2.svg" alt="">
                 <span>Pages</span>
             </a>
             <ul>
@@ -88,7 +104,7 @@
 
         <li class="">
             <a   class="has-arrow" href="#" aria-expanded="false">
-                <img src="backend/images/menu-icon/3.svg" alt="">
+                <img src="{{url('backend')}}/images/menu-icon/3.svg" alt="">
                 <span>Applications</span>
             </a>
             <ul>
@@ -100,7 +116,7 @@
 
         <li class="">
             <a   class="has-arrow" href="#" aria-expanded="false">
-                <img src="backend/images/menu-icon/4.svg" alt="">
+                <img src="{{url('backend')}}/images/menu-icon/4.svg" alt="">
                 <span>UI Component</span>
             </a>
             <ul>
@@ -126,7 +142,7 @@
 
         <li class="">
             <a   class="has-arrow" href="#" aria-expanded="false">
-                <img src="backend/images/menu-icon/5.svg" alt="">
+                <img src="{{url('backend')}}/images/menu-icon/5.svg" alt="">
                 <span>Widgets</span>
             </a>
             <ul>
@@ -137,29 +153,7 @@
 
         <li class="">
             <a   class="has-arrow" href="#" aria-expanded="false">
-                <img src="backend/images/menu-icon/6.svg" alt="">
-                <span>Forms</span>
-            </a>
-            <ul>
-                <li><a href="#">Elements</a>
-                    <ul>
-                        <li><a href="data_table.html">Data Tables</a></li>
-                        <li><a href="bootstrap_table.html">Grid Tables</a></li>
-                        <li><a href="datepicker.html">Date Picker</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Widgets</a>
-                    <ul>
-                        <li><a href="Input_Selects.html">Input Selects</a></li>
-                        <li><a href="Input_Mask.html">Input Mask</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <li class="">
-            <a   class="has-arrow" href="#" aria-expanded="false">
-                <img src="backend/images/menu-icon/7.svg" alt="">
+                <img src="{{url('backend')}}/images/menu-icon/7.svg" alt="">
                 <span>Charts</span>
             </a>
             <ul>
@@ -191,21 +185,21 @@
                                 <div class="search_field">
                                     <input type="text" placeholder="Search here..." >
                                 </div>
-                                <button type="submit"> <img src="backend/images/icon/icon_search.svg" alt=""> </button>
+                                <button type="submit"> <img src="{{url('backend')}}/images/icon/icon_search.svg" alt=""> </button>
                             </form>
                         </div>
                     </div>
                     <div class="header_right d-flex justify-content-between align-items-center">
                         <div class="header_notification_warp d-flex align-items-center">
                             <li>
-                                <a href="#"> <img src="backend/images/icon/bell.svg" alt=""> </a>
+                                <a href="#"> <img src="{{url('backend')}}/images/icon/bell.svg" alt=""> </a>
                             </li>
                             <li>
-                                <a href="#"> <img src="backend/images/icon/msg.svg" alt=""> </a>
+                                <a href="#"> <img src="{{url('backend')}}/images/icon/msg.svg" alt=""> </a>
                             </li>
                         </div>
                         <div class="profile_info">
-                            <img src="backend/images/client_img.png" alt="#">
+                            <img src="{{url('backend')}}/images/client_img.png" alt="#">
                             <div class="profile_info_iner">
                                 <p>Welcome Admin!</p>
                                 <h5>Travor James</h5>
@@ -243,59 +237,65 @@
 
 <!-- footer  -->
 <!-- jquery slim -->
-<script src="backend/js/jquery-3.4.1.min.js"></script>
+<script src="{{url('backend')}}/js/jquery-3.4.1.min.js"></script>
 <!-- popper js -->
-<script src="backend/js/popper.min.js"></script>
+<script src="{{url('backend')}}/js/popper.min.js"></script>
 <!-- bootstarp js -->
-<script src="backend/js/bootstrap.min.js"></script>
+<script src="{{url('backend')}}/js/bootstrap.min.js"></script>
 <!-- sidebar menu  -->
-<script src="backend/js/metisMenu.js"></script>
+<script src="{{url('backend')}}/js/metisMenu.js"></script>
 <!-- waypoints js -->
-<script src="backend/vendors/count_up/jquery.waypoints.min.js"></script>
+<script src="{{url('backend')}}/vendors/count_up/jquery.waypoints.min.js"></script>
 <!-- waypoints js -->
-<script src="backend/vendors/chartlist/Chart.min.js"></script>
+<script src="{{url('backend')}}/vendors/chartlist/Chart.min.js"></script>
 <!-- counterup js -->
-<script src="backend/vendors/count_up/jquery.counterup.min.js"></script>
+<script src="{{url('backend')}}/vendors/count_up/jquery.counterup.min.js"></script>
 <!-- swiper slider js -->
-<script src="backend/vendors/swiper_slider/js/swiper.min.js"></script>
+<script src="{{url('backend')}}/vendors/swiper_slider/js/swiper.min.js"></script>
 <!-- nice select -->
-<script src="backend/vendors/niceselect/js/jquery.nice-select.min.js"></script>
+<script src="{{url('backend')}}/vendors/niceselect/js/jquery.nice-select.min.js"></script>
 <!-- owl carousel -->
-<script src="backend/vendors/owl_carousel/js/owl.carousel.min.js"></script>
+<script src="{{url('backend')}}/vendors/owl_carousel/js/owl.carousel.min.js"></script>
 <!-- gijgo css -->
-<script src="backend/vendors/gijgo/gijgo.min.js"></script>
+<script src="{{url('backend')}}/vendors/gijgo/gijgo.min.js"></script>
 <!-- responsive table -->
-<script src="backend/vendors/datatable/js/jquery.dataTables.min.js"></script>
-<script src="backend/vendors/datatable/js/dataTables.responsive.min.js"></script>
-<script src="backend/vendors/datatable/js/dataTables.buttons.min.js"></script>
-<script src="backend/vendors/datatable/js/buttons.flash.min.js"></script>
-<script src="backend/vendors/datatable/js/jszip.min.js"></script>
-<script src="backend/vendors/datatable/js/pdfmake.min.js"></script>
-<script src="backend/vendors/datatable/js/vfs_fonts.js"></script>
-<script src="backend/vendors/datatable/js/buttons.html5.min.js"></script>
-<script src="backend/vendors/datatable/js/buttons.print.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/jquery.dataTables.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/dataTables.responsive.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/dataTables.buttons.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/buttons.flash.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/jszip.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/pdfmake.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/vfs_fonts.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/buttons.html5.min.js"></script>
+<script src="{{url('backend')}}/vendors/datatable/js/buttons.print.min.js"></script>
 
-<script src="backend/js/chart.min.js"></script>
+<script src="{{url('backend')}}/js/chart.min.js"></script>
 <!-- progressbar js -->
-<script src="backend/vendors/progressbar/jquery.barfiller.js"></script>
+<script src="{{url('backend')}}/vendors/progressbar/jquery.barfiller.js"></script>
 <!-- tag input -->
-<script src="backend/vendors/tagsinput/tagsinput.js"></script>
+<script src="{{url('backend')}}/vendors/tagsinput/tagsinput.js"></script>
 <!-- text editor js -->
-<script src="backend/vendors/text_editor/summernote-bs4.js"></script>
+<script src="{{url('backend')}}/vendors/text_editor/summernote-bs4.js"></script>
 
-<script src="backend/vendors/apex_chart/apexcharts.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/apexcharts.js"></script>
 
 <!-- custom js -->
-<script src="backend/js/custom.js"></script>
+<script src="{{url('backend')}}/js/custom.js"></script>
 
 <!-- active_chart js -->
-<script src="backend/js/active_chart.js"></script>
-<script src="backend/vendors/apex_chart/radial_active.js"></script>
-<script src="backend/vendors/apex_chart/stackbar.js"></script>
-<script src="backend/vendors/apex_chart/area_chart.js"></script>
+{{--<script src="{{url('backend')}}/js/active_chart.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/apex_chart/radial_active.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/apex_chart/stackbar.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/apex_chart/area_chart.js"></script>--}}
 <!-- <script src="vendors/apex_chart/pie.js"></script> -->
-<script src="backend/vendors/apex_chart/bar_active_1.js"></script>
-<script src="backend/vendors/chartjs/chartjs_active.js"></script>
+{{--<script src="{{url('backend')}}/vendors/apex_chart/bar_active_1.js"></script>--}}
+{{--<script src="{{url('backend')}}/vendors/chartjs/chartjs_active.js"></script>--}}
+
+<!-- ck js -->
+<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+<!-- script js -->
+<script src="{{url('backend')}}/js/script.js"></script>
 
 </body>
 
