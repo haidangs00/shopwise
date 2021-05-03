@@ -4,8 +4,8 @@
     // $(document).ready(function(){
     //     $('#bar4').barfiller({ barColor: '#900', duration: 3000 });
     // });
-    
-    
+
+
     //notification section js
     $(".close_icon").click(function () {
       $(this).parents(".hide_content").slideToggle("0");
@@ -24,9 +24,9 @@
     }
 
 
-    // data table 
+    // data table
 
-    
+
     //niceselect select jquery
     $('.nice_Select').niceSelect();
     //niceselect select jquery
@@ -62,7 +62,7 @@
     $('.sidebar_close_icon i').on('click', function(){
         $('.sidebar').removeClass('active_sidebar');
     });
-    
+
     //active menu
     $('.troggle_icon').on('click', function(){
         $('.setting_navbar_bar').toggleClass('active_menu');
@@ -78,7 +78,7 @@
             $(this).removeClass('active');
         } else {
             $('.custom_select.active').removeClass('active');
-            $(this).addClass('active');    
+            $(this).addClass('active');
         }
     });
 //     $( 'ul.nav li' ).on( 'click', function() {
@@ -97,7 +97,7 @@
             $("body").find(".sidebar").removeClass("active_sidebar");
         }
     });
-    
+
     // check all
     $("#checkAll").click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
@@ -115,26 +115,26 @@
         tabsize: 2,
         height: 188
     });
-    
+
     //custom file
     $('.input-file').each(function() {
         var $input = $(this),
             $label = $input.next('.js-labelFile'),
             labelVal = $label.html();
-        
+
        $input.on('change', function(element) {
           var fileName = '';
           if (element.target.value) fileName = element.target.value.split('\\').pop();
           fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
        });
     });
-    
+
     //custom file
     $('.input-file2').each(function() {
         var $input = $(this),
             $label = $input.next('.js-labelFile1'),
             labelVal = $label.html();
-        
+
        $input.on('change', function(element) {
           var fileName = '';
           if (element.target.value) fileName = element.target.value.split('\\').pop();
@@ -191,18 +191,18 @@
         $(this).removeClass('layout_style_selected');
     } else {
         $('.layout_style.layout_style_selected').removeClass('layout_style_selected');
-        $(this).addClass('layout_style_selected');    
+        $(this).addClass('layout_style_selected');
     }
 });
 
-// metisMenu 
+// metisMenu
 $("#sidebar_menu").metisMenu();
 
-// metisMenu 
+// metisMenu
 $("#admin_profile_active").metisMenu();
 
-// switcher menu 
-// anly for side switcher menu 
+// switcher menu
+// anly for side switcher menu
 $('.switcher_wrap li.Horizontal').click( function(){
     $('.sidebar').addClass('hide_vertical_menu');
     $('.main_content ').addClass('main_content_padding_hide');
@@ -219,8 +219,8 @@ $('.switcher_wrap li.vertical').click( function(){
     $('.footer_part').removeClass('pl-0');
 });
 
-// switcher_wrap 
-// anly for side switcher menu 
+// switcher_wrap
+// anly for side switcher menu
 
 $('.switcher_wrap li').click(function(){
     $('li').removeClass("active");
@@ -234,11 +234,11 @@ $('.custom_lms_choose li').click(function(){
 
 
 $('.spin_icon_clicker').on('click', function(e) {
-    $('.switcher_slide_wrapper').toggleClass("swith_show"); //you can list several class names 
+    $('.switcher_slide_wrapper').toggleClass("swith_show"); //you can list several class names
     e.preventDefault();
   });
 
-//   color skin 
+//   color skin
   $(document).ready(function(){
     $(function () {
         "use strict";
@@ -247,6 +247,6 @@ $('.spin_icon_clicker').on('click', function(e) {
           $(".pCard_add i").toggleClass("fa-minus");
         });
       });
-    }); 
+    });
 
 }(jQuery));

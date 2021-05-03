@@ -18,11 +18,32 @@ class Product extends Model
         'size_id',
         'brand_id',
         'regular_price',
-        'sale',
+        'promotional_price',
         'description',
         'status',
         'star',
         'created_at',
         'updated_at'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo('App\Models\Brand');
+    }
+
+    public function productColors()
+    {
+        return $this->hasMany('App\Models\ProductColor');
+    }
+
+    public function productSizes()
+    {
+        return $this->hasMany('App\Models\ProductSize');
+    }
+
 }

@@ -18,11 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('color_id');
-            $table->unsignedBigInteger('size_id');
             $table->unsignedBigInteger('brand_id');
             $table->double('regular_price');
-            $table->double('sale')->default(1);
+            $table->double('promotional_price');
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1)->comment('active:1, inactive:0');
             $table->double('star')->nullable();

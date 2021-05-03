@@ -52,6 +52,7 @@
     color: red;
     font-size: 12px;
     margin-left: 12px;
+    display: block;
 }
 .radio {
     margin: 0.5rem;
@@ -382,4 +383,21 @@ ul.thumb-Images li {
 }
 .custom-i {
     top: 8px;
+}
+.nice-select {
+    float: none;
+}
+.pro-color {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+}
+.pro-size::after {
+    content: ',';
+}
+.pro-size:last-child::after {
+    display: none;
+}
+.cs_modal .modal-body input {
+    margin-bottom: 5px;
 }
