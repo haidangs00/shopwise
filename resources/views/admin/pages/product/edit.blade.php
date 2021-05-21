@@ -12,7 +12,7 @@
                                     <h5 class="modal-title form-title">Cập nhập sản phẩm</h5>
                                 </div>
                                 <div class="modal-body pd">
-                                    <form method="post" action="{{route('products.update', $product->id)}}"
+                                    <form class="form-action" method="post" action="{{route('products.update', $product->id)}}"
                                           enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
@@ -20,9 +20,7 @@
                                             <label for="name">Tên sản phẩm:</label>
                                             <input type="text" name="name" value="{{$product->name}}" class="form-control"
                                                    placeholder="Nhập tên sản phẩm">
-                                            @error('name')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="name"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>Danh mục:</label>
@@ -32,9 +30,7 @@
                                                     <option value="{{$category->id}}" {{$product->category_id==$category->id?'selected':''}}>{{$category->name}}</option>
                                                 @endforeach
                                             </select>
-                                            @error('category_id')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="category_id"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>Nhãn hàng:</label>
@@ -44,9 +40,7 @@
                                                     <option value="{{$brand->id}}" {{$product->brand_id==$brand->id?'selected':''}}>{{$brand->name}}</option>
                                                 @endforeach
                                             </select>
-                                            @error('brand_id')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="brand_id"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="slug">Ảnh sản phẩm:</label>
@@ -122,24 +116,18 @@
                                             <label>Giá gốc:</label>
                                             <input type="number" name="regular_price" value="{{$product->regular_price}}" class="form-control"
                                                    placeholder="Nhập giá gốc">
-                                            @error('regular_price')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="regular_price"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>Giá khuyến mãi:</label>
                                             <input type="number" name="promotional_price" value="{{$product->promotional_price}}" class="form-control"
                                                    placeholder="Nhập giá khuyến mãi">
-                                            @error('promotional_price')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="promotional_price"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>Mô tả:</label>
                                             <textarea class="form-control" name="description" rows="5">{{$product->description}}</textarea>
-                                            @error('description')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="description"></span>
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Cập nhập">
                                     </form>

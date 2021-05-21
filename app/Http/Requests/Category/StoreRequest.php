@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => "required|max:255|unique:categories,name,{$this->route('categories', NULL)},id",
+            'name' => "required|max:255|unique:categories,name,{$this->route('category', NULL)},id",
         ];
     }
 

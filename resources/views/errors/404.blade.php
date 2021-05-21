@@ -13,11 +13,11 @@
                             <p>The page you are looking for was moved, removed, renamed or might never existed.</p>
                             <div class="search_form pb-3 pb-md-4">
                                 <form method="post">
-                                    <input name="text" id="text" type="text" placeholder="Search" class="form-control">
+                                    <input name="text" id="text" type="text" placeholder="Tìm kiếm" class="form-control">
                                     <button type="submit" class="btn icon_search"><i class="ion-ios-search-strong"></i></button>
                                 </form>
                             </div>
-                            <a href="index.html" class="btn btn-fill-out">Back To Home</a>
+                            <a href="{{route('clients.home')}}" class="btn btn-fill-out">Trang chủ</a>
                         </div>
                     </div>
                 </div>

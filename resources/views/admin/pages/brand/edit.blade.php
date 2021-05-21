@@ -13,15 +13,13 @@
                                     <h5 class="modal-title form-title">Cập nhập nhãn hàng</h5>
                                 </div>
                                 <div class="modal-body pd">
-                                    <form method="post" action="{{route('brands.update', $brand->id)}}" enctype="multipart/form-data">
+                                    <form class="form-action" method="post" action="{{route('brands.update', $brand->id)}}" enctype="multipart/form-data">
                                         @method('PUT')
                                         @csrf
                                         <div class="form-group">
                                             <label for="name">Tên nhãn hàng:</label>
                                             <input type="text" name="name" value="{{$brand->name}}" class="form-control" placeholder="Nhập tên nhãn hàng">
-                                            @error('name')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="name"></span>
                                         </div>
                                         <div class="form-group">
                                             @if($brand->logo != NULL)

@@ -50,7 +50,9 @@
     <link rel="stylesheet" href="{{url('backend')}}/css/colors/default.css" id="colorSkinCSS">
     <!-- custom CSS -->
     <link rel="stylesheet" href="{{url('backend')}}/css/custom.css" />
-
+    <!-- alert CSS -->
+    <link rel="stylesheet" href="{{url('backend')}}/alertifyjs/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/alertifyjs/build/css/themes/default.min.css" />
 </head>
 <body class="crm_body_bg">
 
@@ -123,7 +125,8 @@
 
 <!-- ck js -->
 <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-
+<!-- alertjs -->
+<script src="{{url('backend')}}/alertifyjs/build/alertify.min.js"></script>
 <!-- script js -->
 <script src="{{url('backend')}}/js/script.js"></script>
 

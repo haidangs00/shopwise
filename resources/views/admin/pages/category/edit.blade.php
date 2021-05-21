@@ -13,15 +13,13 @@
                                     <h5 class="modal-title form-title">Cập nhập danh mục sản phẩm</h5>
                                 </div>
                                 <div class="modal-body pd">
-                                    <form method="POST" action="{{route('categories.update', $category->id)}}">
+                                    <form class="form-action" class="form-action" method="POST" action="{{route('categories.update', $category->id)}}">
                                         @method('PUT')
                                         @csrf
                                         <div class="form-group">
                                             <label for="name">Tên danh mục sản phẩm:</label>
                                             <input type="text" name="name" value="{{$category->name}}" class="form-control" placeholder="Nhập tên danh mục sản phẩm">
-                                            @error('name')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="name"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="parent_id">Danh mục cha:</label>

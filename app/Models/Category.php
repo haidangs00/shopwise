@@ -23,15 +23,18 @@ class Category extends Model
         return $this->belongsTo('App\Models\Category', 'parent_id');
     }
 
-    public function getParentsNames() {
-        if($this->parent) {
+    public function getParentsNames()
+    {
+        if ($this->parent) {
             return $this->parent->name;
         } else {
             return '';
         }
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany('App\Models\Product');
     }
+
 }

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>{{$pageTitle ?? 'Unknown'}}</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{url('backend')}}/images/favicon.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('backend')}}/css/bootstrap.min.css" />
@@ -50,6 +50,9 @@
     <link rel="stylesheet" href="{{url('backend')}}/css/colors/default.css" id="colorSkinCSS">
     <!-- custom CSS -->
     <link rel="stylesheet" href="{{url('backend')}}/css/custom.css" />
+    <!-- alert CSS -->
+    <link rel="stylesheet" href="{{url('backend')}}/alertifyjs/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="{{url('backend')}}/alertifyjs/build/css/themes/default.min.css" />
 
 </head>
 <body class="crm_body_bg">
@@ -100,7 +103,7 @@
 <script src="{{url('backend')}}/vendors/niceselect/js/jquery.nice-select.min.js"></script>
 <!-- owl carousel -->
 <script src="{{url('backend')}}/vendors/owl_carousel/js/owl.carousel.min.js"></script>
-<!-- gijgo css -->
+<!-- gijgo js -->
 <script src="{{url('backend')}}/vendors/gijgo/gijgo.min.js"></script>
 <!-- responsive table -->
 <script src="{{url('backend')}}/vendors/datatable/js/jquery.dataTables.min.js"></script>
@@ -122,7 +125,8 @@
 <script src="{{url('backend')}}/vendors/text_editor/summernote-bs4.js"></script>
 
 <script src="{{url('backend')}}/vendors/apex_chart/apexcharts.js"></script>
-
+<!-- alertjs -->
+<script src="{{url('backend')}}/alertifyjs/build/alertify.min.js"></script>
 <!-- custom js -->
 <script src="{{url('backend')}}/js/custom.js"></script>
 
@@ -142,6 +146,4 @@
 <script src="{{url('backend')}}/js/script.js"></script>
 
 </body>
-
-<!-- Mirrored from demo.dashboardpack.com/finance-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 06 Apr 2021 13:03:26 GMT -->
 </html>

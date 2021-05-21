@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Helper\CompareHelper;
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 use App\Helper\CartHelper;
 
@@ -27,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function($view){
             $view->with([
                 'cart' => new CartHelper(),
+                'compare' => new CompareHelper(),
+                'categories' => Category::where('status', 1)->withCount('products')->orderBy('name', 'ASC')->get()
             ]);
         });
     }

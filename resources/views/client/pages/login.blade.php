@@ -11,25 +11,22 @@
                             <div class="heading_s1">
                                 <h3>Đăng nhập</h3>
                             </div>
-                            <form method="post" novalidate>
+                            <form class="form-action" method="post">
                                 @csrf
+                                <input type="hidden" name="action" value="{{$url_prev}}">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập">
-                                    @error('user_name')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="user_name"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" type="password" name="password" placeholder="Mật khẩu">
-                                    @error('password')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="password"></span>
                                 </div>
                                 <div class="login_footer form-group">
                                     <div class="chek-form">
                                         <div class="custome-checkbox">
                                             <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
-                                            <label class="form-check-label" for="exampleCheckbox1"><span>Nhớ tôi</span></label>
+                                            <label class="form-check-label" for="exampleCheckbox1"><span>Lưu tài khoản</span></label>
                                         </div>
                                     </div>
                                     <a href="#">Quên mật khẩu?</a>

@@ -70,7 +70,7 @@
                                         @if($product->status == 1)
                                             <a href="#" class="status_btn">Active</a>
                                         @else
-                                            <a href="#" class="status_btn">Inactive</a>
+                                            <a href="#" class="status_inactive">Inactive</a>
                                         @endif
                                     </td>
                                     <td>

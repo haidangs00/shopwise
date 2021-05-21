@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{url('client')}}/owlcarousel/css/owl.theme.default.min.css">
     <!-- Magnific Popup CSS -->
     <link rel="stylesheet" href="{{url('client')}}/css/magnific-popup.css">
+    <!-- jquery-ui CSS -->
+    <link rel="stylesheet" href="{{url('client')}}/css/jquery-ui.css">
     <!-- Slick CSS -->
     <link rel="stylesheet" href="{{url('client')}}/css/slick.css">
     <link rel="stylesheet" href="{{url('client')}}/css/slick-theme.css">
@@ -94,6 +96,7 @@
 
 <!-- Latest jQuery -->
 <script src="{{url('client')}}/js/jquery-1.12.4.min.js"></script>
+<script src="{{url('client')}}/js/jquery-ui.js"></script>
 <!-- popper min js -->
 <script src="{{url('client')}}/js/popper.min.js"></script>
 <!-- Latest compiled and minified Bootstrap -->
@@ -118,8 +121,14 @@
 <script src="{{url('client')}}/js/slick.min.js"></script>
 <!-- elevatezoom js -->
 <script src="{{url('client')}}/js/jquery.elevatezoom.js"></script>
+
+<!-- sweetalert js -->
+<script src="{{url('client')}}/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- scripts js -->
 <script src="{{url('client')}}/js/scripts.js"></script>
+<script src="{{url('client')}}/js/customs.js"></script>
+
 
 </body>
 

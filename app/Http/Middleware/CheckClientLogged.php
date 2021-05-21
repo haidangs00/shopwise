@@ -19,6 +19,9 @@ class CheckClientLogged
     public function handle(Request $request, Closure $next, $guard = 'web')
     {
         if (Auth::guard($guard)->guest()) {
+            if ($request->ajax()) {
+                return response()->json(['redirect' => route('clients.login')]);
+            }
             return redirect()->route('clients.login');
         } else {
             return $next($request);

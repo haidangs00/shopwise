@@ -23,7 +23,6 @@ class CreateProductsTable extends Migration
             $table->double('promotional_price');
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1)->comment('active:1, inactive:0');
-            $table->double('star')->nullable();
             $table->timestamps();
         });
     }

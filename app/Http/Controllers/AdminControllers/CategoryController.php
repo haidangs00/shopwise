@@ -39,8 +39,10 @@ class CategoryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Category::create($request->all());
-        return redirect()->route('categories.index');
+        $created = Category::create($request->all());
+        if($created) {
+            return response()->json(['message' => 'Tạo mới thành công', 'redirect' => route('categories.index')]);
+        }
     }
 
     /**
@@ -78,8 +80,10 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        $category->update($request->all());
-        return redirect()->route('categories.index');
+        $updated = $category->update($request->all());
+        if($updated) {
+            return response()->json(['message' => 'Cập nhập thành công', 'redirect' => route('categories.index')]);
+        }
     }
 
     /**

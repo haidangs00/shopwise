@@ -10,46 +10,34 @@
                             <div class="heading_s1">
                                 <h3>Đăng ký tài khoản</h3>
                             </div>
-                            <form method="post">
+                            <form class="form-action" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="name" placeholder="Họ tên">
-                                    @error('name')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="name"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="email" placeholder="Email">
-                                    @error('email')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="email"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="phone" placeholder="Số điện thoại">
-                                    @error('phone')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="phone"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="address" placeholder="Địa chỉ">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập">
-                                    @error('user_name')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="user_name"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" type="password" name="password" placeholder="Mật khẩu">
-                                    @error('password')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="password"></span>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" type="password" name="re_password" placeholder="Xác nhận mật khẩu">
-                                    @error('re_password')
-                                    <span class="error-msg">{{$message}}</span>
-                                    @enderror
+                                    <span class="error-msg" error-for="re_password"></span>
                                 </div>
                                 <div class="login_footer form-group">
                                     <div class="chek-form">
@@ -57,9 +45,7 @@
                                             <input class="form-check-input" type="checkbox" name="check" id="exampleCheckbox2">
                                             <label class="form-check-label" for="exampleCheckbox2"><span>Tôi đồng ý với các điều khoản & chính sách.</span></label>
                                         </div>
-                                        @error('check')
-                                        <span class="error-msg">{{$message}}</span>
-                                        @enderror
+                                        <span class="error-msg" error-for="check"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">

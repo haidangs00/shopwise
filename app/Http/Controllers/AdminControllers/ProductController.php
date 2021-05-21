@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        if($request->image !== null){
+        if ($request->image !== null) {
             $image = trim($request->image, url('/'));
             $image = trim($image, 'uploads/');
             $request->merge(['image' => $image]);
@@ -84,7 +84,7 @@ class ProductController extends Controller
                 ]);
             }
         }
-        return redirect()->route('products.index');
+        return response()->json(['message' => 'Tạo mới thành công', 'redirect' => route('products.index')]);
     }
 
     /**
@@ -127,7 +127,7 @@ class ProductController extends Controller
     public function update(StoreRequest $request, $id)
     {
 
-        if($request->image !== null){
+        if ($request->image !== null) {
             $image = trim($request->image, url('/'));
             $image = trim($image, 'uploads/');
             $request->merge(['image' => $image]);

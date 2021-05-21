@@ -30,7 +30,7 @@ class RegisterRequest extends FormRequest
             'password' => 'bail|required|min:6|max:16',
             're_password' => 'bail|required|same:password',
             'phone' => 'bail|required|numeric',
-            'check' => 'accepted',
+//            'check' => 'accepted',
 
         ];
     }
@@ -58,7 +58,7 @@ class RegisterRequest extends FormRequest
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'phone.numberic' => 'Số điện thoại không hợp lệ',
 
-            'check.accepted' => 'Bạn chưa đồng ý với các điều khản & chính sách'
+//            'check.accepted' => 'Bạn chưa đồng ý với các điều khản & chính sách'
         ];
     }
 }

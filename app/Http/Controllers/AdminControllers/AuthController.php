@@ -21,11 +21,9 @@ class AuthController extends Controller
         $login = Auth::guard('admin')->attempt($request->only('user_name', 'password'));
         if($login)
         {
-            return redirect()->route('dashboard');
+            return response()->json(['message' => 'Đăng nhập thành công!', 'status' => true, 'redirect' => route('dashboard')]);
         }
-        else {
-            return redirect()->back();
-        }
+        return response()->json(['message' => 'Tài khoản hoặc mật khẩu không đúng, vui lòng thử lại!', 'status' => false]);
     }
 
     public function register()
@@ -36,9 +34,13 @@ class AuthController extends Controller
     public function signUp(RegisterRequest $request)
     {
         $request->merge(['password' => bcrypt($request->password)]);
-        Admin::create($request->all());
+        $created = Admin::create($request->all());
 
-        return redirect()->route('admins.login');
+        if($created)
+        {
+            return response()->json(['message' => 'Đăng ký thành công!', 'status' => true, 'redirect' => route('admins.login')]);
+        }
+        return response()->json(['message' => 'Đăng ký thất bại, vui lòng thử lại!', 'status' => false]);
     }
 
     public function logout()
