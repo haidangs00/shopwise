@@ -16,10 +16,13 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\Size;
+use App\Models\Social;
 use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Http\Request;
 use Auth;
+use Socialite;
+use Session;
 
 class ClientController extends Controller
 {
@@ -183,5 +186,55 @@ class ClientController extends Controller
             return response()->json(['message' => 'Đánh giá của bạn đã được ghi lại! Xin cảm ơn!', 'status' => true]);
         }
         return response()->json(['message' => 'Đánh giá thất bại!', 'status' => false]);
+    }
+
+//    Login Google
+
+    public function loginGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callbackGoogle()
+    {
+        $user = Socialite::driver('google')->stateless()->user();
+        $authUser = $this->findOrCreateUser($user, 'google');
+        $account_name = User::where('id', $authUser->user)->first();
+
+        Session::put('account_name', $account_name->name);
+        Session::put('account_id', $account_name->id);
+
+        return redirect()->route('clients.home');
+    }
+
+    public function findOrCreateUser($user, $provider)
+    {
+        $authUser = Social::where('provider_id', $user->id)->first();
+        if ($authUser) {
+            return $authUser;
+        }
+
+        $social = Social::create([
+           'provider_id' => $user->id,
+            'provider' => $provider
+        ]);
+        $accountUser = User::where('email', $user->email)->first();
+        if (!$accountUser) {
+            $accountUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'user_name' => $user->email,
+                'password' => '',
+                'phone' => '',
+            ]);
+        }
+        $social->login()->associate($accountUser);
+        $social->save();
+
+        $account_name = User::where('id', $social->user)->first();
+        Session::put('account_name', $account_name->name);
+        Session::put('account_id', $account_name->id);
+
+        return redirect()->route('clients.home');
     }
 }

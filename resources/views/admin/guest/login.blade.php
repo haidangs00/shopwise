@@ -15,18 +15,6 @@
                                     <div class="modal-body">
                                         <form class="form-login" method="post" action="{{route('admins.sign_in')}}">
                                             @csrf
-                                            <div class="form-row social_login_btn">
-                                                <div class="form-group col-md-12 text-center">
-                                                    <a href="#" class="btn_1 full_width"><i
-                                                            class="fab fa-facebook-square"></i>Đăng nhập với Facebook</a>
-                                                </div>
-                                                 <div class="form-group col-md-12 text-center">
-                                                    <a href="#" class="btn_1 full_width"><i class="fab fa-google"></i>Đăng nhập với Google</a>
-                                                </div>
-                                           </div>
-                                            <div class="border_style">
-                                                <span>Hoặc</span>
-                                            </div>
                                             <div class="form-group">
                                                 <input name="user_name" type="text" class="form-control" placeholder="Tên đăng nhập">
                                                 <span class="error-msg" error-for="user_name"></span>

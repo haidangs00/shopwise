@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminControllers\BannerController;
 use App\Http\Controllers\AdminControllers\BrandController;
 use App\Http\Controllers\AdminControllers\ColorController;
 use App\Http\Controllers\AdminControllers\CategoryController;
+use App\Http\Controllers\AdminControllers\CommentController;
 use App\Http\Controllers\AdminControllers\ProductController;
 use App\Http\Controllers\AdminControllers\SizeController;
 use App\Http\Controllers\ClientControllers\CartController;
@@ -38,6 +39,11 @@ Route::middleware('guest:web')->group(function () {
     Route::post('/login', [ClientController::class, 'signIn'])->name('clients.sign_in');
     Route::get('/register', [ClientController::class, 'register'])->name('clients.register');
     Route::post('/register', [ClientController::class, 'signUp'])->name('clients.sign_up');
+
+    //Login Google
+    Route::get('/login-google', [ClientController::class, 'loginGoogle'])->name('clients.login_google');
+    Route::get('/google/callback', [ClientController::class, 'callbackGoogle'])->name('clients.callback_google');
+
 });
 
 Route::get('/products/{slug?}', [ClientController::class, 'products'])->name('clients.products');
@@ -83,6 +89,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('brands', BrandController::class);
         Route::resource('sizes', SizeController::class);
         Route::resource('banners', BannerController::class);
+
+        Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+        Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 
     });
     Route::middleware('guest:admin')->group(function () {

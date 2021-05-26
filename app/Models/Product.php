@@ -65,17 +65,20 @@ class Product extends Model
         $ratings = $this->ratings;
         $totalStar = 0;
         $count = 0;
-        foreach ($ratings as $rating)
-        {
+        foreach ($ratings as $rating) {
             $totalStar += $rating->star;
             $count++;
         }
-        return $totalStar/$count;
+        return $totalStar / $count;
+    }
+
+    public function getActiveComments()
+    {
+        return $this->comments()->where('status', 1)->get();
     }
 
     public function countComment()
     {
-        return $this->comments->count();
+        return $this->getActiveComments()->count();
     }
-
 }

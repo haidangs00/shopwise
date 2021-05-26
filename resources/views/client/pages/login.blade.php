@@ -40,7 +40,7 @@
                             </div>
                             <ul class="btn-login list_none text-center">
                                 <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
-                                <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
+                                <li><a href="{{route('clients.login_google')}}" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
                             </ul>
                             <div class="form-note text-center">Bạn chưa có tài khoản? <a href="{{route('clients.register')}}">Đăng ký ngay</a></div>
                         </div>

@@ -26,6 +26,7 @@
                 <li><a class="{{ Request::routeIs('sizes.*') ? 'active' : '' }}" href="{{route('sizes.index')}}">Size</a></li>
                 <li><a class="{{ Request::routeIs('brands.*') ? 'active' : '' }}" href="{{route('brands.index')}}">Nhãn hàng</a></li>
                 <li><a class="{{ Request::routeIs('banners.*') ? 'active' : '' }}" href="{{route('banners.index')}}">Banner</a></li>
+                <li><a class="{{ Request::routeIs('comments.*') ? 'active' : '' }}" href="{{route('comments.index')}}">Bình luận</a></li>
             </ul>
         </li>
 

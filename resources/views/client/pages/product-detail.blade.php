@@ -183,7 +183,7 @@
                                     <h5 class="product_tab_title">{{$product->countComment()}} Đánh giá cho
                                         <span>{{$product->name}}</span></h5>
                                     <ul class="list_none comment_list mt-4">
-                                        @foreach($product->comments as $comment)
+                                        @foreach($product->getActiveComments() as $comment)
                                             <li>
                                                 <div class="comment_img">
                                                     <img src="{{url('uploads')}}/{{$comment->user->avatar}}" alt="{{$comment->user->name}}"/>
