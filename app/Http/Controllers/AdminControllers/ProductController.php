@@ -49,42 +49,47 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        if ($request->image !== null) {
-            $image = trim($request->image, url('/'));
-            $image = trim($image, 'uploads/');
+        if ($request->file !== null) {
+            $image = substr($request->file, strlen(url('/uploads')));
+            $image = trim($image, '/');
+
             $request->merge(['image' => $image]);
         }
 
         $product = Product::create($request->all());
-
-        if ($request->imageList !== null) {
-            $images = json_decode($request->imageList);
-            foreach ($images as $key => $value) {
-                $name = trim($value, url('/'));
-                $name = trim($name, 'uploads/');
-                Image::create([
-                    'path' => $name,
-                    'product_id' => $product->id
-                ]);
+        if ($product) {
+            if ($request->imageList !== null) {
+                $images = json_decode($request->imageList);
+                foreach ($images as $key => $value) {
+                    $name = substr($value, strlen(url('/uploads')));
+                    $name = trim($name, '/');
+                    Image::create([
+                        'path' => $name,
+                        'product_id' => $product->id
+                    ]);
+                }
+            }
+            if ($request->has('colors')) {
+                foreach ($request->colors as $color) {
+                    ProductColor::create([
+                        'color_id' => $color,
+                        'product_id' => $product->id
+                    ]);
+                }
+            }
+            if ($request->has('sizes')) {
+                foreach ($request->sizes as $size) {
+                    ProductSize::create([
+                        'size_id' => $size,
+                        'product_id' => $product->id
+                    ]);
+                }
             }
         }
-        if ($request->has('colors')) {
-            foreach ($request->colors as $color) {
-                ProductColor::create([
-                    'color_id' => $color,
-                    'product_id' => $product->id
-                ]);
-            }
+        if ($product) {
+            return response()->json(['message' => 'Tạo mới thành công!', 'status' => true, 'redirect' => route('products.index')]);
         }
-        if ($request->has('sizes')) {
-            foreach ($request->sizes as $size) {
-                ProductSize::create([
-                    'size_id' => $size,
-                    'product_id' => $product->id
-                ]);
-            }
-        }
-        return response()->json(['message' => 'Tạo mới thành công', 'redirect' => route('products.index')]);
+        return response()->json(['message' => 'Tạo mới thất bại!', 'status' => false]);
     }
 
     /**
@@ -126,23 +131,20 @@ class ProductController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
-
-        if ($request->image !== null) {
-            $image = trim($request->image, url('/'));
-            $image = trim($image, 'uploads/');
+        if ($request->file !== null) {
+            $image = substr($request->file, strlen(url('/uploads')));
+            $image = trim($image, '/');
             $request->merge(['image' => $image]);
         }
-
         $product = Product::find($id);
-        $product->update($request->all());
+        $updated = $product->update($request->all());
 
         if ($request->imageList !== null) {
-//            $images = json_decode($request->imageList);
-            dd($request->imageList);
+            $images = json_decode($request->imageList);
             Image::where('product_id', $id)->delete();
             foreach ($images as $key => $value) {
-                $name = trim($value, url('/'));
-                $name = trim($name, 'uploads/');
+                $name = substr($value, strlen(url('/uploads')));
+                $name = trim($name, '/');
                 Image::create([
                     'path' => $name,
                     'product_id' => $product->id
@@ -150,23 +152,28 @@ class ProductController extends Controller
             }
         }
 
-//        if ($request->has('colors')) {
-//            foreach ($request->colors as $color) {
-//                ProductColor::create([
-//                    'color_id' => $color,
-//                    'product_id' => $product->id
-//                ]);
-//            }
-//        }
-//        if ($request->has('sizes')) {
-//            foreach ($request->sizes as $size) {
-//                ProductSize::create([
-//                    'size_id' => $size,
-//                    'product_id' => $product->id
-//                ]);
-//            }
-//        }
-        return redirect()->route('products.index');
+        if ($request->has('colors')) {
+            ProductColor::where('product_id', $id)->delete();
+            foreach ($request->colors as $color) {
+                ProductColor::create([
+                    'color_id' => $color,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+        if ($request->has('sizes')) {
+            ProductSize::where('product_id', $id)->delete();
+            foreach ($request->sizes as $size) {
+                ProductSize::create([
+                    'size_id' => $size,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập thành công!', 'status' => true, 'redirect' => route('products.index')]);
+        }
+        return response()->json(['message' => 'Cập nhập thất bại!', 'status' => false]);
     }
 
     /**
@@ -178,12 +185,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $product->delete();
+        $deleted = $product->delete();
         Image::where('product_id', $id)->delete();
         ProductColor::where('product_id', $id)->delete();
         ProductSize::where('product_id', $id)->delete();
 
-        return redirect()->back();
+        if ($deleted) {
+            return response()->json(['message' => 'Xóa thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
 
 }

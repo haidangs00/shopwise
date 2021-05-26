@@ -75,11 +75,7 @@
                                     </td>
                                     <td>
                                         <a href="{{route('products.edit', $product->id)}}" class="btn_edit">Sửa</a>
-                                        <form class="d-inline-block" action="{{route('products.destroy', $product->id)}}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn_delete">Xóa</button>
-                                        </form>
+                                        <a action="{{route('products.destroy', $product->id)}}" class="btn_delete">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach

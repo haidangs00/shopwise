@@ -8817,6 +8817,10 @@ body.switch-open {
     height: 300px;
 }
 
+.compare_box .pr_image img {
+    height: 276px;
+}
+
 .compare_box .pr_add_to_cart {
     height: 77px;
 }

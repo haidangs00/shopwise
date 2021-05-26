@@ -16,4 +16,14 @@ class Rating extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Product');
+    }
+
+    public function comment()
+    {
+        return $this->hasOne('App\Models\Comment');
+    }
 }

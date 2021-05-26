@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Http\Request;
+use App\Http\Requests\Banner\StoreRequest;
+use Carbon\Carbon;
 
 class BannerController extends Controller
 {
@@ -14,7 +17,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        //
+        $banners = Banner::all();
+        return view('admin.pages.banner.index', compact('banners'));
     }
 
     /**
@@ -24,7 +28,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.banner.create');
     }
 
     /**
@@ -33,9 +37,21 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        if ($request->file !== null) {
+            $image = substr($request->file, strlen(url('/uploads')));
+            $image = trim($image, '/');
+            $request->merge(['image' => $image]);
+        }
+        $begin = Carbon::parse($request->date_begin)->format('Y-m-d');
+        $end = Carbon::parse($request->date_end)->format('Y-m-d');
+        $request->merge(['date_begin' => $begin, 'date_end' => $end]);
+        $created = Banner::create($request->all());
+        if ($created) {
+            return response()->json(['message' => 'Tạo mới thành công!', 'status' => true, 'redirect' => route('banners.index')]);
+        }
+        return response()->json(['message' => 'Tạo mới thất bại!', 'status' => false]);
     }
 
     /**
@@ -57,7 +73,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $banner = Banner::find($id);
+        return view('admin.pages.banner.edit', compact('banner'));
     }
 
     /**
@@ -67,9 +84,22 @@ class BannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        //
+        if ($request->file !== null) {
+            $image = substr($request->file, strlen(url('/uploads')));
+            $image = trim($image, '/');
+            $request->merge(['image' => $image]);
+        }
+        $begin = Carbon::parse($request->date_begin)->format('Y-m-d');
+        $end = Carbon::parse($request->date_end)->format('Y-m-d');
+        $request->merge(['date_begin' => $begin, 'date_end' => $end]);
+        $banner = Banner::find($id);
+        $updated = $banner->update($request->all());
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập thành công!', 'status' => true, 'redirect' => route('banners.index')]);
+        }
+        return response()->json(['message' => 'Cập nhập thất bại!', 'status' => false]);
     }
 
     /**
@@ -80,6 +110,11 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $banner = Banner::find($id);
+        $deleted = $banner->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'Xóa thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
 }

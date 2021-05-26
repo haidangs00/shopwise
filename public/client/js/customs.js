@@ -1,12 +1,13 @@
 $(document).ready(function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $('.form-action').on('submit', function (e) {
         e.preventDefault();
         let form = $(this);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
         $.ajax({
             url: form.attr('action'),
@@ -133,7 +134,7 @@ $(document).ready(function () {
             url: btn.attr('href'),
             type: 'get',
             success: function (response) {
-                if(response.message) {
+                if (response.message) {
                     swal({
                         title: response.message,
                         icon: "warning",
@@ -145,6 +146,30 @@ $(document).ready(function () {
                     icon: "error",
                 });
             }
+        });
+    });
+
+    $('.form-review').on('submit', function (e) {
+        e.preventDefault();
+        let form = $(this);
+
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            success: function (response) {
+                if (response.status == true) {
+                    swal({
+                        title: response.message,
+                        icon: "success",
+                    });
+                } else if (response.status == false) {
+                    swal({
+                        title: response.message,
+                        icon: "success",
+                    });
+                } else window.location.href = response.redirect;
+            },
         });
     });
 

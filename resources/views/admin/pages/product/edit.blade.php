@@ -51,7 +51,7 @@
                                                 </svg>
                                                 Chọn ảnh
                                             </a>
-                                            <input class="form-control" type="hidden" name="image" id="image">
+                                            <input class="form-control" type="hidden" name="file" id="image">
                                             <div>
                                                 <img id="img-show" src="{{url('uploads')}}/{{$product->image}}" alt="{{$product->name}}">
                                             </div>

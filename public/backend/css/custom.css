@@ -40,7 +40,8 @@
 .btn_delete {
     border: 1px solid #f16565;
     color: #f16565!important;
-    padding: 0 8px;
+    padding: 4px 8px;
+    cursor: pointer;
     background-color: #fff;
     transition: all 0.5s;
 }

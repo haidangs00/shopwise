@@ -66,7 +66,7 @@
                                                         <td>
                                                             <div class="rating_wrap">
                                                                 <div class="rating">
-                                                                    <div class="product_rate" style="width:87%"></div>
+                                                                    <div class="product_rate" style="width:{{100*($item['rating']/5)}}%"></div>
                                                                 </div>
                                                                 <span class="rating_num">(25)</span>
                                                             </div>

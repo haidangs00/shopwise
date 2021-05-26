@@ -14,17 +14,18 @@
             </a>
         </li>
 
-        <li class="{{ Request::is('admin/manager/*') ? 'mm-active' : '' }}">
+        <li class="{{ Request::is('admin/*') ? 'mm-active' : '' }}">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <img src="{{url('backend')}}/images/menu-icon/6.svg" alt="">
                 <span>Quản lý</span>
             </a>
-            <ul class="{{ Request::is('admin/manager/*') ? 'mm-show' : '' }}">
-                <li><a class="{{ Request::routeIs('categories.index') ? 'active' : '' }}" href="{{route('categories.index')}}">Danh mục</a></li>
-                <li><a class="{{ Request::routeIs('products.index') ? 'active' : '' }}" href="{{route('products.index')}}">Sản phẩm</a></li>
-                <li><a class="{{ Request::routeIs('colors.index') ? 'active' : '' }}" href="{{route('colors.index')}}">Màu</a></li>
-                <li><a class="{{ Request::routeIs('sizes.index') ? 'active' : '' }}" href="{{route('sizes.index')}}">Size</a></li>
-                <li><a class="{{ Request::routeIs('brands.index') ? 'active' : '' }}" href="{{route('brands.index')}}">Nhãn hàng</a></li>
+            <ul class="{{ Request::is('admin/*') ? 'mm-show' : '' }}">
+                <li><a class="{{ Request::routeIs('categories.*') ? 'active' : '' }}" href="{{route('categories.index')}}">Danh mục</a></li>
+                <li><a class="{{ Request::routeIs('products.*') ? 'active' : '' }}" href="{{route('products.index')}}">Sản phẩm</a></li>
+                <li><a class="{{ Request::routeIs('colors.*') ? 'active' : '' }}" href="{{route('colors.index')}}">Màu</a></li>
+                <li><a class="{{ Request::routeIs('sizes.*') ? 'active' : '' }}" href="{{route('sizes.index')}}">Size</a></li>
+                <li><a class="{{ Request::routeIs('brands.*') ? 'active' : '' }}" href="{{route('brands.index')}}">Nhãn hàng</a></li>
+                <li><a class="{{ Request::routeIs('banners.*') ? 'active' : '' }}" href="{{route('banners.index')}}">Banner</a></li>
             </ul>
         </li>
 

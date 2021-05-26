@@ -43,11 +43,7 @@
                                     </td>
                                     <td>
                                         <a href="{{route('colors.edit', $color->id)}}" class="btn_edit">Sửa</a>
-                                        <form class="d-inline-block" action="{{route('colors.destroy', $color->id)}}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn_delete">Xóa</button>
-                                        </form>
+                                        <a action="{{route('colors.destroy', $color->id)}}" class="btn_delete">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach

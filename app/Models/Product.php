@@ -21,7 +21,6 @@ class Product extends Model
         'promotional_price',
         'description',
         'status',
-        'star',
         'created_at',
         'updated_at'
     ];
@@ -49,6 +48,34 @@ class Product extends Model
     public function wishlists()
     {
         return $this->hasMany('App\Models\WishList');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Rating');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function getRating()
+    {
+        $ratings = $this->ratings;
+        $totalStar = 0;
+        $count = 0;
+        foreach ($ratings as $rating)
+        {
+            $totalStar += $rating->star;
+            $count++;
+        }
+        return $totalStar/$count;
+    }
+
+    public function countComment()
+    {
+        return $this->comments->count();
     }
 
 }

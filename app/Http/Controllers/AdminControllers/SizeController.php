@@ -38,8 +38,11 @@ class SizeController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Size::create($request->all());
-        return redirect()->route('sizes.index');
+        $created = Size::create($request->all());
+        if ($created) {
+            return response()->json(['message' => 'Tạo mới thành công!', 'status' => true, 'redirect' => route('sizes.index')]);
+        }
+        return response()->json(['message' => 'Tạo mới thất bại!', 'status' => false]);
     }
 
     /**
@@ -75,8 +78,11 @@ class SizeController extends Controller
     public function update(StoreRequest $request, $id)
     {
         $size = Size::find($id);
-        $size->update($request->all());
-        return redirect()->route('sizes.index');
+        $updated = $size->update($request->all());
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập thành công!', 'status' => true, 'redirect' => route('sizes.index')]);
+        }
+        return response()->json(['message' => 'Cập nhập thất bại!', 'status' => false]);
     }
 
     /**
@@ -88,7 +94,10 @@ class SizeController extends Controller
     public function destroy($id)
     {
         $size = Size::find($id);
-        $size->delete();
-        return redirect()->back();
+        $deleted = $size->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'Xóa thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
 }

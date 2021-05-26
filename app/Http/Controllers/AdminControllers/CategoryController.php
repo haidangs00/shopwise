@@ -34,21 +34,22 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
         $created = Category::create($request->all());
-        if($created) {
-            return response()->json(['message' => 'Tạo mới thành công', 'redirect' => route('categories.index')]);
+        if ($created) {
+            return response()->json(['message' => 'Tạo mới thành công!', 'status' => true, 'redirect' => route('categories.index')]);
         }
+        return response()->json(['message' => 'Tạo mới thất bại!', 'status' => false]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -59,7 +60,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,8 +73,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, $id)
@@ -81,22 +82,26 @@ class CategoryController extends Controller
         $category = Category::find($id);
 
         $updated = $category->update($request->all());
-        if($updated) {
-            return response()->json(['message' => 'Cập nhập thành công', 'redirect' => route('categories.index')]);
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập thành công!', 'status' => true, 'redirect' => route('categories.index')]);
         }
+        return response()->json(['message' => 'Cập nhập thất bại!', 'status' => false]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $category = Category::find($id);
-        $category->delete();
-        return redirect()->back();
+        $deleted = $category->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'Xóa thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
 
     }
 }

@@ -9,10 +9,12 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\WishList;
@@ -123,19 +125,30 @@ class ClientController extends Controller
         return view('client.pages.order-completed');
     }
 
-    public function products($slug = null)
+    public function products(Request $request, $slug = null)
     {
-        if ($slug) {
+//        dd($request->all());
+        $products = Product::query()->select('*')->when($slug != null, function ($query) use ($slug) {
             $category = Category::where('slug', $slug)->first();
-            $products = Product::where('category_id', $category->id)->get();
-        } else {
-            $products = Product::all();
-        }
+            $query->whereCategoryId($category->id);
+        })->when($request->brands != null, function ($query) use ($request) {
+            $query->whereIn('brand_id', $request->brands);
+        })->when($request->price_first != null && $request->price_second != null, function ($query) use ($request) {
+            $query->whereBetween('promotional_price', [$request->price_first, $request->price_second])->orderBy('promotional_price', 'ASC');
+        })->when($request->colors != null, function ($query) use ($request) {
+            $query->join('product_colors', 'product_colors.product_id', '=', 'products.id')->whereIn('color_id', $request->colors);
+        })->when($request->sizes != null, function ($query) use ($request) {
+            $query->join('product_sizes', 'product_sizes.product_id', '=', 'products.id')->whereIn('size_id', $request->sizes);
+        })->get();
+
         $brands = Brand::all();
         $colors = Color::all();
         $sizes = Size::all();
 
-        return view('client.pages.products', compact('products', 'brands', 'colors', 'sizes'));
+        $minPrice = Product::min('promotional_price');
+        $maxPrice = Product::max('promotional_price');
+
+        return view('client.pages.products', compact('products', 'brands', 'colors', 'sizes', 'minPrice', 'maxPrice'));
     }
 
     public function productDetail($id)
@@ -152,4 +165,23 @@ class ClientController extends Controller
         return view('client.layouts.products.quick-view', compact('product', 'images'));
     }
 
+    public function reviewProduct(Request $request)
+    {
+        $comment = Comment::create([
+            'content' => $request->message,
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->product_id
+        ]);
+
+        $rating = Rating::create([
+            'user_id' => Auth::user()->id,
+            'product_id' => $request->product_id,
+            'star' => $request->star
+        ]);
+
+        if ($comment && $rating) {
+            return response()->json(['message' => 'Đánh giá của bạn đã được ghi lại! Xin cảm ơn!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Đánh giá thất bại!', 'status' => false]);
+    }
 }

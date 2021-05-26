@@ -34,7 +34,7 @@
                         </div>
                         <div class="rating_wrap">
                             <div class="rating">
-                                <div class="product_rate" style="width:80%"></div>
+                                <div class="product_rate" style="width:{{100*($product->getRating()/5)}}%"></div>
                             </div>
                             <span class="rating_num">(21)</span>
                         </div>

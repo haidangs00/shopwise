@@ -661,7 +661,11 @@ PAGE JS
 	});
 
 	$('.product_color_switch span,.product_size_switch span').on("click", function() {
-		$(this).siblings(this).removeClass('active').end().addClass('active');
+		let id = $(this).attr('data-id');
+		let name = 'size[]';
+        $(this).toggleClass('active');
+        $(this).siblings('input#size-'+id).attr('value', (_, attr) => attr === '' ? id : '');
+        $(this).siblings('input#size-'+id).attr('name', (_, attr) => attr === '' ? name : '');
 	});
 
 	/*===================================*
@@ -775,7 +779,8 @@ PAGE JS
 			for (i = 0; i < onStar; i++) {
 				$(stars[i]).addClass('selected');
 			}
-		});
+          $('input#star').attr('value', onStar);
+	  });
 	});
 
 	/*===================================*

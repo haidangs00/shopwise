@@ -13,6 +13,7 @@ class Banner extends Model
         'name',
         'slug',
         'image',
+        'note',
         'status',
         'date_begin',
         'date_end',

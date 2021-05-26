@@ -50,7 +50,7 @@
                                                 </svg>
                                                 Chọn ảnh
                                             </a>
-                                            <input class="form-control" type="hidden" name="image" id="image">
+                                            <input class="form-control" type="hidden" name="file" id="image">
                                             <div>
                                                 <img id="img-show" src="" alt="">
                                             </div>
@@ -154,7 +154,6 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="filemanager-list" tabindex="-1" role="dialog" aria-labelledby="filemanagerTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:90%">
                 <div class="modal-content" style="height: 700px">

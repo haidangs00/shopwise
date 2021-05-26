@@ -42,9 +42,10 @@
                                 </div>
                                 <div class="rating_wrap">
                                     <div class="rating">
-                                        <div class="product_rate" style="width:80%"></div>
+                                        <div class="product_rate"
+                                             style="width:{{100*($product->getRating()/5)}}%"></div>
                                     </div>
-                                    <span class="rating_num">(21)</span>
+                                    <span class="rating_num">({{$product->countComment()}})</span>
                                 </div>
                             </div>
                             <div class="pr_desc">
@@ -90,7 +91,8 @@
                                     <button class="btn btn-fill-out btn-addtocart" type="submit"><i
                                             class="icon-basket-loaded"></i> Thêm vào giỏ hàng
                                     </button>
-                                    <a class="add_compare" href="{{route('clients.add_compare', $product->id)}}"><i class="icon-shuffle"></i></a>
+                                    <a class="add_compare" href="{{route('clients.add_compare', $product->id)}}"><i
+                                            class="icon-shuffle"></i></a>
                                     <a class="btn-heart add_wishlist"
                                        href="{{route('clients.add_to_list', $product->id)}}"><i
                                             class="icon-heart"></i></a>
@@ -128,15 +130,16 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description"
-                                   role="tab" aria-controls="Description" aria-selected="true">Description</a>
+                                   role="tab" aria-controls="Description" aria-selected="true">Mô tả</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="Additional-info-tab" data-toggle="tab" href="#Additional-info"
-                                   role="tab" aria-controls="Additional-info" aria-selected="false">Additional info</a>
+                                   role="tab" aria-controls="Additional-info" aria-selected="false">Thông tin thêm</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab"
-                                   aria-controls="Reviews" aria-selected="false">Reviews (2)</a>
+                                   aria-controls="Reviews" aria-selected="false">Đánh giá ({{$product->countComment()}}
+                                    )</a>
                             </li>
                         </ul>
                         <div class="tab-content shop_info_tab">
@@ -177,82 +180,55 @@
                             </div>
                             <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
                                 <div class="comments">
-                                    <h5 class="product_tab_title">2 Review For <span>Blue Dress For Woman</span></h5>
+                                    <h5 class="product_tab_title">{{$product->countComment()}} Đánh giá cho
+                                        <span>{{$product->name}}</span></h5>
                                     <ul class="list_none comment_list mt-4">
-                                        <li>
-                                            <div class="comment_img">
-                                                <img src="assets/images/user1.jpg" alt="user1"/>
-                                            </div>
-                                            <div class="comment_block">
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:80%"></div>
+                                        @foreach($product->comments as $comment)
+                                            <li>
+                                                <div class="comment_img">
+                                                    <img src="{{url('uploads')}}/{{$comment->user->avatar}}" alt="{{$comment->user->name}}"/>
+                                                </div>
+                                                <div class="comment_block">
+                                                    <div class="rating_wrap">
+                                                        <div class="rating">
+                                                            <div class="product_rate" style="width:60%"></div>
+                                                        </div>
+                                                    </div>
+                                                    <p class="customer_meta">
+                                                        <span class="review_author">{{$comment->user->name}}</span>
+                                                        <span class="comment-date">{{$comment->created_at}}</span>
+                                                    </p>
+                                                    <div class="description">
+                                                        <p>{{$comment->content}}</p>
                                                     </div>
                                                 </div>
-                                                <p class="customer_meta">
-                                                    <span class="review_author">Alea Brooks</span>
-                                                    <span class="comment-date">March 5, 2018</span>
-                                                </p>
-                                                <div class="description">
-                                                    <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean
-                                                        sollicitudin, lorem quis bibendum auctor, nisi elit consequat
-                                                        ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet
-                                                        nibh vulputate</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="comment_img">
-                                                <img src="assets/images/user2.jpg" alt="user2"/>
-                                            </div>
-                                            <div class="comment_block">
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-                                                <p class="customer_meta">
-                                                    <span class="review_author">Grace Wong</span>
-                                                    <span class="comment-date">June 17, 2018</span>
-                                                </p>
-                                                <div class="description">
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout. The
-                                                        point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters</p>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <div class="review_form field_form">
-                                    <h5>Add a review</h5>
-                                    <form class="row mt-3">
+                                    <h5>Đánh giá sản phẩm</h5>
+                                    <form class="row mt-3 form-review" method="post"
+                                          action="{{route('clients.review_product')}}">
+                                        @csrf
                                         <div class="form-group col-12">
                                             <div class="star_rating">
-                                                <span data-value="1"><i class="far fa-star"></i></span>
-                                                <span data-value="2"><i class="far fa-star"></i></span>
-                                                <span data-value="3"><i class="far fa-star"></i></span>
-                                                <span data-value="4"><i class="far fa-star"></i></span>
-                                                <span data-value="5"><i class="far fa-star"></i></span>
+                                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                <input id="star" type="hidden" name="star" value="">
+                                                @for($count = 1; $count <=5; $count++)
+                                                    <span data-value="{{$count}}"><i
+                                                            class="far fa-star"></i></span>
+                                                @endfor
                                             </div>
                                         </div>
                                         <div class="form-group col-12">
-                                            <textarea required="required" placeholder="Your review *"
+                                            <textarea required="required" placeholder="Viết đánh giá của bạn *"
                                                       class="form-control" name="message" rows="4"></textarea>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <input required="required" placeholder="Enter Name *" class="form-control"
-                                                   name="name" type="text">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <input required="required" placeholder="Enter Email *" class="form-control"
-                                                   name="email" type="email">
                                         </div>
 
                                         <div class="form-group col-12">
-                                            <button type="submit" class="btn btn-fill-out" name="submit" value="Submit">
-                                                Submit Review
+                                            <button type="submit" class="btn btn-fill-out">
+                                                Gửi đánh giá
                                             </button>
                                         </div>
                                     </form>

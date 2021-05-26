@@ -121,8 +121,11 @@ $(document).ready(function () {
             type: form.attr('method'),
             data: form.serialize(),
             success: function (response) {
-                alertify.success(response.message);
-                window.location.href = response.redirect;
+                if(response.status) {
+                    alertify.success(response.message);
+                    window.location.href = response.redirect;
+                }
+                else alertify.error(response.message);
             },
             error: function (xhr) {
                 let err = JSON.parse(xhr.responseText);
@@ -153,6 +156,23 @@ $(document).ready(function () {
                     form.find('[error-for=' + field_name + ']').text(error);
                 })
             }
+        });
+    });
+
+    $('.btn_delete').on('click', function (e) {
+        let btn = $(this);
+
+        alertify.confirm('Bạn có muốn xóa không?', function () {
+            $.ajax({
+                url: btn.attr('action'),
+                type: 'delete',
+                success: function (response) {
+                    if (response.status) {
+                        alertify.success(response.message);
+                        location.reload();
+                    } else alertify.error(response.message);
+                }
+            });
         });
     });
 });
