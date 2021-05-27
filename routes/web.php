@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminControllers\SizeController;
 use App\Http\Controllers\ClientControllers\CartController;
 use App\Http\Controllers\ClientControllers\ClientController;
 use App\Http\Controllers\ClientControllers\CompareController;
+use App\Http\Controllers\ClientControllers\MailController;
 use App\Http\Controllers\ClientControllers\WishListController;
 use Illuminate\Support\Facades\Route;
 

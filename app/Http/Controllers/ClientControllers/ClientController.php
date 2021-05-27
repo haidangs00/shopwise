@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Mail;
 use Socialite;
 use Session;
 
@@ -125,6 +126,17 @@ class ClientController extends Controller
             ]);
         }
         $cart->clear();
+
+        $toName = 'Shopwise';
+        $toMail = Auth::user()->email;
+
+        $data = array('title' => 'Xác nhận đơn hàng!', 'user_name' => Auth::user()->name);
+
+        Mail::send('client.send-mail.mail', $data, function($message) use ($toName, $toMail) {
+            $message->to($toMail)->subject('Xác nhận đặt hàng Shopwise');
+            $message->from($toMail, $toName);
+        });
+
         return view('client.pages.order-completed');
     }
 

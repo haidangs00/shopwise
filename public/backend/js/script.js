@@ -126,11 +126,15 @@ $(document).ready(function () {
                     window.location.href = response.redirect;
                 }
                 else alertify.error(response.message);
+
             },
             error: function (xhr) {
                 let err = JSON.parse(xhr.responseText);
                 $.each(err.errors, function (field_name, error) {
-                    form.find('[error-for=' + field_name + ']').text(error);
+                    if (field_name) {
+                        form.find('[error-for=' + field_name + ']').text(error);
+                        form.find('input[name=' + field_name + ']').addClass('is-invalid');
+                    }
                 })
             }
         });
