@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-xl-9">
                     <div class="single_post">
-                        <h2 class="blog_title">But I must explain to you how all this mistaken idea</h2>
+                        <h2 class="blog_title">{{$blog->title}}</h2>
                         <ul class="list_none blog_meta">
-                            <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>
+                            <li><a href="#"><i class="ti-calendar"></i> {{date_format($blog->created_at, 'M d, Y')}}</a></li>
                             <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>
                         </ul>
                         <div class="blog_img">
-                            <img src="assets/images/blog_img1.jpg" alt="blog_img1">
+                            <img src="{{url('uploads')}}/{{$blog->image}}" alt="{{$blog->title}}">
                         </div>
                         <div class="blog_content">
                             <div class="blog_text">
@@ -141,101 +141,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="comment-area">
-                        <div class="content_title">
-                            <h5>(03) Comments</h5>
-                        </div>
-                        <ul class="list_none comment_list">
-                            <li class="comment_info">
-                                <div class="d-flex">
-                                    <div class="comment_user">
-                                        <img src="assets/images/user2.jpg" alt="user2">
-                                    </div>
-                                    <div class="comment_content">
-                                        <div class="d-flex">
-                                            <div class="meta_data">
-                                                <h6><a href="#">Alden Smith</a></h6>
-                                                <div class="comment-time">MARCH 5, 2018, 6:05 PM</div>
-                                            </div>
-                                            <div class="ml-auto">
-                                                <a href="#" class="comment-reply"><i class="ion-reply-all"></i>Reply</a>
-                                            </div>
-                                        </div>
-                                        <p>We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire that the cannot foresee the pain and trouble that.</p>
-                                    </div>
-                                </div>
-                                <ul class="children">
-                                    <li class="comment_info">
-                                        <div class="d-flex">
-                                            <div class="comment_user">
-                                                <img src="assets/images/user3.jpg" alt="user3">
-                                            </div>
-                                            <div class="comment_content">
-                                                <div class="d-flex align-items-md-center">
-                                                    <div class="meta_data">
-                                                        <h6><a href="#">Daisy Lana</a></h6>
-                                                        <div class="comment-time">april 8, 2018, 5:15 PM</div>
-                                                    </div>
-                                                    <div class="ml-auto">
-                                                        <a href="#" class="comment-reply"><i class="ion-reply-all"></i>Reply</a>
-                                                    </div>
-                                                </div>
-                                                <p>We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire that the cannot foresee the pain and trouble that.</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="comment_info">
-                                <div class="d-flex">
-                                    <div class="comment_user">
-                                        <img src="assets/images/user4.jpg" alt="user4">
-                                    </div>
-                                    <div class="comment_content">
-                                        <div class="d-flex">
-                                            <div class="meta_data">
-                                                <h6><a href="#">John Becker</a></h6>
-                                                <div class="comment-time">april 15, 2018, 10:30 PM</div>
-                                            </div>
-                                            <div class="ml-auto">
-                                                <a href="#" class="comment-reply"><i class="ion-reply-all"></i>Reply</a>
-                                            </div>
-                                        </div>
-                                        <p>We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire that the cannot foresee the pain and trouble that.</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="content_title">
-                            <h5>Write a comment</h5>
-                        </div>
-                        <form class="field_form" name="enq" method="post">
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <input name="name" class="form-control" placeholder="Your Name" required="required" type="text">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input name="email" class="form-control" placeholder="Your Email" required="required" type="email">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input name="website" class="form-control" placeholder="Your Website" required="required" type="text">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <textarea rows="3" name="message" class="form-control" placeholder="Your Comment" required="required"></textarea>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <button value="Submit" name="submit" class="btn btn-fill-out" title="Submit Your Message!" type="submit">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
                 <div class="col-xl-3 mt-4 pt-2 mt-xl-0 pt-xl-0">
                     <div class="sidebar">
                         <div class="widget">
                             <div class="search_form">
                                 <form>
-                                    <input required="" class="form-control" placeholder="Search..." type="text">
+                                    <input required="" class="form-control" placeholder="Tìm kiếm..." type="text">
                                     <button type="submit" title="Subscribe" class="btn icon_search" name="submit" value="Submit">
                                         <i class="ion-ios-search-strong"></i>
                                     </button>

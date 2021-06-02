@@ -46,12 +46,8 @@
                                     </td>
                                     <td>{{$brand->name}}</td>
                                     <td>{{$brand->slug}}</td>
-                                    <td>
-                                        @if($brand->status == 1)
-                                            <a href="#" class="status_btn">Active</a>
-                                        @else
-                                            <a href="#" class="status_inactive">Inactive</a>
-                                        @endif
+                                    <td class="status-switch">
+                                        <input action="{{route('brands.update_status', $brand->id)}}" class="js-status-switch" {{$brand->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$brand->id}}" /><label for="switch-{{$brand->id}}">Toggle</label>
                                     </td>
                                     <td>
                                         <a href="{{route('brands.edit', $brand->id)}}" class="btn_edit">Sửa</a>

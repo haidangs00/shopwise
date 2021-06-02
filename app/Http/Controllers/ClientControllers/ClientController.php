@@ -6,6 +6,8 @@ use App\Helper\CartHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
@@ -90,7 +92,15 @@ class ClientController extends Controller
 
     public function blogs()
     {
-        return view('client.pages.blogs');
+        $blogCategories = BlogCategory::where('status', 1)->get();
+        $blogs = Blog::all();
+        return view('client.pages.blogs', compact('blogCategories', 'blogs'));
+    }
+
+    public function blogDetail($id)
+    {
+        $blog = Blog::find($id);
+        return view('client.pages.blog-detail', compact('blog'));
     }
 
     public function wishlist()
@@ -143,7 +153,7 @@ class ClientController extends Controller
     public function products(Request $request, $slug = null)
     {
 //        dd($request->all());
-        $products = Product::query()->select('*')->when($slug != null, function ($query) use ($slug) {
+        $products = Product::query()->where('status', 1)->when($slug != null, function ($query) use ($slug) {
             $category = Category::where('slug', $slug)->first();
             $query->whereCategoryId($category->id);
         })->when($request->brands != null, function ($query) use ($request) {
@@ -156,7 +166,7 @@ class ClientController extends Controller
             $query->join('product_sizes', 'product_sizes.product_id', '=', 'products.id')->whereIn('size_id', $request->sizes);
         })->get();
 
-        $brands = Brand::all();
+        $brands = Brand::where('status', 1)->get();
         $colors = Color::all();
         $sizes = Size::all();
 
@@ -211,10 +221,8 @@ class ClientController extends Controller
     {
         $user = Socialite::driver('google')->stateless()->user();
         $authUser = $this->findOrCreateUser($user, 'google');
-        $account_name = User::where('id', $authUser->user)->first();
 
-        Session::put('account_name', $account_name->name);
-        Session::put('account_id', $account_name->id);
+        auth('web')->login($authUser);
 
         return redirect()->route('clients.home');
     }
@@ -223,7 +231,8 @@ class ClientController extends Controller
     {
         $authUser = Social::where('provider_id', $user->id)->first();
         if ($authUser) {
-            return $authUser;
+            $account_name = User::where('id', $authUser->user)->first();
+            return $account_name;
         }
 
         $social = Social::create([
@@ -244,9 +253,6 @@ class ClientController extends Controller
         $social->save();
 
         $account_name = User::where('id', $social->user)->first();
-        Session::put('account_name', $account_name->name);
-        Session::put('account_id', $account_name->id);
-
-        return redirect()->route('clients.home');
+        return $account_name;
     }
 }

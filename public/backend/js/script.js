@@ -121,12 +121,10 @@ $(document).ready(function () {
             type: form.attr('method'),
             data: form.serialize(),
             success: function (response) {
-                if(response.status) {
+                if (response.status) {
                     alertify.success(response.message);
                     window.location.href = response.redirect;
-                }
-                else alertify.error(response.message);
-
+                } else alertify.error(response.message);
             },
             error: function (xhr) {
                 let err = JSON.parse(xhr.responseText);
@@ -177,6 +175,25 @@ $(document).ready(function () {
                     } else alertify.error(response.message);
                 }
             });
+        });
+    })
+
+    $('.js-status-switch').on('change', function (e) {
+        let btn = $(this);
+        let status = this.checked ? 1 : 0;
+        let action = btn.attr('action');
+
+        $.ajax({
+            action: action,
+            url: btn.attr('action'),
+            type: 'patch',
+            dataType: 'json',
+            data: {status: status},
+            success: function (response) {
+                if (response.status) {
+                    alertify.success(response.message);
+                } else alertify.error(response.message);
+            }
         });
     });
 });

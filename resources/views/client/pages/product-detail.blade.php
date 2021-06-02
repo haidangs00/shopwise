@@ -180,7 +180,7 @@
                             </div>
                             <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
                                 <div class="comments">
-                                    <h5 class="product_tab_title">{{$product->countComment()}} Đánh giá cho
+                                    <h5 class="product_tab_title">{{$product->countComment() ? $product->countComment() : 'Chưa có'}} Đánh giá cho
                                         <span>{{$product->name}}</span></h5>
                                     <ul class="list_none comment_list mt-4">
                                         @foreach($product->getActiveComments() as $comment)

@@ -66,12 +66,8 @@
                                     <td>{{$product->regular_price}}</td>
                                     <td>{{$product->promotional_price}}</td>
                                     <td>{{$product->star}}</td>
-                                    <td>
-                                        @if($product->status == 1)
-                                            <a href="#" class="status_btn">Active</a>
-                                        @else
-                                            <a href="#" class="status_inactive">Inactive</a>
-                                        @endif
+                                    <td class="status-switch">
+                                        <input action="{{route('products.update_status', $product->id)}}" class="js-status-switch" {{$product->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$product->id}}" /><label for="switch-{{$product->id}}">Toggle</label>
                                     </td>
                                     <td>
                                         <a href="{{route('products.edit', $product->id)}}" class="btn_edit">Sửa</a>

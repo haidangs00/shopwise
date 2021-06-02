@@ -39,8 +39,8 @@
                                                 Chọn ảnh
                                             </a>
                                             <input class="form-control" type="hidden" name="file" id="image">
-                                            <div>
-                                                <img style="width: 1000px; height: 250px" id="img-show" src="" alt="">
+                                            <div class="image-wrap">
+                                                <img id="img-show" alt="">
                                             </div>
                                         </div>
                                         <div class="form-group">

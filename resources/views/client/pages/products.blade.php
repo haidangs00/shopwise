@@ -84,7 +84,8 @@
                                         </div>
                                         <div class="rating_wrap">
                                             <div class="rating">
-                                                <div class="product_rate" style="width:{{100*($product->getRating()/5)}}%"></div>
+                                                <div class="product_rate"
+                                                     style="width:{{100*($product->getRating()/5)}}%"></div>
                                             </div>
                                             <span class="rating_num">(21)</span>
                                         </div>
@@ -141,13 +142,11 @@
                                     <li><a href="{{route('clients.products')}}"><span
                                                 class="categories_name">Tất cả</span></a>
                                     </li>
-                                    @foreach($categories as $category)
-                                        @if($category->products_count > 0)
-                                            <li><a href="{{route('clients.products', $category->slug)}}"><span
-                                                        class="categories_name">{{$category->name}}</span><span
-                                                        class="categories_num">({{$category->products_count}})</span></a>
-                                            </li>
-                                        @endif
+                                    @foreach($activeCategories as $category)
+                                        <li><a href="{{route('clients.products', $category->slug)}}"><span
+                                                    class="categories_name">{{$category->name}}</span><span
+                                                    class="categories_num">({{$category->products_count > 0 ? $category->products_count : 'Hết hàng'}})</span></a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -199,7 +198,9 @@
                                                        id="{{$color->name}}"
                                                        value="{{$color->id}}">
                                                 <label class="form-check-label"
-                                                       for="{{$color->name}}"><span data-color="{{$color->color_code}}"></span>{{$color->name}}</label>
+                                                       for="{{$color->name}}"><span
+                                                        data-color="{{$color->color_code}}"></span>{{$color->name}}
+                                                </label>
                                             </div>
                                         </div>
                                     @endforeach
@@ -209,18 +210,18 @@
                                 <button type="submit" class="btn btn-fill-out">Lọc</button>
                             </div>
                         </form>
-{{--                        <div class="widget">--}}
-{{--                            <div class="shop_banner">--}}
-{{--                                <div class="banner_img overlay_bg_20">--}}
-{{--                                    <img src="{{url('client')}}/images/sidebar_banner_img.jpg" alt="sidebar_banner_img">--}}
-{{--                                </div>--}}
-{{--                                <div class="shop_bn_content2 text_white">--}}
-{{--                                    <h5 class="text-uppercase shop_subtitle">New Collection</h5>--}}
-{{--                                    <h3 class="text-uppercase shop_title">Sale 30% Off</h3>--}}
-{{--                                    <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">Shop Now</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="widget">--}}
+                        {{--                            <div class="shop_banner">--}}
+                        {{--                                <div class="banner_img overlay_bg_20">--}}
+                        {{--                                    <img src="{{url('client')}}/images/sidebar_banner_img.jpg" alt="sidebar_banner_img">--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="shop_bn_content2 text_white">--}}
+                        {{--                                    <h5 class="text-uppercase shop_subtitle">New Collection</h5>--}}
+                        {{--                                    <h3 class="text-uppercase shop_title">Sale 30% Off</h3>--}}
+                        {{--                                    <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">Shop Now</a>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                     </div>
                 </div>
             </div>

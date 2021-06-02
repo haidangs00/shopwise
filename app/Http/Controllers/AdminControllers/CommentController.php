@@ -89,4 +89,14 @@ class CommentController extends Controller
         }
         return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
+
+    public function updateStatus(Request $request, $commentId)
+    {
+        $comment = Comment::find($commentId);
+        $updated = $comment->update(['status' => $request->status]);
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Cập nhập trạng thái thất bại!', 'status' => false]);
+    }
 }

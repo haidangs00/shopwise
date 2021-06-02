@@ -110,4 +110,14 @@ class BrandController extends Controller
         }
         return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
+
+    public function updateStatus(Request $request, $brandId)
+    {
+        $brand = Brand::find($brandId);
+        $updated = $brand->update(['status' => $request->status]);
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Cập nhập trạng thái thất bại!', 'status' => false]);
+    }
 }

@@ -104,4 +104,14 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
 
     }
+
+    public function updateStatus(Request $request, $categoryId)
+    {
+        $category = Category::find($categoryId);
+        $updated = $category->update(['status' => $request->status]);
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Cập nhập trạng thái thất bại!', 'status' => false]);
+    }
 }

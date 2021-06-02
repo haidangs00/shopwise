@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminControllers\AuthController;
 use App\Http\Controllers\AdminControllers\BannerController;
+use App\Http\Controllers\AdminControllers\BlogCategoryController;
+use App\Http\Controllers\AdminControllers\BlogController;
 use App\Http\Controllers\AdminControllers\BrandController;
 use App\Http\Controllers\AdminControllers\ColorController;
 use App\Http\Controllers\AdminControllers\CategoryController;
@@ -56,6 +58,7 @@ Route::get('/delete-cart/{id}', [CartController::class, 'deleteCart'])->name('cl
 Route::get('/contact', [ClientController::class, 'contact'])->name('clients.contact');
 Route::get('/about-us', [ClientController::class, 'aboutUs'])->name('clients.about_us');
 Route::get('/blogs', [ClientController::class, 'blogs'])->name('clients.blogs');
+Route::get('/blog-detail/{id}', [ClientController::class, 'blogDetail'])->name('clients.blog_detail');
 Route::get('/checkout', [ClientController::class, 'checkout'])->name('clients.checkout');
 Route::post('/checkout', [ClientController::class, 'proceedCheckout'])->name('clients.proceed_checkout');
 Route::get('/quick-view-product/{id}', [ClientController::class, 'quickViewProduct'])->name('clients.quick_view_product');
@@ -85,15 +88,23 @@ Route::prefix('admin')->group(function () {
         })->name('dashboard');
         Route::get('/logout', [AuthController::class, 'logout'])->name('admins.logout');
         Route::resource('categories', CategoryController::class);
+        Route::patch('/category/update-status/{id}', [CategoryController::class, 'updateStatus'])->name('categories.update_status');
         Route::resource('products', ProductController::class);
-        Route::resource('colors', ColorController::class);
+        Route::patch('/product/update-status/{id}', [ProductController::class, 'updateStatus'])->name('products.update_status');
         Route::resource('brands', BrandController::class);
-        Route::resource('sizes', SizeController::class);
+        Route::patch('/brand/update-status/{id}', [BrandController::class, 'updateStatus'])->name('brands.update_status');
         Route::resource('banners', BannerController::class);
+        Route::resource('blogCategories', BlogCategoryController::class);
+        Route::patch('/blogCategories/update-status/{id}', [BlogCategoryController::class, 'updateStatus'])->name('blogCategories.update_status');
+        Route::patch('/banner/update-status/{id}', [BannerController::class, 'updateStatus'])->name('banners.update_status');
+        Route::resource('blogs', BlogController::class);
+        Route::patch('/blog/update-status/{id}', [BlogController::class, 'updateStatus'])->name('blogs.update_status');
+        Route::resource('colors', ColorController::class);
+        Route::resource('sizes', SizeController::class);
 
         Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
         Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
-
+        Route::patch('/comment/update-status/{id}', [CommentController::class, 'updateStatus'])->name('comments.update_status');
 
     });
     Route::middleware('guest:admin')->group(function () {

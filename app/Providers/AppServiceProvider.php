@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'cart' => new CartHelper(),
                 'compare' => new CompareHelper(),
-                'categories' => Category::where('status', 1)->withCount('products')->orderBy('name', 'ASC')->get()
+                'activeCategories' => Category::where('status', 1)->withCount('products')->orderBy('name', 'ASC')->get()
             ]);
         });
         view()->composer('client.layouts.banner', function ($view) {

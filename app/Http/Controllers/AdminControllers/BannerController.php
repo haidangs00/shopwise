@@ -44,9 +44,11 @@ class BannerController extends Controller
             $image = trim($image, '/');
             $request->merge(['image' => $image]);
         }
-        $begin = Carbon::parse($request->date_begin)->format('Y-m-d');
-        $end = Carbon::parse($request->date_end)->format('Y-m-d');
-        $request->merge(['date_begin' => $begin, 'date_end' => $end]);
+        $request->date_begin = Carbon::parse($request->date_begin)->format('Y-m-d');
+        if($request->date_end !== null) {
+            $request->date_end = Carbon::parse($request->date_end)->format('Y-m-d');
+        }
+        $request->merge(['date_begin' => $request->date_begin, 'date_end' => $request->date_end]);
         $created = Banner::create($request->all());
         if ($created) {
             return response()->json(['message' => 'Tạo mới thành công!', 'status' => true, 'redirect' => route('banners.index')]);
@@ -117,4 +119,14 @@ class BannerController extends Controller
         }
         return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
+    public function updateStatus(Request $request, $bannerId)
+    {
+        $banner = Banner::find($bannerId);
+        $updated = $banner->update(['status' => $request->status]);
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Cập nhập trạng thái thất bại!', 'status' => false]);
+    }
+
 }

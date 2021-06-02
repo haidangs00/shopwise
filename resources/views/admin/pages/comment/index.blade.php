@@ -44,12 +44,8 @@
                                     <td>{{$comment->content}}</td>
                                     <td>{{$comment->product->name}}</td>
                                     <td>3</td>
-                                    <td>
-                                        @if($comment->status == 1)
-                                            <a href="#" class="status_btn">Active</a>
-                                        @else
-                                            <a href="#" class="status_inactive">Inactive</a>
-                                        @endif
+                                    <td class="status-switch">
+                                        <input action="{{route('comments.update_status', $comment->id)}}" class="js-status-switch" {{$comment->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$comment->id}}" /><label for="switch-{{$comment->id}}">Toggle</label>
                                     </td>
                                     <td>
                                         <a href="#" class="btn_edit">Trả lời</a>

@@ -20,13 +20,16 @@
                 <span>Quản lý</span>
             </a>
             <ul class="{{ Request::is('admin/*') ? 'mm-show' : '' }}">
-                <li><a class="{{ Request::routeIs('categories.*') ? 'active' : '' }}" href="{{route('categories.index')}}">Danh mục</a></li>
+                <li><a class="{{ Request::routeIs('categories.*') ? 'active' : '' }}" href="{{route('categories.index')}}">Danh mục sản phẩm</a></li>
                 <li><a class="{{ Request::routeIs('products.*') ? 'active' : '' }}" href="{{route('products.index')}}">Sản phẩm</a></li>
                 <li><a class="{{ Request::routeIs('colors.*') ? 'active' : '' }}" href="{{route('colors.index')}}">Màu</a></li>
                 <li><a class="{{ Request::routeIs('sizes.*') ? 'active' : '' }}" href="{{route('sizes.index')}}">Size</a></li>
                 <li><a class="{{ Request::routeIs('brands.*') ? 'active' : '' }}" href="{{route('brands.index')}}">Nhãn hàng</a></li>
                 <li><a class="{{ Request::routeIs('banners.*') ? 'active' : '' }}" href="{{route('banners.index')}}">Banner</a></li>
                 <li><a class="{{ Request::routeIs('comments.*') ? 'active' : '' }}" href="{{route('comments.index')}}">Bình luận</a></li>
+                <li><a class="{{ Request::routeIs('blogCategories.*') ? 'active' : '' }}" href="{{route('blogCategories.index')}}">Danh mục bài viết</a></li>
+                <li><a class="{{ Request::routeIs('blogs.*') ? 'active' : '' }}" href="{{route('blogs.index')}}">Bài viết</a></li>
+
             </ul>
         </li>
 
