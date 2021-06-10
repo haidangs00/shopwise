@@ -141,6 +141,13 @@
 
 <!-- ck js -->
 <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script>
+    // Ckeditor
+    CKEDITOR.replace('content-ckeditor', {
+        filebrowserUploadUrl: "{{route('ckeditor_upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
+</script>
 
 <!-- script js -->
 <script src="{{url('backend')}}/js/script.js"></script>

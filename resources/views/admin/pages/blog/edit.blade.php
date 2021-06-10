@@ -59,13 +59,13 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="summary">Tóm tắt:</label>
-                                            <input value="{{$blog->title}}" type="text" name="summary" class="form-control"
+                                            <input value="{{$blog->summary}}" type="text" name="summary" class="form-control"
                                                    placeholder="Nhập tóm tắt bài viết">
                                             <span class="error-msg" error-for="summary"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>Nội dung:</label>
-                                            <textarea class="form-control" name="content" rows="5">{{$blog->content}}</textarea>
+                                            <textarea id="content-ckeditor" class="form-control" name="content" rows="5">{{$blog->content}}</textarea>
                                             <span class="error-msg" error-for="content"></span>
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Cập nhập">

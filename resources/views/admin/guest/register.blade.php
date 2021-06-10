@@ -1,13 +1,12 @@
 @extends('admin.layouts.default', ['pageTitle'=>'Đăng ký'])
 @section('content')
     <div class="main_content_iner ">
-        <div class="container-fluid plr_30 body_white_bg pt_30">
+        <div class="container-fluid" style="background-color: #f7faff">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="white_box mb_30">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4">
-                                <!-- sign_in  -->
+                    <div class="container" style="min-height:100vh;">
+                        <div class="row justify-content-center" style="position: relative; top: 50%; transform: translateY(12%);">
+                            <div class="col-lg-4 col-md-6 col-8">
                                 <div class="modal-content cs_modal">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Đăng ký</h5>
@@ -52,12 +51,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-
-
             </div>
         </div>
+    </div>
 @endsection

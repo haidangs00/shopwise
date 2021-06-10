@@ -29,80 +29,18 @@
                 <li><a class="{{ Request::routeIs('comments.*') ? 'active' : '' }}" href="{{route('comments.index')}}">Bình luận</a></li>
                 <li><a class="{{ Request::routeIs('blogCategories.*') ? 'active' : '' }}" href="{{route('blogCategories.index')}}">Danh mục bài viết</a></li>
                 <li><a class="{{ Request::routeIs('blogs.*') ? 'active' : '' }}" href="{{route('blogs.index')}}">Bài viết</a></li>
-
+                <li><a class="{{ Request::routeIs('contacts.*') ? 'active' : '' }}" href="{{route('contacts.index')}}">Liên hệ của khách hàng</a></li>
             </ul>
         </li>
 
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="{{url('backend')}}/images/menu-icon/2.svg" alt="">
-                <span>Pages</span>
-            </a>
-            <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="resister.html">Register</a></li>
-                <li><a href="forgot_pass.html">Forgot Password</a></li>
-            </ul>
-        </li>
-
-        <li class="">
+        <li class="{{ Request::is('admin/accounts/*') ? 'mm-active' : '' }}">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <img src="{{url('backend')}}/images/menu-icon/3.svg" alt="">
-                <span>Applications</span>
+                <span>Quản lý tài khoản</span>
             </a>
-            <ul>
-                <li><a href="mail_box.html">Mail Box</a></li>
-                <li><a href="chat.html">Chat</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-            </ul>
-        </li>
-
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="{{url('backend')}}/images/menu-icon/4.svg" alt="">
-                <span>UI Component</span>
-            </a>
-            <ul>
-                <li><a href="#">Elements</a>
-                    <ul>
-                        <li><a href="buttons.html">Buttons</a></li>
-                        <li><a href="dropdown.html">Dropdowns</a></li>
-                        <li><a href="Badges.html">Badges</a></li>
-                        <li><a href="Loading_Indicators.html">Loading Indicators</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Components</a>
-                    <ul>
-                        <li><a href="notification.html">Notifications</a></li>
-                        <li><a href="progress.html">Progress Bar</a></li>
-                        <li><a href="carousel.html">Carousel</a></li>
-                        <li><a href="cards.html">cards</a></li>
-                        <li><a href="Pagination.html">Pagination</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="{{url('backend')}}/images/menu-icon/5.svg" alt="">
-                <span>Widgets</span>
-            </a>
-            <ul>
-                <li><a href="chart_box_1.html">Chart Boxes 1</a></li>
-                <li><a href="profilebox.html">Profile Box</a></li>
-            </ul>
-        </li>
-
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="{{url('backend')}}/images/menu-icon/7.svg" alt="">
-                <span>Charts</span>
-            </a>
-            <ul>
-                <li><a href="chartjs.html">ChartJS</a></li>
-                <li><a href="apex_chart.html">Apex Charts</a></li>
-                <li><a href="chart_sparkline.html">chart sparkline</a></li>
+            <ul class="{{ Request::is('admin/accounts/*') ? 'mm-show' : '' }}">
+                <li><a class="{{ Request::routeIs('admins.*') ? 'active' : '' }}" href="{{route('admins.index')}}">Quản trị viên</a></li>
+                <li><a class="{{ Request::routeIs('users.*') ? 'active' : '' }}" href="{{route('users.index')}}">Khách hàng</a></li>
             </ul>
         </li>
 

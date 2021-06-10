@@ -6,12 +6,14 @@ use App\Helper\CartHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Contact\StoreRequest as ContactStoreRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Comment;
+use App\Models\Contact;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -23,6 +25,7 @@ use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Socialite;
 use Session;
@@ -90,17 +93,39 @@ class ClientController extends Controller
         return view('client.pages.contact');
     }
 
+    public function sendContact(ContactStoreRequest $request)
+    {
+        $created = Contact::create($request->all());
+
+        if($created)
+        {
+            return response()->json(['message' => 'Xin cảm ơn! Chúng tôi sẽ liên hệ với bạn sớm nhất!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Đã xảy ra lỗi, vui lòng thử lại!', 'status' => false]);
+    }
     public function blogs()
     {
+        $dates = Blog::selectRaw('year(created_at) year, monthname(created_at) month, day(created_at) day, count(*) data')
+            ->groupBy('year', 'month', 'day')
+            ->orderBy('month', 'desc')
+            ->get();
+
         $blogCategories = BlogCategory::where('status', 1)->get();
-        $blogs = Blog::all();
-        return view('client.pages.blogs', compact('blogCategories', 'blogs'));
+        $blogs = Blog::paginate(4);
+        return view('client.pages.blogs', compact('blogCategories', 'blogs', 'dates'));
     }
 
     public function blogDetail($id)
     {
+        $dates = Blog::selectRaw('year(created_at) year, monthname(created_at) month, day(created_at) day, count(*) data')
+            ->groupBy('year', 'month', 'day')
+            ->orderBy('month', 'desc')
+            ->get();
+        $blogs = Blog::paginate(4);
+
+        $blogCategories = BlogCategory::where('status', 1)->get();
         $blog = Blog::find($id);
-        return view('client.pages.blog-detail', compact('blog'));
+        return view('client.pages.blog-detail', compact('blog', 'blogCategories', 'dates', 'blogs'));
     }
 
     public function wishlist()
@@ -142,7 +167,7 @@ class ClientController extends Controller
 
         $data = array('title' => 'Xác nhận đơn hàng!', 'user_name' => Auth::user()->name);
 
-        Mail::send('client.send-mail.mail', $data, function($message) use ($toName, $toMail) {
+        Mail::send('client.send-mail.mail', $data, function ($message) use ($toName, $toMail) {
             $message->to($toMail)->subject('Xác nhận đặt hàng Shopwise');
             $message->from($toMail, $toName);
         });
@@ -236,7 +261,7 @@ class ClientController extends Controller
         }
 
         $social = Social::create([
-           'provider_id' => $user->id,
+            'provider_id' => $user->id,
             'provider' => $provider
         ]);
         $accountUser = User::where('email', $user->email)->first();

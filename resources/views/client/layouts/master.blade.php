@@ -125,6 +125,9 @@
 <!-- sweetalert js -->
 <script src="{{url('client')}}/sweetalert/dist/sweetalert.min.js"></script>
 
+<!-- Google Map Js -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7TypZFTl4Z3gVtikNOdGSfNTpnmq-ahQ&amp;callback=initMap"></script>
+
 <!-- scripts js -->
 <script src="{{url('client')}}/js/scripts.js"></script>
 <script src="{{url('client')}}/js/customs.js"></script>

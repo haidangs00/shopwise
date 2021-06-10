@@ -56,7 +56,7 @@ class RegisterRequest extends FormRequest
             're_password.same' => 'Nhập lại mật khẩu không đúng',
 
             'phone.required' => 'Vui lòng nhập số điện thoại',
-            'phone.numberic' => 'Số điện thoại không hợp lệ',
+            'phone.numeric' => 'Số điện thoại không hợp lệ',
 
 //            'check.accepted' => 'Bạn chưa đồng ý với các điều khản & chính sách'
         ];

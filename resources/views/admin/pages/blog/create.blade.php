@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Nội dung:</label>
-                                            <textarea class="form-control" name="content" rows="5"></textarea>
+                                            <textarea id="content-ckeditor" class="form-control" name="content" rows="5"></textarea>
                                             <span class="error-msg" error-for="content"></span>
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Thêm mới">

@@ -24,4 +24,9 @@ class Blog extends Model
     {
         return $this->belongsTo('App\Models\BlogCategory');
     }
+
+    public function getDate()
+    {
+        return date_format($this->created_at, 'M d Y');
+    }
 }

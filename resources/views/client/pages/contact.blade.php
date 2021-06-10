@@ -11,7 +11,7 @@
                             <i class="linearicons-map2"></i>
                         </div>
                         <div class="contact_text">
-                            <span>Address</span>
+                            <span>Địa chỉ</span>
                             <p>123 Street, Old Trafford, London, UK</p>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                             <i class="linearicons-envelope-open"></i>
                         </div>
                         <div class="contact_text">
-                            <span>Email Address</span>
+                            <span>Email</span>
                             <a href="mailto:info@sitename.com">info@yourmail.com </a>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                             <i class="linearicons-tablet2"></i>
                         </div>
                         <div class="contact_text">
-                            <span>Phone</span>
+                            <span>Điện thoại</span>
                             <p>+ 457 789 789 65</p>
                         </div>
                     </div>
@@ -49,32 +49,35 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="heading_s1">
-                        <h2>Get In touch</h2>
+                        <h2>Liên hệ với chúng tôi</h2>
                     </div>
                     <p class="leads">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
                     <div class="field_form">
-                        <form method="post" name="enq">
+                        <form class="form-action" method="post" action="{{route('clients.send_contact')}}">
+                            @csrf
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <input required placeholder="Enter Name *" id="first-name" class="form-control" name="name" type="text">
+                                    <input placeholder="Nhập Họ Tên *" id="first-name" class="form-control" name="name" type="text">
+                                    <span class="error-msg" error-for="name"></span>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <input required placeholder="Enter Email *" id="email" class="form-control" name="email" type="email">
+                                    <input placeholder="Nhập Email *" id="email" class="form-control" name="email" type="email">
+                                    <span class="error-msg" error-for="email"></span>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <input required placeholder="Enter Phone No. *" id="phone" class="form-control" name="phone">
+                                    <input placeholder="Nhập Số Điện Thoại *" id="phone" class="form-control" name="phone">
+                                    <span class="error-msg" error-for="phone"></span>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <input placeholder="Enter Subject" id="subject" class="form-control" name="subject">
+                                    <input placeholder="Nhập chủ đề" id="subject" class="form-control" name="subject">
+                                    <span class="error-msg" error-for="subject"></span>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <textarea required placeholder="Message *" id="description" class="form-control" name="message" rows="4"></textarea>
+                                    <textarea placeholder="Nội dung *" id="description" class="form-control" name="message" rows="4"></textarea>
+                                    <span class="error-msg" error-for="message"></span>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" title="Submit Your Message!" class="btn btn-fill-out" id="submitButton" name="submit" value="Submit">Send Message</button>
-                                </div>
-                                <div class="col-md-12">
-                                    <div id="alert-msg" class="alert-msg text-center"></div>
+                                    <button type="submit" class="btn btn-fill-out" value="Submit">Gửi</button>
                                 </div>
                             </div>
                         </form>

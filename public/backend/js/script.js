@@ -115,7 +115,11 @@ $(document).ready(function () {
         e.preventDefault();
         let form = $(this);
 
-        // alert(form.serialize())
+        //Update content ckedittor
+        for ( instance in CKEDITOR.instances ) {
+            CKEDITOR.instances[instance].updateElement();
+        }
+
         $.ajax({
             url: form.attr('action'),
             type: form.attr('method'),

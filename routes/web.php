@@ -1,19 +1,22 @@
 <?php
 
+use App\Http\Controllers\AdminControllers\AdminController;
 use App\Http\Controllers\AdminControllers\AuthController;
 use App\Http\Controllers\AdminControllers\BannerController;
 use App\Http\Controllers\AdminControllers\BlogCategoryController;
 use App\Http\Controllers\AdminControllers\BlogController;
 use App\Http\Controllers\AdminControllers\BrandController;
+use App\Http\Controllers\AdminControllers\CKEditorController;
 use App\Http\Controllers\AdminControllers\ColorController;
 use App\Http\Controllers\AdminControllers\CategoryController;
 use App\Http\Controllers\AdminControllers\CommentController;
+use App\Http\Controllers\AdminControllers\ContactController;
 use App\Http\Controllers\AdminControllers\ProductController;
 use App\Http\Controllers\AdminControllers\SizeController;
+use App\Http\Controllers\AdminControllers\UserController;
 use App\Http\Controllers\ClientControllers\CartController;
 use App\Http\Controllers\ClientControllers\ClientController;
 use App\Http\Controllers\ClientControllers\CompareController;
-use App\Http\Controllers\ClientControllers\MailController;
 use App\Http\Controllers\ClientControllers\WishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +68,7 @@ Route::get('/quick-view-product/{id}', [ClientController::class, 'quickViewProdu
 Route::get('/compare', [CompareController::class, 'showCompare'])->name('clients.show_compare');
 Route::get('/add-compare/{id}', [CompareController::class, 'addCompare'])->name('clients.add_compare');
 Route::get('/delete-compare/{id}', [CompareController::class, 'deleteCompare'])->name('clients.delete_compare');
+Route::post('/send-contact', [ClientController::class, 'sendContact'])->name('clients.send_contact');
 
 Route::middleware('client')->group(function () {
     Route::get('/my-account', [ClientController::class, 'account'])->name('clients.account');
@@ -102,10 +106,19 @@ Route::prefix('admin')->group(function () {
         Route::resource('colors', ColorController::class);
         Route::resource('sizes', SizeController::class);
 
+        //Manager Account
+        Route::resource('admins', AdminController::class);
+        Route::resource('users', UserController::class);
+
         Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
         Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
         Route::patch('/comment/update-status/{id}', [CommentController::class, 'updateStatus'])->name('comments.update_status');
 
+        Route::get('/contact', [ContactController::class, 'index'])->name('contacts.index');
+        Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
+        //ckeditor upload images
+        Route::post('ckeditor/image_upload', [CKEditorController::class, 'upload'])->name('ckeditor_upload');
     });
     Route::middleware('guest:admin')->group(function () {
         Route::get('/login', [AuthController::class, 'login'])->name('admins.login');
