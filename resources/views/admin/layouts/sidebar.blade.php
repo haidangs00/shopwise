@@ -14,12 +14,12 @@
             </a>
         </li>
 
-        <li class="{{ Request::is('admin/*') ? 'mm-active' : '' }}">
+        <li class="{{ Request::is('admin/manager/*') ? 'mm-active' : '' }}">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <img src="{{url('backend')}}/images/menu-icon/6.svg" alt="">
                 <span>Quản lý</span>
             </a>
-            <ul class="{{ Request::is('admin/*') ? 'mm-show' : '' }}">
+            <ul class="{{ Request::is('admin/manager/*') ? 'mm-show' : '' }}">
                 <li><a class="{{ Request::routeIs('categories.*') ? 'active' : '' }}" href="{{route('categories.index')}}">Danh mục sản phẩm</a></li>
                 <li><a class="{{ Request::routeIs('products.*') ? 'active' : '' }}" href="{{route('products.index')}}">Sản phẩm</a></li>
                 <li><a class="{{ Request::routeIs('colors.*') ? 'active' : '' }}" href="{{route('colors.index')}}">Màu</a></li>
@@ -33,12 +33,12 @@
             </ul>
         </li>
 
-        <li class="{{ Request::is('admin/accounts/*') ? 'mm-active' : '' }}">
+        <li class="{{ Request::is('admin/account/*') ? 'mm-active' : '' }}">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <img src="{{url('backend')}}/images/menu-icon/3.svg" alt="">
                 <span>Quản lý tài khoản</span>
             </a>
-            <ul class="{{ Request::is('admin/accounts/*') ? 'mm-show' : '' }}">
+            <ul class="{{ Request::is('admin/account/*') ? 'mm-show' : '' }}">
                 <li><a class="{{ Request::routeIs('admins.*') ? 'active' : '' }}" href="{{route('admins.index')}}">Quản trị viên</a></li>
                 <li><a class="{{ Request::routeIs('users.*') ? 'active' : '' }}" href="{{route('users.index')}}">Khách hàng</a></li>
             </ul>

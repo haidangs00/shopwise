@@ -26,10 +26,10 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'bail|required',
             'email' => 'bail|required|email|unique:users,email',
-            'user_name' => 'bail|required|alpha_dash',
+            'user_name' => 'bail|required|alpha_dash|unique:users,user_name',
             'password' => 'bail|required|min:6|max:16',
             're_password' => 'bail|required|same:password',
-            'phone' => 'bail|required|numeric',
+            'phone' => 'bail|required|numeric|unique:users,phone',
 //            'check' => 'accepted',
 
         ];
@@ -47,6 +47,7 @@ class RegisterRequest extends FormRequest
 
             'user_name.required' => 'Vui lòng nhập tên đăng nhập',
             'user_name.alpha_dash' => 'Tên đăng nhập không hợp lệ',
+            'user_name.unique' => 'Tên đăng nhập đã tồn tại',
 
             'password.required' => 'Vui lòng nhập mật khẩu',
             'password.min' => 'Mật khẩu phải tối thiểu 6 ký tự',
@@ -57,6 +58,7 @@ class RegisterRequest extends FormRequest
 
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'phone.numeric' => 'Số điện thoại không hợp lệ',
+            'phone.unique' => 'Số điện thoại đã tồn tại',
 
 //            'check.accepted' => 'Bạn chưa đồng ý với các điều khản & chính sách'
         ];

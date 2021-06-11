@@ -91,24 +91,31 @@ Route::prefix('admin')->group(function () {
             return view('admin.pages.index');
         })->name('dashboard');
         Route::get('/logout', [AuthController::class, 'logout'])->name('admins.logout');
-        Route::resource('categories', CategoryController::class);
-        Route::patch('/category/update-status/{id}', [CategoryController::class, 'updateStatus'])->name('categories.update_status');
-        Route::resource('products', ProductController::class);
-        Route::patch('/product/update-status/{id}', [ProductController::class, 'updateStatus'])->name('products.update_status');
-        Route::resource('brands', BrandController::class);
-        Route::patch('/brand/update-status/{id}', [BrandController::class, 'updateStatus'])->name('brands.update_status');
-        Route::resource('banners', BannerController::class);
-        Route::resource('blogCategories', BlogCategoryController::class);
-        Route::patch('/blogCategories/update-status/{id}', [BlogCategoryController::class, 'updateStatus'])->name('blogCategories.update_status');
-        Route::patch('/banner/update-status/{id}', [BannerController::class, 'updateStatus'])->name('banners.update_status');
-        Route::resource('blogs', BlogController::class);
-        Route::patch('/blog/update-status/{id}', [BlogController::class, 'updateStatus'])->name('blogs.update_status');
-        Route::resource('colors', ColorController::class);
-        Route::resource('sizes', SizeController::class);
+
+        Route::prefix('manager')->group(function () {
+            Route::resource('categories', CategoryController::class);
+            Route::patch('/category/update-status/{id}', [CategoryController::class, 'updateStatus'])->name('categories.update_status');
+            Route::resource('products', ProductController::class);
+            Route::patch('/product/update-status/{id}', [ProductController::class, 'updateStatus'])->name('products.update_status');
+            Route::resource('brands', BrandController::class);
+            Route::patch('/brand/update-status/{id}', [BrandController::class, 'updateStatus'])->name('brands.update_status');
+            Route::resource('banners', BannerController::class);
+            Route::resource('blogCategories', BlogCategoryController::class);
+            Route::patch('/blogCategories/update-status/{id}', [BlogCategoryController::class, 'updateStatus'])->name('blogCategories.update_status');
+            Route::patch('/banner/update-status/{id}', [BannerController::class, 'updateStatus'])->name('banners.update_status');
+            Route::resource('blogs', BlogController::class);
+            Route::patch('/blog/update-status/{id}', [BlogController::class, 'updateStatus'])->name('blogs.update_status');
+            Route::resource('colors', ColorController::class);
+            Route::resource('sizes', SizeController::class);
+        });
 
         //Manager Account
-        Route::resource('admins', AdminController::class);
-        Route::resource('users', UserController::class);
+        Route::prefix('account')->group(function () {
+            Route::resource('admins', AdminController::class);
+            Route::patch('/admins/update-status/{id}', [AdminController::class, 'updateStatus'])->name('admins.update_status');
+            Route::resource('users', UserController::class);
+            Route::patch('/users/update-status/{id}', [UserController::class, 'updateStatus'])->name('users.update_status');
+        });
 
         Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
         Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');

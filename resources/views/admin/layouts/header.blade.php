@@ -25,7 +25,7 @@
                         </li>
                     </div>
                     <div class="profile_info">
-                        <img src="{{url('backend')}}/images/client_img.png" alt="#">
+                        <img src="{{url('uploads')}}/{{Auth::guard('admin')->user()->avatar}}" alt="{{Auth::guard('admin')->user()->name}}">
                         <div class="profile_info_iner">
                             <p>Xin chào Admin!</p>
                             @if(Auth::guard('admin')->user())
