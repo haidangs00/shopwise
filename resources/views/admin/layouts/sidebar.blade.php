@@ -41,6 +41,7 @@
             <ul class="{{ Request::is('admin/account/*') ? 'mm-show' : '' }}">
                 <li><a class="{{ Request::routeIs('admins.*') ? 'active' : '' }}" href="{{route('admins.index')}}">Quản trị viên</a></li>
                 <li><a class="{{ Request::routeIs('users.*') ? 'active' : '' }}" href="{{route('users.index')}}">Khách hàng</a></li>
+                <li><a class="{{ Request::routeIs('roles.*') ? 'active' : '' }}" href="{{route('roles.index')}}">Vai trò</a></li>
             </ul>
         </li>
 

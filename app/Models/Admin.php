@@ -20,7 +20,6 @@ class Admin extends Authenticatable
         'phone',
         'address',
         'avatar',
-        'role_id',
         'status',
         'user_name',
         'password',
@@ -37,4 +36,9 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role', 'admin_role', 'admin_id', 'role_id');
+    }
 }

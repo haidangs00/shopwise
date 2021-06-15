@@ -21,8 +21,8 @@ class CheckAdminLogged
         if (Auth::guard($guard)->guest()) {
             return redirect()->route('admins.login');
         } else {
-            $adminLogged = Auth::guard($guard)->user();
-            $request->merge(['adminLogged' => $adminLogged]);
+//            $adminLogged = Auth::guard($guard)->user();
+//            $request->merge(['adminLogged' => $adminLogged]);
             return $next($request);
         }
     }

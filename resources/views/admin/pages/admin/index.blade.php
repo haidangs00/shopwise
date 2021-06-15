@@ -49,7 +49,11 @@
                                             <img class="w-100" src="{{url('uploads')}}/{{$admin->avatar}}" alt="{{$admin->name}}">
                                         </div>
                                     </td>
-                                    <td>{{$admin->role_id}}</td>
+                                    <td>
+                                        @foreach($admin->roles as $role)
+                                            <span class="pro-size">{{$role->display_name}}</span>
+                                        @endforeach
+                                    </td>
                                     <td>{{$admin->name}}</td>
                                     <td>{{$admin->email}}</td>
                                     <td>{{$admin->birthday}}</td>

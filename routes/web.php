@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminControllers\CategoryController;
 use App\Http\Controllers\AdminControllers\CommentController;
 use App\Http\Controllers\AdminControllers\ContactController;
 use App\Http\Controllers\AdminControllers\ProductController;
+use App\Http\Controllers\AdminControllers\RoleController;
 use App\Http\Controllers\AdminControllers\SizeController;
 use App\Http\Controllers\AdminControllers\UserController;
 use App\Http\Controllers\ClientControllers\CartController;
@@ -92,7 +93,7 @@ Route::prefix('admin')->group(function () {
         })->name('dashboard');
         Route::get('/logout', [AuthController::class, 'logout'])->name('admins.logout');
 
-        Route::prefix('manager')->group(function () {
+        Route::prefix('manager')->middleware('checkAcl:manager')->group(function () {
             Route::resource('categories', CategoryController::class);
             Route::patch('/category/update-status/{id}', [CategoryController::class, 'updateStatus'])->name('categories.update_status');
             Route::resource('products', ProductController::class);
@@ -111,10 +112,16 @@ Route::prefix('admin')->group(function () {
 
         //Manager Account
         Route::prefix('account')->group(function () {
-            Route::resource('admins', AdminController::class);
-            Route::patch('/admins/update-status/{id}', [AdminController::class, 'updateStatus'])->name('admins.update_status');
-            Route::resource('users', UserController::class);
-            Route::patch('/users/update-status/{id}', [UserController::class, 'updateStatus'])->name('users.update_status');
+            Route::middleware('checkAcl:admin')->group(function () {
+                Route::resource('admins', AdminController::class);
+                Route::patch('/admins/update-status/{id}', [AdminController::class, 'updateStatus'])->name('admins.update_status');
+            });
+            Route::middleware('checkAcl:user')->group(function () {
+                Route::resource('users', UserController::class)->middleware('checkAcl:user');
+                Route::patch('/users/update-status/{id}', [UserController::class, 'updateStatus'])->name('users.update_status');
+            });
+            Route::resource('roles', RoleController::class)->middleware('checkAcl:role');
+
         });
 
         Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');

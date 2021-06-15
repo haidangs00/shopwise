@@ -17,7 +17,7 @@
                                         @method('PUT')
                                         @csrf
                                         <div class="form-group">
-                                            <label for="name">Tên:</label>
+                                            <label for="name">Họ tên:</label>
                                             <input type="text" value="{{$admin->name}}" name="name" class="form-control" placeholder="Nhập tên">
                                             <span class="error-msg" error-for="name"></span>
                                         </div>
@@ -63,6 +63,19 @@
                                             <div class="radio">
                                                 <input id="radio-2" name="status" type="radio" value="0" {{$admin->status=='0'?'checked':''}}>
                                                 <label for="radio-2" class="radio-label">Inactive</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Vai trò:</label>
+                                            <div>
+                                                @foreach($roles as $role)
+                                                    <label class="form-checkbox-label">
+                                                        <input name=roles[] value="{{$role->id}}" class="form-checkbox-field"
+                                                               type="checkbox" {{in_array($role->id, $admin_roles)?'checked':''}}/>
+                                                        <i class="form-checkbox-button"></i>
+                                                        <span>{{$role->display_name}}</span>
+                                                    </label>
+                                                @endforeach
                                             </div>
                                         </div>
                                         <input type="submit" class="btn btn-primary btn-add" value="Cập nhập">

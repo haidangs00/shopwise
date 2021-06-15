@@ -16,13 +16,14 @@
                                     <form class="form-action" method="post" action="{{route('admins.store')}}">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="name">Tên:</label>
+                                            <label for="name">Họ tên:</label>
                                             <input type="text" name="name" class="form-control" placeholder="Nhập tên">
                                             <span class="error-msg" error-for="name"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email:</label>
                                             <input type="text" name="email" class="form-control" placeholder="Nhập email">
+                                            <span class="error-msg" error-for="email"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">Số điện thoại:</label>
@@ -67,6 +68,19 @@
                                             <div class="radio">
                                                 <input id="radio-2" name="status" type="radio" value="0">
                                                 <label  for="radio-2" class="radio-label">Inactive</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Vai trò:</label>
+                                            <div>
+                                                @foreach($roles as $role)
+                                                    <label class="form-checkbox-label">
+                                                        <input name=roles[] value="{{$role->id}}" class="form-checkbox-field"
+                                                               type="checkbox"/>
+                                                        <i class="form-checkbox-button"></i>
+                                                        <span>{{$role->display_name}}</span>
+                                                    </label>
+                                                @endforeach
                                             </div>
                                         </div>
                                         <input type="submit" class="btn btn-primary btn-add" value="Thêm mới">
