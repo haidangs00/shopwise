@@ -18,6 +18,7 @@ class CreateBannersTable extends Migration
             $table->string('name');
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
+            $table->string('note')->nullable();
             $table->tinyInteger('status')->default(1)->comment('active:1, inactive:0');
             $table->timestamp('date_begin')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('date_end')->nullable();

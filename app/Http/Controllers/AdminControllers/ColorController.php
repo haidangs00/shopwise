@@ -33,19 +33,22 @@ class ColorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request)
     {
-        Color::create($request->all());
-        return redirect()->route('colors.index');
+        $created = Color::create($request->all());
+        if ($created) {
+            return response()->json(['message' => 'Tạo mới thành công!', 'status' => true, 'redirect' => route('colors.index')]);
+        }
+        return response()->json(['message' => 'Tạo mới thất bại!', 'status' => false]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -56,7 +59,7 @@ class ColorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -68,27 +71,33 @@ class ColorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRequest $request, $id)
     {
         $color = Color::find($id);
-        $color->update($request->all());
-        return redirect()->route('colors.index');
+        $updated = $color->update($request->all());
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập thành công!', 'status' => true, 'redirect' => route('colors.index')]);
+        }
+        return response()->json(['message' => 'Cập nhập thất bại!', 'status' => false]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $color = Color::find($id);
-        $color->delete();
-        return redirect()->back();
+        $deleted = $color->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'Xóa thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
 }

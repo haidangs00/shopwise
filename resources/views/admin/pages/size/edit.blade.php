@@ -13,15 +13,13 @@
                                     <h5 class="modal-title form-title">Cập nhập size</h5>
                                 </div>
                                 <div class="modal-body pd">
-                                    <form method="post" action="{{route('sizes.update', $size->id)}}">
+                                    <form class="form-action" method="post" action="{{route('sizes.update', $size->id)}}">
                                         @method('PUT')
                                         @csrf
                                         <div class="form-group">
                                             <label for="name">Tên size:</label>
                                             <input type="text" name="name" value="{{$size->name}}" class="form-control" placeholder="Nhập tên size">
-                                            @error('name')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="name"></span>
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Cập nhập">
                                     </form>

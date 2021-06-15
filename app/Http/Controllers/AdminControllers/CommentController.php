@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -14,7 +15,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return view('admin.pages.comment.index', compact('comments'));
     }
 
     /**
@@ -80,6 +82,21 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $deleted = $comment->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'Xóa thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
+    }
+
+    public function updateStatus(Request $request, $commentId)
+    {
+        $comment = Comment::find($commentId);
+        $updated = $comment->update(['status' => $request->status]);
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Cập nhập trạng thái thất bại!', 'status' => false]);
     }
 }

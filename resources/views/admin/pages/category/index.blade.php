@@ -42,20 +42,12 @@
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->getParentsNames()}}</td>
                                 <td>{{$category->slug}}</td>
-                                <td>
-                                    @if($category->status == 1)
-                                        <a href="#" class="status_btn">Active</a>
-                                    @else
-                                        <a href="#" class="status_inactive">Inactive</a>
-                                    @endif
+                                <td class="status-switch">
+                                    <input action="{{route('categories.update_status', $category->id)}}" class="js-status-switch" {{$category->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$category->id}}" /><label for="switch-{{$category->id}}">Toggle</label>
                                 </td>
                                 <td>
                                     <a href="{{route('categories.edit', $category->id)}}" class="btn_edit">Sửa</a>
-                                    <form class="d-inline-block" action="{{route('categories.destroy', $category->id)}}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn_delete">Xóa</button>
-                                    </form>
+                                    <a action="{{route('categories.destroy', $category->id)}}" class="btn_delete">Xóa</a>
                                 </td>
                             </tr>
                            @endforeach

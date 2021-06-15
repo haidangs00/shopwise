@@ -36,9 +36,8 @@
                                 <th scope="col">Size</th>
                                 <th scope="col">Nhãn hàng</th>
                                 <th scope="col">Giá gốc</th>
-                                <th scope="col">Sale</th>
+                                <th scope="col">Giâ khuyến mãi</th>
                                 <th scope="col">Số sao</th>
-                                <th scope="col">Mô tả</th>
                                 <th scope="col">Trạng thái</th>
                                 <th scope="col">Hành động</th>
                             </tr>
@@ -52,28 +51,27 @@
                                         </div>
                                     </td>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->category_id}}</td>
-                                    <td>{{$product->color_id}}</td>
-                                    <td>{{$product->size_id}}</td>
-                                    <td>{{$product->brand_id}}</td>
-                                    <td>{{$product->regular_price}}</td>
-                                    <td>{{$product->sale}}</td>
-                                    <td>{{$product->star}}</td>
-                                    <td>{{$product->description}}</td>
+                                    <td>{{$product->category->name}}</td>
                                     <td>
-                                        @if($product->status == 1)
-                                            <a href="#" class="status_btn">Active</a>
-                                        @else
-                                            <a href="#" class="status_btn">Inactive</a>
-                                        @endif
+                                        @foreach($product->productColors as $color)
+                                            <span class="pro-color" style="background-color: {{$color->getColorCode()}}"></span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @foreach($product->productSizes as $size)
+                                            <span class="pro-size">{{$size->getSize()}}</span>
+                                        @endforeach
+                                    </td>
+                                    <td>{{$product->brand->name}}</td>
+                                    <td>{{$product->regular_price}}</td>
+                                    <td>{{$product->promotional_price}}</td>
+                                    <td>{{$product->star}}</td>
+                                    <td class="status-switch">
+                                        <input action="{{route('products.update_status', $product->id)}}" class="js-status-switch" {{$product->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$product->id}}" /><label for="switch-{{$product->id}}">Toggle</label>
                                     </td>
                                     <td>
                                         <a href="{{route('products.edit', $product->id)}}" class="btn_edit">Sửa</a>
-                                        <form class="d-inline-block" action="{{route('products.destroy', $product->id)}}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="btn_delete">Xóa</button>
-                                        </form>
+                                        <a action="{{route('products.destroy', $product->id)}}" class="btn_delete">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach

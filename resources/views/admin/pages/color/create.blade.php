@@ -13,21 +13,17 @@
                                     <h5 class="modal-title form-title">Thêm mới màu</h5>
                                 </div>
                                 <div class="modal-body pd">
-                                    <form method="post" action="{{route('colors.store')}}">
+                                    <form class="form-action" method="post" action="{{route('colors.store')}}">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name">Tên màu:</label>
                                             <input type="text" name="name" class="form-control" placeholder="Nhập tên màu">
-                                            @error('name')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="name"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="parent_id">Mã màu:</label>
                                             <input type="color" name="color_code">
-                                            @error('color_code')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="color_code"></span>
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Thêm mới">
                                     </form>

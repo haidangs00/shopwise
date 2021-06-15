@@ -13,19 +13,17 @@
                                     <h5 class="modal-title form-title">Thêm mới danh mục sản phẩm</h5>
                                 </div>
                                 <div class="modal-body pd">
-                                    <form method="post" action="{{route('categories.store')}}">
+                                    <form class="form-action" method="post" action="{{route('categories.store')}}">
                                         @csrf
                                         <div class="form-group">
                                             <label for="name">Tên danh mục sản phẩm:</label>
                                             <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục sản phẩm">
-                                            @error('name')
-                                            <span class="error-msg">{{$message}}</span>
-                                            @enderror
+                                            <span class="error-msg" error-for="name"></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="parent_id">Danh mục cha:</label>
                                             <select name="parent_id" class="default_sel mb_30 w-100">
-                                                <option data-display="--Chọn danh mục cha--">Không</option>
+                                                <option value="0" data-display="--Chọn danh mục cha--">Không</option>
                                                 @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                                 @endforeach
@@ -46,7 +44,7 @@
                                                 <label  for="radio-2" class="radio-label">Inactive</label>
                                             </div>
                                         </div>
-                                        <input type="submit" class="btn btn-primary" value="Thêm mới">
+                                        <input type="submit" class="btn btn-primary btn-add" value="Thêm mới">
                                     </form>
                                 </div>
                             </div>

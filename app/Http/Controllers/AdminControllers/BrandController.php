@@ -38,15 +38,16 @@ class BrandController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        if ($request->has('file')) {
-            $file = $request->file;
-            $fileName = $request->file->getClientOriginalName();
-            $file->move(public_path('uploads'), $fileName);
-            $request->merge(['logo' => $fileName]);
-
+        if ($request->file !== null) {
+            $image = substr($request->file, strlen(url('/uploads')));
+            $image = trim($image, '/');
+            $request->merge(['logo' => $image]);
         }
-        Brand::create($request->all());
-        return redirect()->route('brands.index');
+        $created = Brand::create($request->all());
+        if ($created) {
+            return response()->json(['message' => 'Tạo mới thành công!', 'status' => true, 'redirect' => route('brands.index')]);
+        }
+        return response()->json(['message' => 'Tạo mới thất bại!', 'status' => false]);
     }
 
     /**
@@ -81,16 +82,17 @@ class BrandController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
-        if ($request->has('file')) {
-            $file = $request->file;
-            $fileName = $request->file->getClientOriginalName();
-            $file->move(public_path('uploads'), $fileName);
-            $request->merge(['logo' => $fileName]);
-
+        if ($request->file !== null) {
+            $image = substr($request->file, strlen(url('/uploads')));
+            $image = trim($image, '/');
+            $request->merge(['logo' => $image]);
         }
         $brand = Brand::find($id);
-        $brand->update($request->all());
-        return redirect()->route('brands.index');
+        $updated = $brand->update($request->all());
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập thành công!', 'status' => true, 'redirect' => route('brands.index')]);
+        }
+        return response()->json(['message' => 'Cập nhập thất bại!', 'status' => false]);
     }
 
     /**
@@ -102,7 +104,20 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $brand = Brand::find($id);
-        $brand->delete();
-        return redirect()->back();
+        $deleted = $brand->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'Xóa thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
+    }
+
+    public function updateStatus(Request $request, $brandId)
+    {
+        $brand = Brand::find($brandId);
+        $updated = $brand->update(['status' => $request->status]);
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
+        }
+        return response()->json(['message' => 'Cập nhập trạng thái thất bại!', 'status' => false]);
     }
 }

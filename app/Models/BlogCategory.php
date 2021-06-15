@@ -11,9 +11,29 @@ class BlogCategory extends Model
 
     protected $fillable = [
         'name',
+        'parent_id',
         'slug',
         'status',
         'created_at',
         'updated_at'
     ];
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\BlogCategory', 'parent_id');
+    }
+
+    public function getParentsNames()
+    {
+        if ($this->parent) {
+            return $this->parent->name;
+        } else {
+            return '';
+        }
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany('App\Models\Blog');
+    }
 }

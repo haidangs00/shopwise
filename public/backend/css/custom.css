@@ -40,7 +40,8 @@
 .btn_delete {
     border: 1px solid #f16565;
     color: #f16565!important;
-    padding: 0 8px;
+    padding: 4px 8px;
+    cursor: pointer;
     background-color: #fff;
     transition: all 0.5s;
 }
@@ -52,6 +53,7 @@
     color: red;
     font-size: 12px;
     margin-left: 12px;
+    display: block;
 }
 .radio {
     margin: 0.5rem;
@@ -383,3 +385,61 @@ ul.thumb-Images li {
 .custom-i {
     top: 8px;
 }
+.nice-select {
+    float: none;
+}
+.pro-color {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+}
+.pro-size::after {
+    content: ',';
+}
+.pro-size:last-child::after {
+    display: none;
+}
+.cs_modal .modal-body input {
+    margin-bottom: 5px;
+}
+.image-wrap img {
+    width: 100%;
+}
+.status-switch input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.status-switch label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 45px;
+    height: 25px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+}
+
+.status-switch label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 21px;
+    height: 21px;
+    background: #fff;
+    border-radius: 45px;
+    transition: 0.3s;
+}
+
+.status-switch input:checked + label {
+    background: #05d34e;
+}
+
+.status-switch input:checked + label:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+}
+

@@ -21,10 +21,10 @@ class CreateAdminsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();
-            $table->unsignedBigInteger('role_id');
             $table->tinyInteger('status')->default(1)->comment('active:1, inactive:0');
             $table->string('user_name');
             $table->string('password');
+            $table->string('remember_token')->nullable();
             $table->timestamps();
         });
     }
