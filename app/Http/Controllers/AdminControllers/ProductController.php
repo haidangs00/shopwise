@@ -21,9 +21,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $search_key = $request->search_key;
+        $products = Product::query()->when($search_key != null, function ($query) use ($search_key) {
+            $query->where('name', 'like', "%{$search_key}%")->orWhere('description', 'like', "%{$search_key}%");
+        })->get();
+        if ($request->ajax()) {
+            return response()->json(['status' => true, 'data' => view('admin.pages.product.index.table', compact('products'))->render()]);
+        }
         return view('admin.pages.product.index', compact('products'));
     }
 

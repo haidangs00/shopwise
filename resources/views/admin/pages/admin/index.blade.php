@@ -10,9 +10,9 @@
                         <div class="box_right d-flex lms_block">
                             <div class="serach_field_2">
                                 <div class="search_inner">
-                                    <form Active="#">
+                                    <form class="js-search-form">
                                         <div class="search_field">
-                                            <input type="text" placeholder="Tìm kiếm...">
+                                            <input type="text" name="search_key" placeholder="Tìm kiếm...">
                                         </div>
                                         <button type="submit"> <i class="ti-search"></i> </button>
                                     </form>

@@ -14,9 +14,15 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        $search_key = $request->search_key;
+        $categories = Category::query()->when($search_key != null, function ($query) use ($search_key) {
+            $query->where('name', 'like', "%{$search_key}%")->orWhere('slug', 'like', "%{$search_key}%");
+        })->get();
+        if ($request->ajax()) {
+            return response()->json(['status' => true, 'data' => view('admin.pages.category.index.table', compact('categories'))->render()]);
+        }
         return view('admin.pages.category.index', compact('categories'));
     }
 

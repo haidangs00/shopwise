@@ -32,7 +32,7 @@
                             <h5>{{Auth::guard('admin')->user()->name}}</h5>
                             @endif
                             <div class="profile_info_details">
-                                <a href="#">Hồ sơ của tôi <i class="ti-user"></i></a>
+                                <a href="{{route('account.profile')}}">Hồ sơ của tôi <i class="ti-user"></i></a>
                                 <a href="#">Cài đặt <i class="ti-settings"></i></a>
                                 <a href="{{route('admins.logout')}}">Đăng xuất <i class="ti-shift-left"></i></a>
                             </div>

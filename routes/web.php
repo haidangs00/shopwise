@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminControllers\AccountController;
 use App\Http\Controllers\AdminControllers\AdminController;
 use App\Http\Controllers\AdminControllers\AuthController;
 use App\Http\Controllers\AdminControllers\BannerController;
@@ -130,6 +131,9 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/contact', [ContactController::class, 'index'])->name('contacts.index');
         Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
+        //Profile
+        Route::get('/profile', [AccountController::class, 'profile'])->name('account.profile');
 
         //ckeditor upload images
         Route::post('ckeditor/image_upload', [CKEditorController::class, 'upload'])->name('ckeditor_upload');

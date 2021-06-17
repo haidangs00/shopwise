@@ -14,7 +14,9 @@ class Comment extends Model
         'reply',
         'user_id',
         'product_id',
-        'status'
+        'status',
+        'created_at',
+        'updated_at'
     ];
 
     public function product()

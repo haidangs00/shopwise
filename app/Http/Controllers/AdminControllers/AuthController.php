@@ -33,7 +33,7 @@ class AuthController extends Controller
 
     public function signUp(RegisterRequest $request)
     {
-        $request->merge(['password' => bcrypt($request->password)]);
+        $request->merge(['password' => bcrypt($request->password), 'avatar' => 'user.png']);
         $created = Admin::create($request->all());
 
         if($created)

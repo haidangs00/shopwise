@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->double('star')->nullable();
+            $table->timestamps();
         });
     }
 

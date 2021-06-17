@@ -32,7 +32,6 @@
                                 <th scope="col">Tên khách hàng</th>
                                 <th scope="col">Bình luận</th>
                                 <th scope="col">Sản phẩm</th>
-                                <th scope="col">Số sao</th>
                                 <th scope="col">Trạng thái</th>
                                 <th scope="col">Hành động</th>
                             </tr>
@@ -43,7 +42,6 @@
                                     <td>{{$comment->user->name}}</td>
                                     <td>{{$comment->content}}</td>
                                     <td>{{$comment->product->name}}</td>
-                                    <td>3</td>
                                     <td class="status-switch">
                                         <input action="{{route('comments.update_status', $comment->id)}}" class="js-status-switch" {{$comment->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$comment->id}}" /><label for="switch-{{$comment->id}}">Toggle</label>
                                     </td>

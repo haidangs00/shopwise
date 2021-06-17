@@ -189,11 +189,6 @@
                                                     <img src="{{url('uploads')}}/{{$comment->user->avatar}}" alt="{{$comment->user->name}}"/>
                                                 </div>
                                                 <div class="comment_block">
-                                                    <div class="rating_wrap">
-                                                        <div class="rating">
-                                                            <div class="product_rate" style="width:60%"></div>
-                                                        </div>
-                                                    </div>
                                                     <p class="customer_meta">
                                                         <span class="review_author">{{$comment->user->name}}</span>
                                                         <span class="comment-date">{{$comment->created_at}}</span>

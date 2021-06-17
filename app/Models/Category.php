@@ -25,11 +25,7 @@ class Category extends Model
 
     public function getParentsNames()
     {
-        if ($this->parent) {
-            return $this->parent->name;
-        } else {
-            return '';
-        }
+        return $this->parent ? $this->parent->name : '';
     }
 
     public function products()

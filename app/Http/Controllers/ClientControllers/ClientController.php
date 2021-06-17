@@ -26,6 +26,8 @@ use App\Models\WishList;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Socialite;
 use Session;
@@ -97,12 +99,12 @@ class ClientController extends Controller
     {
         $created = Contact::create($request->all());
 
-        if($created)
-        {
+        if ($created) {
             return response()->json(['message' => 'Xin cảm ơn! Chúng tôi sẽ liên hệ với bạn sớm nhất!', 'status' => true]);
         }
         return response()->json(['message' => 'Đã xảy ra lỗi, vui lòng thử lại!', 'status' => false]);
     }
+
     public function blogs()
     {
         $dates = Blog::selectRaw('year(created_at) year, monthname(created_at) month, day(created_at) day, count(*) data')
@@ -217,22 +219,26 @@ class ClientController extends Controller
 
     public function reviewProduct(Request $request)
     {
-        $comment = Comment::create([
-            'content' => $request->message,
-            'user_id' => Auth::user()->id,
-            'product_id' => $request->product_id
-        ]);
+        try {
+            DB::beginTransaction();
+            Comment::create([
+                'content' => $request->message,
+                'user_id' => Auth::user()->id,
+                'product_id' => $request->product_id
+            ]);
 
-        $rating = Rating::create([
-            'user_id' => Auth::user()->id,
-            'product_id' => $request->product_id,
-            'star' => $request->star
-        ]);
-
-        if ($comment && $rating) {
+            Rating::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $request->product_id,
+                'star' => $request->star
+            ]);
+            DB::commit();
             return response()->json(['message' => 'Đánh giá của bạn đã được ghi lại! Xin cảm ơn!', 'status' => true]);
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            Log::error("Đánh giá sản phẩm: " . $ex->getMessage());
+            return response()->json(['message' => 'Đánh giá thất bại!', 'status' => false]);
         }
-        return response()->json(['message' => 'Đánh giá thất bại!', 'status' => false]);
     }
 
 //    Login Google

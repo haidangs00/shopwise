@@ -21,9 +21,4 @@ class Rating extends Model
     {
         return $this->belongsTo('App\Models\Product');
     }
-
-    public function comment()
-    {
-        return $this->hasOne('App\Models\Comment');
-    }
 }

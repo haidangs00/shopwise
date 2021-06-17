@@ -10,11 +10,12 @@
                         <div class="box_right d-flex lms_block">
                             <div class="serach_field_2">
                                 <div class="search_inner">
-                                    <form Active="#">
+                                    <form class="js-search-form" action="{{route('categories.index')}}"
+                                          data-container="#js_list_categories">
                                         <div class="search_field">
-                                            <input type="text" placeholder="Tìm kiếm...">
+                                            <input type="text" name="search_key" placeholder="Tìm kiếm...">
                                         </div>
-                                        <button type="submit"> <i class="ti-search"></i> </button>
+                                        <button type="submit"><i class="ti-search"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -24,35 +25,9 @@
                         </div>
                     </div>
 
-                    <div class="QA_table ">
+                    <div id="js_list_categories" class="QA_table">
                         <!-- table-responsive -->
-                        <table class="table lms_table_active">
-                            <thead>
-                            <tr>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Tên danh mục cha</th>
-                                <th scope="col">Slug</th>
-                                <th scope="col">Trạng thái</th>
-                                <th scope="col">Hành động</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($categories as $category)
-                            <tr>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->getParentsNames()}}</td>
-                                <td>{{$category->slug}}</td>
-                                <td class="status-switch">
-                                    <input action="{{route('categories.update_status', $category->id)}}" class="js-status-switch" {{$category->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$category->id}}" /><label for="switch-{{$category->id}}">Toggle</label>
-                                </td>
-                                <td>
-                                    <a href="{{route('categories.edit', $category->id)}}" class="btn_edit">Sửa</a>
-                                    <a action="{{route('categories.destroy', $category->id)}}" class="btn_delete">Xóa</a>
-                                </td>
-                            </tr>
-                           @endforeach
-                            </tbody>
-                        </table>
+                        @include('admin.pages.category.index.table')
                     </div>
                 </div>
             </div>

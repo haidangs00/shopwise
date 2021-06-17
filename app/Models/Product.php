@@ -69,7 +69,7 @@ class Product extends Model
             $totalStar += $rating->star;
             $count++;
         }
-        return $totalStar / $count;
+        return $count > 0 ? $totalStar / $count : $totalStar;
     }
 
     public function getActiveComments()

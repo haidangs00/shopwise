@@ -165,6 +165,25 @@ $(document).ready(function () {
         });
     });
 
+    $('.js-search-form').on('submit', function (e) {
+        e.preventDefault();
+        let form = $(this);
+
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            success: function (response) {
+                if (response.status) {
+                    $(form.data('container')).html(response.data);
+                } else alertify.error('Error!');
+            },
+            error: function (xhr) {
+                alertify.error('Error!');
+            }
+        });
+    });
+
     $('.btn_delete').on('click', function (e) {
         let btn = $(this);
 

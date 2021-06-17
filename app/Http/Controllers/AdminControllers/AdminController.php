@@ -53,6 +53,7 @@ class AdminController extends Controller
 
                 $request->merge(['avatar' => $image]);
             }
+            else $request->merge(['avatar' => 'user.png']);
             $request->merge(['password' => bcrypt($request->password)]);
             $admin = Admin::create($request->all());
 

@@ -105,12 +105,12 @@ $(document).ready(function () {
             url: btn.attr('href'),
             type: 'get',
             success: function (response) {
-                if (response.status == true) {
+                if (response.status === true) {
                     swal({
                         title: response.message,
                         icon: "success",
                     });
-                } else if (response.status == false) {
+                } else if (response.status === false) {
                     swal({
                         title: response.message,
                         icon: "success",
@@ -158,15 +158,15 @@ $(document).ready(function () {
             type: form.attr('method'),
             data: form.serialize(),
             success: function (response) {
-                if (response.status == true) {
+                if (response.status === true) {
                     swal({
                         title: response.message,
                         icon: "success",
                     });
-                } else if (response.status == false) {
+                } else if (response.status === false) {
                     swal({
                         title: response.message,
-                        icon: "success",
+                        icon: "error",
                     });
                 } else window.location.href = response.redirect;
             },
