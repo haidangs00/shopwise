@@ -668,6 +668,14 @@ PAGE JS
         $(this).siblings('input#size-'+id).attr('name', (_, attr) => attr === '' ? name : '');
 	});
 
+    $('.product_color_switch_s span,.product_size_switch_s span').on("click", function() {
+        $(this).siblings(this).removeClass('active').end().addClass('active');
+        let color_id = $(this).attr('data-colorid');
+        let size_id = $(this).attr('data-sizeid');
+        $('input#color_id').attr('value', color_id);
+        $('input#size_id').attr('value', size_id);
+    });
+
 	/*===================================*
 	21. QUICKVIEW POPUP + ZOOM IMAGE + PRODUCT SLIDER JS
 	*===================================*/
@@ -758,12 +766,12 @@ PAGE JS
 			max: $filter_selector.data("max"),
 			values: [ a, b ],
 			slide: function( event, ui ) {
-				$( "#flt_price" ).html( c + ui.values[ 0 ] + " - " + c + ui.values[ 1 ] );
+				$( "#flt_price" ).html( ui.values[ 0 ].toLocaleString('en-US', {style : 'currency', currency : 'VND'}) + " - " + ui.values[ 1 ].toLocaleString('en-US', {style : 'currency', currency : 'VND'}) );
 				$( "#price_first" ).val(ui.values[ 0 ]);
 				$( "#price_second" ).val(ui.values[ 1 ]);
 			}
 		});
-		$( "#flt_price" ).html( c + $filter_selector.slider( "values", 0 ) + " - " + c + $filter_selector.slider( "values", 1 ) );
+		$( "#flt_price" ).html( $filter_selector.slider( "values", 0 ).toLocaleString('en-US', {style : 'currency', currency : 'VND'}) + " - " + $filter_selector.slider( "values", 1 ).toLocaleString('en-US', {style : 'currency', currency : 'VND'}) );
 	});
 
 	/*===================================*

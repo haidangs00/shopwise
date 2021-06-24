@@ -50,10 +50,10 @@
                                         <div class="product_action_box">
                                             <ul class="list_none pr_action_btn">
                                                 <li class="add-to-cart">
-                                                    <a class="btn-add-cart"
-                                                       href="{{route('clients.add_to_cart', $product->id)}}">
+                                                    <a class=""
+                                                       href="{{route('clients.product_detail', $product->id)}}">
                                                         <i class="icon-basket-loaded"></i>
-                                                        Thêm vào giỏ hàng
+                                                        Chọn mua
                                                     </a>
                                                 </li>
                                                 <li><a href="{{route('clients.add_compare', $product->id)}}"
@@ -87,24 +87,31 @@
                                                 <div class="product_rate"
                                                      style="width:{{100*($product->getRating()/5)}}%"></div>
                                             </div>
-                                            <span class="rating_num">(21)</span>
+                                            <span class="rating_num">({{$product->countComment()}})</span>
                                         </div>
                                         <div class="pr_desc">
                                             <p>{{$product->description}}</p>
                                         </div>
                                         <div class="pr_switch_wrap">
+                                            <div class="product_size_switch">
+                                                @foreach($product->sizes()->get() as $size)
+                                                    <span>{{$size->name}}</span>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="pr_switch_wrap">
                                             <div class="product_color_switch">
-                                                @foreach($product->productColors as $color)
+                                                @foreach($product->colors()->get() as $color)
                                                     <span class="{{$loop->index == 0?'active':''}}"
-                                                          data-color="{{$color->getColorCode()}}"></span>
+                                                          data-color="{{$color->color_code}}"></span>
                                                 @endforeach
                                             </div>
                                         </div>
                                         <div class="list_product_action_box">
                                             <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a class="btn-add-cart"
-                                                                           href="{{route('clients.add_to_cart', $product->id)}}"><i
-                                                            class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
+                                                <li class="add-to-cart"><a class=""
+                                                                           href="{{route('clients.product_detail', $product->id)}}"><i
+                                                            class="icon-basket-loaded"></i> Chọn mua</a></li>
                                                 <li><a class="add_compare"
                                                        href="{{route('clients.add_compare', $product->id)}}"><i
                                                             class="icon-shuffle"></i></a></li>

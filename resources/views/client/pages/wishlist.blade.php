@@ -29,8 +29,8 @@
                                         <td class="product-price" data-title="Price">₫{{number_format($item->product->promotional_price)}}</td>
                                         <td class="product-stock-status" data-title="Stock Status"><span
                                                 class="badge badge-pill badge-success">Còn hàng</span></td>
-                                        <td class="product-add-to-cart"><a href="{{route('clients.add_to_cart', $item->product_id)}}" class="btn btn-fill-out"><i
-                                                    class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></td>
+                                        <td class="product-add-to-cart"><a href="{{route('clients.product_detail', $item->product_id)}}" class="btn btn-fill-out"><i
+                                                    class="icon-basket-loaded"></i> Chọn mua</a></td>
                                         <td class="product-remove" data-title="Remove"><a href="{{route('clients.remove_from_list', $item->product_id)}}"><i
                                                     class="ti-close"></i></a>
                                         </td>

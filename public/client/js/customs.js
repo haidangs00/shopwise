@@ -74,26 +74,28 @@ $(document).ready(function () {
             dangerMode: true,
         })
             .then((willDelete) => {
-                $.ajax({
-                    url: btn.attr('action'),
-                    type: 'get',
-                    success: function (response) {
-                        swal({
-                            title: response.message,
-                            icon: "success",
-                        });
-                        $(document).on('click', function () {
-                            if (response.redirect) {
-                                window.location.href = response.redirect;
-                            } else location.reload();
-                        });
-                    },
-                    error: function (response) {
-                        swal("Xóa sản phẩm không thành công!", {
-                            icon: "error",
-                        });
-                    }
-                });
+                if (willDelete) {
+                    $.ajax({
+                        url: btn.attr('action'),
+                        type: 'get',
+                        success: function (response) {
+                            swal({
+                                title: response.message,
+                                icon: "success",
+                            });
+                            $(document).on('click', function () {
+                                if (response.redirect) {
+                                    window.location.href = response.redirect;
+                                } else location.reload();
+                            });
+                        },
+                        error: function (response) {
+                            swal("Xóa sản phẩm không thành công!", {
+                                icon: "error",
+                            });
+                        }
+                    });
+                }
             });
     });
 
@@ -172,5 +174,35 @@ $(document).ready(function () {
             },
         });
     });
+
+    $('.form-checkout').on('submit', function (e) {
+        e.preventDefault();
+        let form = $(this);
+
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            success: function (response) {
+                if (response.status) {
+                    if (response.redirect) {
+                        window.location.href = response.redirect;
+                    }
+                } else
+                    swal({
+                        title: response.message,
+                        icon: "error",
+                    });
+
+            },
+            error: function (response) {
+                let err = JSON.parse(response.responseText);
+                $.each(err.errors, function (field_name, error) {
+                    form.find('[error-for=' + field_name + ']').text(error);
+                })
+            }
+        });
+    });
+
 
 });

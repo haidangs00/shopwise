@@ -26,13 +26,13 @@
                 <td>{{$product->name}}</td>
                 <td>{{$product->category->name}}</td>
                 <td>
-                    @foreach($product->productColors as $color)
-                        <span class="pro-color" style="background-color: {{$color->getColorCode()}}"></span>
+                    @foreach($product->colors()->get() as $color)
+                        <span class="pro-color" style="background-color: {{$color->color_code}}"></span>
                     @endforeach
                 </td>
                 <td>
-                    @foreach($product->productSizes as $size)
-                        <span class="pro-size">{{$size->getSize()}}</span>
+                    @foreach($product->sizes()->get() as $size)
+                        <span class="pro-size">{{$size->name}}</span>
                     @endforeach
                 </td>
                 <td>{{$product->brand->name}}</td>

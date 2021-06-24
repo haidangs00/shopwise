@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Contact\StoreRequest as ContactStoreRequest;
+use App\Http\Requests\Checkout\StoreRequest as CheckoutStoreRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Brand;
@@ -141,40 +142,52 @@ class ClientController extends Controller
         return view('client.pages.checkout');
     }
 
-    public function proceedCheckout(Request $request, CartHelper $cart)
+    public function proceedCheckout(CheckoutStoreRequest $request, CartHelper $cart)
     {
-        $order = Order::create([
-            'user_id' => Auth::user()->id,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'total_price' => $cart->total_price,
-            'total_quantity' => $cart->total_quantity,
-            'description' => $request->description,
-            'ship_id' => 1,
-            'payment_id' => 1
-        ]);
+        try {
+            DB::beginTransaction();
 
-        foreach ($cart->items as $item) {
-            OrderDetail::create([
-                'order_id' => $order->id,
-                'product_id' => $item['id'],
-                'quantity' => $item['quantity'],
-                'price' => $item['price']
+            $order = Order::create([
+                'user_id' => Auth::user()->id,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'total_price' => $cart->total_price,
+                'total_quantity' => $cart->total_quantity,
+                'description' => $request->description,
+                'ship_id' => 1,
+                'payment_id' => 1
             ]);
+
+            foreach ($cart->items as $item) {
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item['id'],
+                    'color_id' => $item['color'],
+                    'size_id' => $item['size'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price']
+                ]);
+            }
+            DB::commit();
+            $cart->clear();
+
+            // Send mail confirm
+//            $toName = 'Shopwise';
+//            $toMail = Auth::user()->email;
+//
+//            $data = array('title' => 'Xác nhận đơn hàng!', 'user_name' => Auth::user()->name);
+//
+//            Mail::send('client.send-mail.mail', $data, function ($message) use ($toName, $toMail) {
+//                $message->to($toMail)->subject('Xác nhận đặt hàng Shopwise');
+//                $message->from($toMail, $toName);
+//            });
+
+            return response()->json(['redirect' => route('clients.order_completed'), 'status' => true]);
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            Log::error($ex->getMessage());
+            return response()->json(['message' => 'Đã xảy ra lỗi! Xin vui lòng thử lại sau!', 'status' => false]);
         }
-        $cart->clear();
-
-        $toName = 'Shopwise';
-        $toMail = Auth::user()->email;
-
-        $data = array('title' => 'Xác nhận đơn hàng!', 'user_name' => Auth::user()->name);
-
-        Mail::send('client.send-mail.mail', $data, function ($message) use ($toName, $toMail) {
-            $message->to($toMail)->subject('Xác nhận đặt hàng Shopwise');
-            $message->from($toMail, $toName);
-        });
-
-        return view('client.pages.order-completed');
     }
 
     public function products(Request $request, $slug = null)
@@ -188,9 +201,9 @@ class ClientController extends Controller
         })->when($request->price_first != null && $request->price_second != null, function ($query) use ($request) {
             $query->whereBetween('promotional_price', [$request->price_first, $request->price_second])->orderBy('promotional_price', 'ASC');
         })->when($request->colors != null, function ($query) use ($request) {
-            $query->join('product_colors', 'product_colors.product_id', '=', 'products.id')->whereIn('color_id', $request->colors);
+            $query->join('product_color', 'product_color.product_id', '=', 'products.id')->whereIn('color_id', $request->colors);
         })->when($request->sizes != null, function ($query) use ($request) {
-            $query->join('product_sizes', 'product_sizes.product_id', '=', 'products.id')->whereIn('size_id', $request->sizes);
+            $query->join('product_size', 'product_size.product_id', '=', 'products.id')->whereIn('size_id', $request->sizes);
         })->get();
 
         $brands = Brand::where('status', 1)->get();

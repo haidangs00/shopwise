@@ -98,14 +98,19 @@
                         @if($cart->total_quantity > 0)
                             <div class="cart_box dropdown-menu dropdown-menu-right">
                                 <ul class="cart_list">
+                                    <p class="cart_total text-left">{{$cart->total_quantity}} Sản phẩm</p>
                                     @foreach($cart->items as $item)
                                         <li>
-                                            <a action="{{route('clients.delete_cart', $item['id'])}}"
+                                            <a action="{{route('clients.delete_cart', $item['item_id'])}}"
                                                class="btn-delete item_remove"><i
                                                     class="ion-close"></i></a>
                                             <a href="{{route('clients.product_detail', $item['id'])}}"><img
                                                     src="{{url('uploads')}}/{{$item['image']}}"
                                                     alt="cart_thumb1">{{$item['name']}}</a>
+                                            <div class="product-name">
+                                                <p class="item-info">Màu sắc: {{$item['color_name']}}</p>
+                                                <p class="item-info">Size: {{$item['size_name']}}</p>
+                                            </div>
                                             <span class="cart_quantity"> {{$item['quantity']}} x <span
                                                     class="cart_amount"> </span>₫{{number_format($item['price'])}}
                                         </li>

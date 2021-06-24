@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        return view('admin.pages.order.index', compact('orders'));
     }
 
     /**
@@ -81,5 +83,10 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function orderCompleted()
+    {
+        return view('client.pages.order-completed');
     }
 }

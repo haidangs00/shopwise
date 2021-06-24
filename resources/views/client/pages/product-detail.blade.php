@@ -30,6 +30,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="pr_detail">
+                        <form class="form-action" action="{{route('clients.add_to_cart', $product->id)}}">
+                            @csrf
                         <div class="product_description">
                             <h4 class="product_title"><a href="#">{{$product->name}}</a></h4>
                             <div class="d-flex justify-content-between">
@@ -60,45 +62,52 @@
                             </div>
                             <div class="pr_switch_wrap">
                                 <span class="switch_lable">Color</span>
-                                <div class="product_color_switch">
-                                    @foreach($product->productColors as $color)
-                                        <span class="{{$loop->index == 0?'active':''}}"
-                                              data-color="{{$color->getColorCode()}}"></span>
+                                <div class="product_color_switch product_color_switch_s">
+                                    @foreach($product->colors()->get() as $color)
+                                        @if($loop->index == 0)
+                                            <input type="hidden" name="color_id" id="color_id" value="{{$color->id}}">
+                                        @endif
+
+                                        <span data-colorid="{{$color->id}}" class="{{$loop->index == 0?'active':''}}"
+                                              data-color="{{$color->color_code}}"></span>
                                     @endforeach
                                 </div>
                             </div>
                             <div class="pr_switch_wrap">
                                 <span class="switch_lable">Size</span>
-                                <div class="product_size_switch">
-                                    @foreach($product->productSizes as $size)
-                                        <span>{{$size->getSize()}}</span>
+                                <div class="product_size_switch product_size_switch_s">
+                                    @foreach($product->sizes()->get() as $size)
+                                        @if($loop->index == 0)
+                                            <input type="hidden" name="size_id" id="size_id" value="{{$size->id}}">
+                                        @endif
+
+                                        <span data-sizeid="{{$size->id}}"
+                                              class="{{$loop->index == 0?'active':''}}">{{$size->name}}</span>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
                         <hr/>
                         <div class="cart_extra">
-                            <form class="form-action" action="{{route('clients.add_to_cart', $product->id)}}">
-                                @csrf
-                                <div class="cart-product-quantity">
-                                    <div class="quantity">
-                                        <input type="button" value="-" class="minus">
-                                        <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
-                                        <input type="button" value="+" class="plus">
-                                    </div>
+                            <div class="cart-product-quantity">
+                                <div class="quantity">
+                                    <input type="button" value="-" class="minus">
+                                    <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                    <input type="button" value="+" class="plus">
                                 </div>
-                                <div class="cart_btn">
-                                    <button class="btn btn-fill-out btn-addtocart" type="submit"><i
-                                            class="icon-basket-loaded"></i> Thêm vào giỏ hàng
-                                    </button>
-                                    <a class="add_compare" href="{{route('clients.add_compare', $product->id)}}"><i
-                                            class="icon-shuffle"></i></a>
-                                    <a class="btn-heart add_wishlist"
-                                       href="{{route('clients.add_to_list', $product->id)}}"><i
-                                            class="icon-heart"></i></a>
-                                </div>
-                            </form>
+                            </div>
+                            <div class="cart_btn">
+                                <button class="btn btn-fill-out btn-addtocart" type="submit"><i
+                                        class="icon-basket-loaded"></i> Thêm vào giỏ hàng
+                                </button>
+                                <a class="add_compare" href="{{route('clients.add_compare', $product->id)}}"><i
+                                        class="icon-shuffle"></i></a>
+                                <a class="btn-heart add_wishlist"
+                                   href="{{route('clients.add_to_list', $product->id)}}"><i
+                                        class="icon-heart"></i></a>
+                            </div>
                         </div>
+                        </form>
                         <hr/>
                         <ul class="product-meta">
                             <li>SKU: <a href="#">BE45VGRT</a></li>
@@ -180,13 +189,15 @@
                             </div>
                             <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
                                 <div class="comments">
-                                    <h5 class="product_tab_title">{{$product->countComment() ? $product->countComment() : 'Chưa có'}} Đánh giá cho
+                                    <h5 class="product_tab_title">{{$product->countComment() ? $product->countComment() : 'Chưa có'}}
+                                        Đánh giá cho
                                         <span>{{$product->name}}</span></h5>
                                     <ul class="list_none comment_list mt-4">
                                         @foreach($product->getActiveComments() as $comment)
                                             <li>
                                                 <div class="comment_img">
-                                                    <img src="{{url('uploads')}}/{{$comment->user->avatar}}" alt="{{$comment->user->name}}"/>
+                                                    <img src="{{url('uploads')}}/{{$comment->user->avatar}}"
+                                                         alt="{{$comment->user->name}}"/>
                                                 </div>
                                                 <div class="comment_block">
                                                     <p class="customer_meta">

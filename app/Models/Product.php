@@ -35,14 +35,14 @@ class Product extends Model
         return $this->belongsTo('App\Models\Brand');
     }
 
-    public function productColors()
+    public function colors()
     {
-        return $this->hasMany('App\Models\ProductColor');
+        return $this->belongsToMany('App\Models\Color', 'product_color', 'product_id', 'color_id');
     }
 
-    public function productSizes()
+    public function sizes()
     {
-        return $this->hasMany('App\Models\ProductSize');
+        return $this->belongsToMany('App\Models\Size', 'product_size', 'product_id', 'size_id');
     }
 
     public function wishlists()

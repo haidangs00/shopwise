@@ -26,14 +26,17 @@
                                             <td class="product-thumbnail"><a href="#"><img
                                                         src="{{url('uploads')}}/{{$item['image']}}"
                                                         alt="{{$item['name']}}"></a></td>
-                                            <td class="product-name" data-title="Product"><a
-                                                    href="{{route('clients.product_detail', $item['id'])}}">{{$item['name']}}</a></td>
+                                            <td class="product-name" data-title="Product">
+                                                <a href="{{route('clients.product_detail', $item['id'])}}">{{$item['name']}}</a>
+                                                <p class="item-info">Màu sắc: {{$item['color_name']}}</p>
+                                                <p class="item-info">Size: {{$item['size_name']}}</p>
+                                            </td>
                                             <td class="product-price" data-title="Price">
                                                 ₫{{number_format($item['price'])}}</td>
                                             <td class="product-quantity" data-title="Quantity">
                                                 <div class="quantity">
                                                     <input type="button" value="-" class="minus">
-                                                    <input type="number" name="quantity[{{$item['id']}}]"
+                                                    <input type="number" name="quantity[{{$item['item_id']}}]"
                                                            value="{{$item['quantity']}}" title="Qty" class="qty"
                                                            size="4">
                                                     <input type="button" value="+" class="plus">
@@ -42,7 +45,7 @@
                                             <td class="product-subtotal" data-title="Total">
                                                 ₫{{number_format($item['price']*$item['quantity'])}}</td>
                                             <td class="product-remove" data-title="Remove"><a class="btn-delete"
-                                                    action="{{route('clients.delete_cart', $item['id'])}}"><i
+                                                                                              action="{{route('clients.delete_cart', $item['item_id'])}}"><i
                                                         class="ti-close"></i></a></td>
                                         </tr>
                                     @endforeach
@@ -104,7 +107,8 @@
                                     </tr>
                                     <tr>
                                         <td class="cart_total_label">Tổng tiền</td>
-                                        <td class="cart_total_amount"><strong>₫{{number_format($cart->total_price)}}</strong></td>
+                                        <td class="cart_total_amount">
+                                            <strong>₫{{number_format($cart->total_price)}}</strong></td>
                                     </tr>
                                     </tbody>
                                 </table>

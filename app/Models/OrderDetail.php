@@ -14,6 +14,8 @@ class OrderDetail extends Model
         'price',
         'order_id',
         'product_id',
+        'color_id',
+        'size_id',
         'created_at',
         'updated_at'
     ];

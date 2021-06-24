@@ -8830,6 +8830,10 @@ body.switch-open {
 .pro-size:last-child::after {
     display: none;
 }
+.product-name .item-info {
+    margin: 0;
+    font-size: 13px;
+}
 
 @media only screen and (max-width: 1199px) {
     .compare_box table {

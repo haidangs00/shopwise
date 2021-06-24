@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminControllers\ColorController;
 use App\Http\Controllers\AdminControllers\CategoryController;
 use App\Http\Controllers\AdminControllers\CommentController;
 use App\Http\Controllers\AdminControllers\ContactController;
+use App\Http\Controllers\AdminControllers\OrderController;
 use App\Http\Controllers\AdminControllers\ProductController;
 use App\Http\Controllers\AdminControllers\RoleController;
 use App\Http\Controllers\AdminControllers\SizeController;
@@ -71,6 +72,7 @@ Route::get('/compare', [CompareController::class, 'showCompare'])->name('clients
 Route::get('/add-compare/{id}', [CompareController::class, 'addCompare'])->name('clients.add_compare');
 Route::get('/delete-compare/{id}', [CompareController::class, 'deleteCompare'])->name('clients.delete_compare');
 Route::post('/send-contact', [ClientController::class, 'sendContact'])->name('clients.send_contact');
+Route::get('/order-completed', [OrderController::class, 'orderCompleted'])->name('clients.order_completed');
 
 Route::middleware('client')->group(function () {
     Route::get('/my-account', [ClientController::class, 'account'])->name('clients.account');
@@ -109,6 +111,8 @@ Route::prefix('admin')->group(function () {
             Route::patch('/blog/update-status/{id}', [BlogController::class, 'updateStatus'])->name('blogs.update_status');
             Route::resource('colors', ColorController::class);
             Route::resource('sizes', SizeController::class);
+            Route::resource('orders', OrderController::class);
+
         });
 
         //Manager Account

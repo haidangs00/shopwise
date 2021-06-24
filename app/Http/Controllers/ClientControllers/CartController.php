@@ -11,12 +11,9 @@ class CartController extends Controller
 {
     public function addToCart(CartHelper $cart, $id, Request $request)
     {
-        if ($request->all() == null) {
+        if ($request->all() !== null) {
             $product = Product::find($id);
-            $created = $cart->add($product);
-        } else {
-            $product = Product::find($id);
-            $created = $cart->add($product, $request->quantity);
+            $created = $cart->add($product, $request->only('color_id', 'size_id', 'quantity'));
         }
 
         if ($created) {
