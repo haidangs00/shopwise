@@ -28,6 +28,21 @@
     min-width: 70px;
     text-align: center;
 }
+.status_processing {
+    display: inline-block;
+    padding: 2px 15px;
+    font-size: 11px;
+    font-weight: 300;
+    color: #fff !important;
+    background: grey;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+}
 .btn_edit {
     border: 1px solid #3B76EF;
     color: #3B76EF!important;
@@ -441,5 +456,9 @@ ul.thumb-Images li {
 .status-switch input:checked + label:after {
     left: calc(100% - 2px);
     transform: translateX(-100%);
+}
+
+.order-info li i {
+    font-weight: bold;
 }
 

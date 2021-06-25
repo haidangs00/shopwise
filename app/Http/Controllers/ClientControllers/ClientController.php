@@ -43,7 +43,8 @@ class ClientController extends Controller
 
     public function signIn(LoginRequest $request)
     {
-        $login = Auth::guard('web')->attempt($request->only('user_name', 'password'));
+        $remember = $request->has('remember');
+        $login = Auth::guard('web')->attempt($request->only('user_name', 'password'), $remember);
 
         if ($login) {
             if ($request->action == url('/checkout')) {
@@ -64,9 +65,12 @@ class ClientController extends Controller
     public function signUp(RegisterRequest $request)
     {
         $request->merge(['password' => bcrypt($request->password)]);
-        User::create($request->all());
+        $created = User::create($request->all());
 
-        return redirect()->route('clients.login');
+        if ($created) {
+            return response()->json(['message' => 'Đăng ký thành công!', 'status' => true, 'redirect' => route('clients.login')]);
+        }
+        return response()->json(['message' => 'Đăng ký thất bại!', 'status' => false]);
     }
 
     public function account()

@@ -19,4 +19,24 @@ class OrderDetail extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function order()
+    {
+        return $this->belongsTo('App\Models\Order', 'order_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Product', 'product_id');
+    }
+
+    public function color()
+    {
+        return $this->belongsTo('App\Models\Color', 'color_id');
+    }
+
+    public function size()
+    {
+        return $this->belongsTo('App\Models\Size', 'size_id');
+    }
 }

@@ -14,7 +14,7 @@
                                         <div class="search_field">
                                             <input type="text" name="search_key" placeholder="Tìm kiếm...">
                                         </div>
-                                        <button type="submit"> <i class="ti-search"></i> </button>
+                                        <button type="submit"><i class="ti-search"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -41,10 +41,20 @@
                                     <td>{{$order->phone}}</td>
                                     <td>{{$order->address}}</td>
                                     <td>{{$order->total_price}}</td>
-                                    <td><a href="#" class="status_btn">Chờ xử lý</a></td>
                                     <td>
-                                        <a href="" class="btn_edit">Xem chi tiết</a>
-                                        <a action="" class="btn_delete">Xóa</a>
+                                        @if($order->status == 0)
+                                            <a href="#" class="status_processing">Chờ xử lý</a>
+                                        @elseif($order->status == 1)
+                                            <a href="#" class="status_processing">Đang giao</a>
+                                        @elseif($order->status == 2)
+                                            <a href="#" class="status_btn">Hoàn thành</a>
+                                        @else
+                                            <a href="#" class="status_inactive">Đã hủy</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{route('orders.show', $order->id)}}" class="btn_edit">Xem chi tiết</a>
+                                        <a action="{{route('orders.destroy', $order->id)}}" class="btn_delete">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach
