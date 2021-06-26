@@ -4,10 +4,12 @@ namespace App\Http\Controllers\ClientControllers;
 
 use App\Helper\CartHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Contact\StoreRequest as ContactStoreRequest;
 use App\Http\Requests\Checkout\StoreRequest as CheckoutStoreRequest;
+use App\Http\Requests\User\ResetPasswordRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Brand;
@@ -302,5 +304,59 @@ class ClientController extends Controller
 
         $account_name = User::where('id', $social->user)->first();
         return $account_name;
+    }
+
+    public function forgotPassword()
+    {
+        return view('client.pages.forgot-password');
+    }
+
+    public function recoverPassword(ForgotPasswordRequest $request)
+    {
+        $now = Carbon::now()->format('d-m-Y');
+        $title = 'Lấy lại mật khẩu tài khoản Shopwise '.$now;
+        $user = User::whereEmail($request->email)->first();
+
+        if($user) {
+            $toName = 'Shopwise';
+            $toMail = $request->email;
+            $token = \Str::random();
+            $user->token = $token;
+            $user->save();
+
+            $link = url('/reset-password?email='.$toMail.'&token='.$token);
+
+            $data = array('title' => $title, 'link' => $link, 'email' => $toMail);
+
+            Mail::send('client.send-mail.reset-password', $data, function ($message) use ($toName, $toMail, $title) {
+                $message->to($toMail)->subject($title);
+                $message->from($toMail, $toName);
+            });
+
+            return response()->json(['message' => 'Gửi mail thành công! Vui lòng kiểm tra email của bạn.', 'status' => true]);
+
+        } else {
+            return response()->json(['message' => 'Email của bạn chưa được đăng ký tài khoản!', 'status' => false]);
+        }
+    }
+
+    public function resetPassword()
+    {
+        return view('client.pages.reset-password');
+    }
+
+    public function updateNewPassword(ResetPasswordRequest $request)
+    {
+        $token = \Str::random();
+        $user = User::whereEmail($request->email)->whereToken($request->token)->first();
+        if($user) {
+            $user->password = bcrypt($request->new_password);
+            $user->token = $token;
+            $user->save();
+
+            return response()->json(['message' => 'Xác nhận mật khẩu thành công!', 'status' => true, 'redirect' => route('clients.login')]);
+        } else {
+            return response()->json(['message' => 'Vui lòng nhập lại email vì link đã hết hạn!', 'status' => false]);
+        }
     }
 }

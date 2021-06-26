@@ -48,6 +48,10 @@ Route::middleware('guest:web')->group(function () {
     Route::post('/login', [ClientController::class, 'signIn'])->name('clients.sign_in');
     Route::get('/register', [ClientController::class, 'register'])->name('clients.register');
     Route::post('/register', [ClientController::class, 'signUp'])->name('clients.sign_up');
+    Route::get('/forgot-password', [ClientController::class, 'forgotPassword'])->name('clients.forgot_password');
+    Route::post('/forgot-password', [ClientController::class, 'recoverPassword'])->name('clients.recover_password');
+    Route::get('/reset-password', [ClientController::class, 'resetPassword'])->name('clients.reset_password');
+    Route::post('/reset-password', [ClientController::class, 'updateNewPassword'])->name('clients.update_new_password');
 
     //Login Google
     Route::get('/login-google', [ClientController::class, 'loginGoogle'])->name('clients.login_google');

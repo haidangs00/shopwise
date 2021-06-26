@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('active:1, inactive:0');
             $table->string('user_name');
             $table->string('password');
+            $table->string('token')->nullable();
             $table->string('remember_token')->nullable();
             $table->timestamps();
         });

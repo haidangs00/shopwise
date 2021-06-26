@@ -29,7 +29,7 @@
                                             <label class="form-check-label" for="exampleCheckbox1"><span>Lưu tài khoản</span></label>
                                         </div>
                                     </div>
-                                    <a href="#">Quên mật khẩu?</a>
+                                    <a href="{{route('clients.forgot_password')}}">Quên mật khẩu?</a>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-fill-out btn-block" name="login">Đăng nhập</button>

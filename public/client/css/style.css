@@ -8834,7 +8834,18 @@ body.switch-open {
     margin: 0;
     font-size: 13px;
 }
-
+.progress-bar {
+    display: block;
+    text-align: center;
+    width: 0;
+    height: 3px;
+    background: red;
+    transition: width .3s;
+}
+.progress-bar.hide {
+    opacity: 0;
+    transition: opacity 1.3s;
+}
 @media only screen and (max-width: 1199px) {
     .compare_box table {
         width: initial !important;
