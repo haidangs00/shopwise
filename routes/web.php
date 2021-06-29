@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminControllers\CategoryController;
 use App\Http\Controllers\AdminControllers\CommentController;
 use App\Http\Controllers\AdminControllers\ContactController;
 use App\Http\Controllers\AdminControllers\OrderController;
+use App\Http\Controllers\AdminControllers\PaymentController;
 use App\Http\Controllers\AdminControllers\ProductController;
 use App\Http\Controllers\AdminControllers\RoleController;
 use App\Http\Controllers\AdminControllers\SizeController;
@@ -116,6 +117,8 @@ Route::prefix('admin')->group(function () {
             Route::resource('colors', ColorController::class);
             Route::resource('sizes', SizeController::class);
             Route::resource('orders', OrderController::class);
+            Route::resource('payments', PaymentController::class);
+            Route::patch('/payment/update-status/{id}', [PaymentController::class, 'updateStatus'])->name('payments.update_status');
 
         });
 

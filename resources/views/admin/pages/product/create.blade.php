@@ -109,14 +109,24 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Giá gốc:</label>
-                                            <input type="number" name="regular_price" class="form-control"
-                                                   placeholder="Nhập giá gốc">
+                                            <div class="input-group">
+                                                <input type="number" name="regular_price" class="form-control js-vnd-currency"
+                                                       placeholder="Nhập giá gốc">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">VND</span>
+                                                </div>
+                                            </div>
                                             <span class="error-msg" error-for="regular_price"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>Giá khuyến mãi:</label>
-                                            <input type="number" name="promotional_price" class="form-control"
-                                                    placeholder="Nhập giá khuyến mãi">
+                                            <div class="input-group">
+                                                <input type="number" name="promotional_price" class="form-control"
+                                                       placeholder="Nhập giá khuyến mãi">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">VND</span>
+                                                </div>
+                                            </div>
                                             <span class="error-msg" error-for="promotional_price"></span>
                                         </div>
                                         <div class="form-group">

@@ -90,6 +90,11 @@ class CommentController extends Controller
         return response()->json(['message' => 'Xóa thất bại!', 'status' => false]);
     }
 
+    /**
+     * @param Request $request
+     * @param $commentId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateStatus(Request $request, $commentId)
     {
         $comment = Comment::find($commentId);

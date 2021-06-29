@@ -31,6 +31,7 @@
                 <li><a class="{{ Request::routeIs('blogs.*') ? 'active' : '' }}" href="{{route('blogs.index')}}">Bài viết</a></li>
                 <li><a class="{{ Request::routeIs('contacts.*') ? 'active' : '' }}" href="{{route('contacts.index')}}">Liên hệ của khách hàng</a></li>
                 <li><a class="{{ Request::routeIs('orders.*') ? 'active' : '' }}" href="{{route('orders.index')}}">Đơn hàng</a></li>
+                <li><a class="{{ Request::routeIs('payments.*') ? 'active' : '' }}" href="{{route('payments.index')}}">Phương thức thanh toán</a></li>
             </ul>
         </li>
 

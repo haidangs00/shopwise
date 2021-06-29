@@ -814,7 +814,7 @@ PAGE JS
 	25. Cart Page Payment option
 	*===================================*/
 	$(document).on('ready', function(){
-		$('[name="payment_option"]').on('change', function() {
+		$('[name="payment"]').on('change', function() {
 			var $value = $(this).attr('value');
 			$('.payment-text').slideUp();
 			$('[data-method="'+$value+'"]').slideDown();

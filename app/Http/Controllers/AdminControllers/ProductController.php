@@ -13,6 +13,7 @@ use App\Models\ProductSize;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use App\Http\Requests\Product\StoreRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -77,7 +78,7 @@ class ProductController extends Controller
             }
             if ($request->has('colors')) {
                 foreach ($request->colors as $color) {
-                    ProductColor::create([
+                    DB::table('product_color')->create([
                         'color_id' => $color,
                         'product_id' => $product->id
                     ]);
@@ -85,7 +86,7 @@ class ProductController extends Controller
             }
             if ($request->has('sizes')) {
                 foreach ($request->sizes as $size) {
-                    ProductSize::create([
+                    DB::table('product_size')->create([
                         'size_id' => $size,
                         'product_id' => $product->id
                     ]);
@@ -123,8 +124,8 @@ class ProductController extends Controller
         $colors = Color::all();
         $sizes = Size::all();
         $images = Image::where('product_id', $id)->get();
-        $product_colors = ProductColor::where('product_id', $id)->pluck('color_id')->toArray();
-        $product_sizes = ProductSize::where('product_id', $id)->pluck('size_id')->toArray();
+        $product_colors = DB::table('product_color')->where('product_id', $id)->pluck('color_id')->toArray();
+        $product_sizes = DB::table('product_size')->where('product_id', $id)->pluck('size_id')->toArray();
         return view('admin.pages.product.edit', compact('product', 'categories', 'brands', 'colors', 'sizes', 'images', 'product_colors', 'product_sizes'));
     }
 
@@ -159,18 +160,18 @@ class ProductController extends Controller
         }
 
         if ($request->has('colors')) {
-            ProductColor::where('product_id', $id)->delete();
+            DB::table('product_color')->where('product_id', $id)->delete();
             foreach ($request->colors as $color) {
-                ProductColor::create([
+                DB::table('product_color')->create([
                     'color_id' => $color,
                     'product_id' => $product->id
                 ]);
             }
         }
         if ($request->has('sizes')) {
-            ProductSize::where('product_id', $id)->delete();
+            DB::table('product_size')->where('product_id', $id)->delete();
             foreach ($request->sizes as $size) {
-                ProductSize::create([
+                DB::table('product_size')->create([
                     'size_id' => $size,
                     'product_id' => $product->id
                 ]);
@@ -193,8 +194,8 @@ class ProductController extends Controller
         $product = Product::find($id);
         $deleted = $product->delete();
         Image::where('product_id', $id)->delete();
-        ProductColor::where('product_id', $id)->delete();
-        ProductSize::where('product_id', $id)->delete();
+        DB::table('product_color')->where('product_id', $id)->delete();
+        DB::table('product_size')->where('product_id', $id)->delete();
 
         if ($deleted) {
             return response()->json(['message' => 'Xóa thành công!', 'status' => true]);

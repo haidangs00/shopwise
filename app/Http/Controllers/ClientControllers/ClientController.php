@@ -20,6 +20,7 @@ use App\Models\Contact;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\Size;
@@ -145,7 +146,8 @@ class ClientController extends Controller
 
     public function checkout()
     {
-        return view('client.pages.checkout');
+        $payments = Payment::whereStatus(1)->get();
+        return view('client.pages.checkout', compact('payments'));
     }
 
     public function proceedCheckout(CheckoutStoreRequest $request, CartHelper $cart)
@@ -161,7 +163,7 @@ class ClientController extends Controller
                 'total_quantity' => $cart->total_quantity,
                 'description' => $request->description,
                 'ship_id' => 1,
-                'payment_id' => 1
+                'payment_id' => $request->payment
             ]);
 
             foreach ($cart->items as $item) {

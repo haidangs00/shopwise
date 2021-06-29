@@ -22,7 +22,6 @@ class CreateOrdersTable extends Migration
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(0)->comment('processing:0, shipping:1 , finish: 2 ,cancelled:3');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('ship_id');
             $table->unsignedBigInteger('payment_id');
             $table->timestamps();
         });

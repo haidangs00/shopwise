@@ -9,7 +9,6 @@
         <th scope="col">Nhãn hàng</th>
         <th scope="col">Giá gốc</th>
         <th scope="col">Giâ khuyến mãi</th>
-        <th scope="col">Số sao</th>
         <th scope="col">Trạng thái</th>
         <th scope="col">Hành động</th>
     </tr>
@@ -38,7 +37,6 @@
                 <td>{{$product->brand->name}}</td>
                 <td>{{$product->regular_price}}</td>
                 <td>{{$product->promotional_price}}</td>
-                <td>{{$product->star}}</td>
                 <td class="status-switch">
                     <input action="{{route('products.update_status', $product->id)}}" class="js-status-switch"
                            {{$product->status == 1 ? 'checked' : ''}} type="checkbox"

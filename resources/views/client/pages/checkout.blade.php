@@ -119,38 +119,15 @@
                                             <h4>Phương thức thanh toán</h4>
                                         </div>
                                         <div class="payment_option">
+                                            @foreach($payments as $payment)
                                             <div class="custome-radio">
                                                 <input class="form-check-input" required="" type="radio"
-                                                       name="payment_option"
-                                                       id="exampleRadios3" value="option3" checked="">
-                                                <label class="form-check-label" for="exampleRadios3">Direct Bank
-                                                    Transfer</label>
-                                                <p data-method="option3" class="payment-text">There are many variations
-                                                    of
-                                                    passages
-                                                    of Lorem Ipsum available, but the majority have suffered
-                                                    alteration. </p>
+                                                       name="payment"
+                                                       id="exampleRadios{{$loop->index + 1}}" value="{{$payment->id}}" {{$loop->index == 0 ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="exampleRadios{{$loop->index + 1}}">{{$payment->name}}</label>
+                                                <p data-method="{{$payment->id}}" class="payment-text">{{$payment->description}}</p>
                                             </div>
-                                            <div class="custome-radio">
-                                                <input class="form-check-input" type="radio" name="payment_option"
-                                                       id="exampleRadios4" value="option4">
-                                                <label class="form-check-label" for="exampleRadios4">Check
-                                                    Payment</label>
-                                                <p data-method="option4" class="payment-text">Please send your cheque to
-                                                    Store
-                                                    Name,
-                                                    Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                            </div>
-                                            <div class="custome-radio">
-                                                <input class="form-check-input" type="radio" name="payment_option"
-                                                       id="exampleRadios5" value="option5">
-                                                <label class="form-check-label" for="exampleRadios5">Paypal</label>
-                                                <p data-method="option5" class="payment-text">Pay via PayPal; you can
-                                                    pay
-                                                    with
-                                                    your
-                                                    credit card if you don't have a PayPal account.</p>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-fill-out btn-block">Đặt hàng</button>

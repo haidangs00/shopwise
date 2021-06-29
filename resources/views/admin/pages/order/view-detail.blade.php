@@ -64,10 +64,9 @@
                                             <li>- Email: <i>{{$order->user->email}}</i></li>
                                             <li>- Số lượng sản phẩm: <i>{{$order->total_quantity}}</i></li>
                                             <li>- Tổng đơn hàng: <i>{{number_format($order->total_price)}} (VND)</i></li>
-                                            <li>- Phương thức giao hàng:</li>
-                                            <li>- Phương thức thanh toán:</li>
-                                            <li>- Ngày đặt hàng: <i>{{$order->created_at}}</i></li>
-                                            <li>- Ngày giao hàng(dự kiến): <i>{{$order->created_at}}</i></li>
+                                            <li>- Phương thức thanh toán: <i>{{$order->payment->name}}</i></li>
+                                            <li>- Ngày đặt hàng: <i>{{date_format($order->created_at, 'd-m-Y')}}</i></li>
+                                            <li>- Ngày giao hàng(dự kiến): <i>{{date_format($order->created_at, 'd-m-Y')}}</i></li>
                                         </ul>
                                     </div>
                                     <form class="form-action mt-3" method="post"

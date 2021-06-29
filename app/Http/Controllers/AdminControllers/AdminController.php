@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreRequest;
 use App\Http\Requests\Admin\UpdateRequest;
 use App\Models\Admin;
-use App\Models\AdminRole;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

@@ -17,7 +17,6 @@ class Order extends Model
         'description',
         'status',
         'user_id',
-        'ship_id',
         'payment_id',
         'created_at',
         'updated_at'
@@ -31,5 +30,10 @@ class Order extends Model
     public function orderDetails()
     {
         return $this->hasMany('App\Models\OrderDetail');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo('App\Models\Payment', 'payment_id');
     }
 }
