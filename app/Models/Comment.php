@@ -11,13 +11,18 @@ class Comment extends Model
 
     protected $fillable = [
         'content',
-        'reply',
+        'parent_id',
         'user_id',
         'product_id',
         'status',
         'created_at',
         'updated_at'
     ];
+
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Comment', 'parent_id');
+    }
 
     public function product()
     {

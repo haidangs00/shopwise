@@ -47,6 +47,7 @@
     border: 1px solid #3B76EF;
     color: #3B76EF!important;
     padding: 4px 8px;
+    cursor: pointer;
 }
 .btn_edit:hover {
     color: #fff!important;
@@ -461,4 +462,12 @@ ul.thumb-Images li {
 .order-info li i {
     font-weight: bold;
 }
-
+a.btn_reply.inactive {
+    border-color: #ccc;
+    color: #ccc !important;
+    cursor: no-drop;
+}
+a.btn_reply.inactive:hover {
+    background-color: transparent;
+    color: #ccc !important;
+}

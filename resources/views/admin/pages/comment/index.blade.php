@@ -14,7 +14,7 @@
                                         <div class="search_field">
                                             <input type="text" placeholder="Tìm kiếm...">
                                         </div>
-                                        <button type="submit"> <i class="ti-search"></i> </button>
+                                        <button type="submit"><i class="ti-search"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -40,14 +40,27 @@
                             @foreach($comments as $comment)
                                 <tr>
                                     <td>{{$comment->user->name}}</td>
-                                    <td>{{$comment->content}}</td>
+                                    <td>
+                                        {{$comment->content}}
+                                        <div class="reply-comment {{$comment->status == 0 ? 'd-none' : ''}}">
+                                            <textarea name="reply_comment" class="form-control reply-content" rows="2" placeholder="Nhập phản hồi..." required></textarea>
+                                            <span class="error-msg" error-for="reply_comment"></span>
+                                            <button action="{{route('comments.reply_comment')}}" data-product_id="{{$comment->product_id}}" data-comment_id="{{$comment->id}}" class="btn btn-secondary btn-sm btn-reply-comment mt-2">
+                                                Trả lời bình luận
+                                            </button>
+                                        </div>
+                                    </td>
                                     <td>{{$comment->product->name}}</td>
                                     <td class="status-switch">
-                                        <input action="{{route('comments.update_status', $comment->id)}}" class="js-status-switch" {{$comment->status == 1 ? 'checked' : ''}} type="checkbox" id="switch-{{$comment->id}}" /><label for="switch-{{$comment->id}}">Toggle</label>
+                                        <input action="{{route('comments.update_status', $comment->id)}}"
+                                               class="js-status-switch"
+                                               {{$comment->status == 1 ? 'checked' : ''}} type="checkbox"
+                                               id="switch-{{$comment->id}}"/><label
+                                            for="switch-{{$comment->id}}">Toggle</label>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn_edit">Trả lời</a>
-                                        <a action="{{route('comments.destroy', $comment->id)}}" class="btn_delete">Xóa</a>
+                                        <a action="{{route('comments.destroy', $comment->id)}}"
+                                           class="btn_delete">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach

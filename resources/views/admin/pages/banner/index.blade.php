@@ -50,12 +50,10 @@
                                     <td>{{$banner->name}}</td>
                                     <td>{{$banner->slug}}</td>
                                     <td>{{$banner->note}}</td>
-                                    <td>
-                                        @if($banner->status == 1)
-                                            <a href="#" class="status_btn">Active</a>
-                                        @else
-                                            <a href="#" class="status_inactive">Inactive</a>
-                                        @endif
+                                    <td class="status-switch">
+                                        <input action="{{route('banners.update_status', $banner->id)}}" class="js-status-switch"
+                                               {{$banner->status == 1 ? 'checked' : ''}} type="checkbox"
+                                               id="switch-{{$banner->id}}"/><label for="switch-{{$banner->id}}">Toggle</label>
                                     </td>
                                     <td>{{date('m/d/Y',strtotime($banner->date_begin))}}</td>
                                     <td>{{date('m/d/Y',strtotime($banner->date_end))}}</td>

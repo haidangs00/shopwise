@@ -74,7 +74,7 @@ class Product extends Model
 
     public function getActiveComments()
     {
-        return $this->comments()->where('status', 1)->get();
+        return $this->comments()->whereStatus(1)->whereNull('parent_id')->get();
     }
 
     public function countComment()

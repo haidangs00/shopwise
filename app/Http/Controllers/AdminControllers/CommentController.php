@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Comment\StoreRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::whereNull('parent_id')->get();
         return view('admin.pages.comment.index', compact('comments'));
     }
 
@@ -103,5 +104,21 @@ class CommentController extends Controller
             return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
         }
         return response()->json(['message' => 'Cập nhập trạng thái thất bại!', 'status' => false]);
+    }
+
+    public function replyComment(StoreRequest $request)
+    {
+        $created = Comment::create([
+            'content' => $request->reply_comment,
+            'parent_id' => $request->comment_id,
+            'user_id' => \Auth::guard('admin')->user()->id,
+            'product_id' => $request->product_id,
+            'status' => 1
+        ]);
+
+        if ($created) {
+            return response()->json(['message' => 'Đã trả lời bình luận' ,'status' => true]);
+        }
+        return response()->json(['message' => 'Xảy ra lỗi vui lòng thử lại sau!', 'status' => false]);
     }
 }

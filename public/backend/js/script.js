@@ -215,7 +215,40 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status) {
                     alertify.success(response.message);
-                } else alertify.error(response.message);
+                    btn.parent().siblings().children('.reply-comment').toggleClass('d-none');
+                } else {
+                    alertify.error(response.message);
+                }
+            }
+        });
+    });
+
+    // Reply Comment
+    $('.btn-reply-comment').on('click', function () {
+        var btn = $(this);
+        let url = btn.attr('action');
+        let comment_id = btn.data('comment_id');
+        let product_id = btn.data('product_id');
+        let comment = btn.siblings('textarea').val();
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            data: {comment_id: comment_id, product_id: product_id, reply_comment: comment,},
+            success: function (response) {
+                if (response.status) {
+                    alertify.success(response.message);
+                    btn.siblings('textarea').val('');
+                } else {
+                    alertify.error(response.message);
+                }
+            },
+            error: function (xhr) {
+                let err = JSON.parse(xhr.responseText);
+                $.each(err.errors, function (field_name, error) {
+                    btn.siblings('[error-for=' + field_name + ']').text(error);
+                })
             }
         });
     });

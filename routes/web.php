@@ -86,6 +86,7 @@ Route::middleware('client')->group(function () {
     Route::get('/add-to-list/{id}', [WishListController::class, 'addToList'])->name('clients.add_to_list');
     Route::get('/remove-from-list/{id}', [WishListController::class, 'removeFromList'])->name('clients.remove_from_list');
     Route::post('/review-product', [ClientController::class, 'reviewProduct'])->name('clients.review_product');
+
 });
 
 
@@ -119,7 +120,12 @@ Route::prefix('admin')->group(function () {
             Route::resource('orders', OrderController::class);
             Route::resource('payments', PaymentController::class);
             Route::patch('/payment/update-status/{id}', [PaymentController::class, 'updateStatus'])->name('payments.update_status');
-
+            Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+            Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+            Route::post('/reply-comment', [CommentController::class, 'replyComment'])->name('comments.reply_comment');
+            Route::patch('/comment/update-status/{id}', [CommentController::class, 'updateStatus'])->name('comments.update_status');
+            Route::get('/contact', [ContactController::class, 'index'])->name('contacts.index');
+            Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
         });
 
         //Manager Account
@@ -135,13 +141,6 @@ Route::prefix('admin')->group(function () {
             Route::resource('roles', RoleController::class)->middleware('checkAcl:role');
 
         });
-
-        Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
-        Route::delete('/comment/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
-        Route::patch('/comment/update-status/{id}', [CommentController::class, 'updateStatus'])->name('comments.update_status');
-
-        Route::get('/contact', [ContactController::class, 'index'])->name('contacts.index');
-        Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 
         //Profile
         Route::get('/profile', [AccountController::class, 'profile'])->name('account.profile');
