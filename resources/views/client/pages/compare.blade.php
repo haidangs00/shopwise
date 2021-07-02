@@ -68,7 +68,7 @@
                                                                 <div class="rating">
                                                                     <div class="product_rate" style="width:{{100*($item['rating']/5)}}%"></div>
                                                                 </div>
-                                                                <span class="rating_num">(25)</span>
+                                                                <span class="rating_num">({{$item['countComment']}})</span>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -76,8 +76,7 @@
                                                         <td class="row_color">
                                                             <div class="product_color_switch">
                                                                 @foreach ($item['colors'] as $color)
-                                                                    <span
-                                                                        data-color="{{$color->getColorCode()}}"></span>
+                                                                    <span data-color="{{$color->color_code}}"></span>
                                                                 @endforeach
                                                             </div>
                                                         </td>
@@ -85,7 +84,7 @@
                                                     <tr class="pr_size">
                                                         <td class="row_size"><span>
                                                             @foreach ($item['sizes'] as $size)
-                                                                    <span class="pro-size">{{$size->getSize()}}</span>
+                                                                    <span class="pro-size">{{$size->name}}</span>
                                                                 @endforeach
                                                         </span>
                                                         </td>
@@ -96,10 +95,10 @@
                                                     </tr>
                                                     <tr class="pr_add_to_cart">
                                                         <td class="row_btn"><a
-                                                                href="{{route('clients.add_to_cart', $item['id'])}}"
+                                                                href="{{route('clients.product_detail', $item['id'])}}"
                                                                 class="btn btn-fill-out"><i
                                                                     class="icon-basket-loaded"></i>
-                                                                Thêm vào giỏ hàng</a></td>
+                                                                Chọn mua</a></td>
                                                     </tr>
                                                     <tr class="pr_remove">
                                                         <td class="row_remove">

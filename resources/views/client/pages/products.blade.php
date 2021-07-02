@@ -40,103 +40,103 @@
                         </div>
                     </div>
                     <div class="row shop_container list">
-                        @foreach($products as $product)
-                            <div class="col-md-4 col-6">
-                                <div class="product">
-                                    <div class="product_img">
-                                        <a href="">
-                                            <img src="{{url('uploads')}}/{{$product->image}}" alt="{{$product->name}}">
-                                        </a>
-                                        <div class="product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart">
-                                                    <a class=""
-                                                       href="{{route('clients.product_detail', $product->id)}}">
-                                                        <i class="icon-basket-loaded"></i>
-                                                        Chọn mua
-                                                    </a>
-                                                </li>
-                                                <li><a href="{{route('clients.add_compare', $product->id)}}"
-                                                       class="add_compare"><i
-                                                            class="icon-shuffle"></i></a></li>
-                                                <li><a href="{{route('clients.quick_view_product', $product->id)}}"
-                                                       class="popup-ajax"><i
-                                                            class="icon-magnifier-add"></i></a></li>
-                                                <li>
-                                                    <a class="btn-heart"
-                                                       href="{{route('clients.add_to_list', $product->id)}}">
-                                                        <i class="icon-heart"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a
-                                                href="{{route('clients.product_detail', $product->id)}}">{{$product->name}}</a>
-                                        </h6>
-                                        <div class="product_price">
-                                            <span class="price">₫{{number_format($product->promotional_price)}}</span>
-                                            <del>₫{{number_format($product->regular_price)}}</del>
-                                            <div class="on_sale">
-                                                <span>{{number_format(($product->regular_price - $product->promotional_price)/$product->regular_price *100)}}% Off</span>
+                        @if($products->isEmpty())
+                            <p class="text-center m-auto">Không có sản phẩm nào!</p>
+                        @else
+                            @foreach($products as $product)
+                                <div class="col-md-4 col-6">
+                                    <div class="product">
+                                        <div class="product_img">
+                                            <a href="">
+                                                <img src="{{url('uploads')}}/{{$product->image}}"
+                                                     alt="{{$product->name}}">
+                                            </a>
+                                            <div class="product_action_box">
+                                                <ul class="list_none pr_action_btn">
+                                                    <li class="add-to-cart">
+                                                        <a class=""
+                                                           href="{{route('clients.product_detail', $product->id)}}">
+                                                            <i class="icon-basket-loaded"></i>
+                                                            Chọn mua
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="{{route('clients.add_compare', $product->id)}}"
+                                                           class="add_compare"><i
+                                                                class="icon-shuffle"></i></a></li>
+                                                    <li><a href="{{route('clients.quick_view_product', $product->id)}}"
+                                                           class="popup-ajax"><i
+                                                                class="icon-magnifier-add"></i></a></li>
+                                                    <li>
+                                                        <a class="btn-heart"
+                                                           href="{{route('clients.add_to_list', $product->id)}}">
+                                                            <i class="icon-heart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate"
-                                                     style="width:{{100*($product->getRating()/5)}}%"></div>
+                                        <div class="product_info">
+                                            <h6 class="product_title"><a
+                                                    href="{{route('clients.product_detail', $product->id)}}">{{$product->name}}</a>
+                                            </h6>
+                                            <div class="product_price">
+                                                <span
+                                                    class="price">₫{{number_format($product->promotional_price)}}</span>
+                                                <del>₫{{number_format($product->regular_price)}}</del>
+                                                <div class="on_sale">
+                                                    <span>{{number_format(($product->regular_price - $product->promotional_price)/$product->regular_price *100)}}% Off</span>
+                                                </div>
                                             </div>
-                                            <span class="rating_num">({{$product->countComment()}})</span>
-                                        </div>
-                                        <div class="pr_desc">
-                                            <p>{{$product->description}}</p>
-                                        </div>
-                                        <div class="pr_switch_wrap">
-                                            <div class="product_size_switch">
-                                                @foreach($product->sizes()->get() as $size)
-                                                    <span>{{$size->name}}</span>
-                                                @endforeach
+                                            <div class="rating_wrap">
+                                                <div class="rating">
+                                                    <div class="product_rate"
+                                                         style="width:{{100*($product->getRating()/5)}}%"></div>
+                                                </div>
+                                                <span class="rating_num">({{$product->countComment()}})</span>
                                             </div>
-                                        </div>
-                                        <div class="pr_switch_wrap">
-                                            <div class="product_color_switch">
-                                                @foreach($product->colors()->get() as $color)
-                                                    <span class="{{$loop->index == 0?'active':''}}"
-                                                          data-color="{{$color->color_code}}"></span>
-                                                @endforeach
+                                            <div class="pr_desc">
+                                                <p>{{$product->description}}</p>
                                             </div>
-                                        </div>
-                                        <div class="list_product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a class=""
-                                                                           href="{{route('clients.product_detail', $product->id)}}"><i
-                                                            class="icon-basket-loaded"></i> Chọn mua</a></li>
-                                                <li><a class="add_compare"
-                                                       href="{{route('clients.add_compare', $product->id)}}"><i
-                                                            class="icon-shuffle"></i></a></li>
-                                                <li><a class="popup-ajax"
-                                                       href="{{route('clients.quick_view_product', $product->id)}}"><i
-                                                            class="icon-magnifier-add"></i></a></li>
-                                                <li><a class="btn-heart"
-                                                       href="{{route('clients.add_to_list', $product->id)}}"><i
-                                                            class="icon-heart"></i></a></li>
-                                            </ul>
+                                            <div class="pr_switch_wrap">
+                                                <div class="product_size_switch">
+                                                    @foreach($product->sizes as $size)
+                                                        <span>{{$size->name}}</span>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="pr_switch_wrap">
+                                                <div class="product_color_switch">
+                                                    @foreach($product->colors as $color)
+                                                        <span class="{{$loop->index == 0?'active':''}}"
+                                                              data-color="{{$color->color_code}}"></span>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="list_product_action_box">
+                                                <ul class="list_none pr_action_btn">
+                                                    <li class="add-to-cart"><a class=""
+                                                                               href="{{route('clients.product_detail', $product->id)}}"><i
+                                                                class="icon-basket-loaded"></i> Chọn mua</a></li>
+                                                    <li><a class="add_compare"
+                                                           href="{{route('clients.add_compare', $product->id)}}"><i
+                                                                class="icon-shuffle"></i></a></li>
+                                                    <li><a class="popup-ajax"
+                                                           href="{{route('clients.quick_view_product', $product->id)}}"><i
+                                                                class="icon-magnifier-add"></i></a></li>
+                                                    <li><a class="btn-heart"
+                                                           href="{{route('clients.add_to_list', $product->id)}}"><i
+                                                                class="icon-heart"></i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @endif
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <ul class="pagination mt-3 justify-content-center pagination_style1">
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#"><i
-                                            class="linearicons-arrow-right"></i></a></li>
-                            </ul>
+                            {{$products->render('vendor.pagination.default')}}
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                                 </ul>
                             </div>
                             <div class="widget">
-                                <h5 class="widget_title">Lọc theo giá</h5>
+                                <h5 class="widget_title">Khoảng giá</h5>
                                 <div class="filter_price">
                                     <div id="price_filter" data-min="0" data-max="{{$maxPrice + 100000}}"
                                          data-min-value="{{$minPrice}}"

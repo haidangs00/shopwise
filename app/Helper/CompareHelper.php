@@ -25,9 +25,10 @@ class CompareHelper
                 'name' => $product->name,
                 'price' => $product->promotional_price > 0 ? $product->promotional_price : $product->regular_price,
                 'description' => $product->description,
-                'colors' => $product->productColors,
-                'sizes' => $product->productSizes,
-                'rating' => $product->getRating()
+                'colors' => $product->colors,
+                'sizes' => $product->sizes,
+                'rating' => $product->getRating(),
+                'countComment' => $product->countComment()
             ];
             $this->items[$product->id] = $item;
             session(['compare' => $this->items]);

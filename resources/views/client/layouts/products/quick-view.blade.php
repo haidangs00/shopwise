@@ -52,17 +52,17 @@
                     <div class="pr_switch_wrap">
                         <span class="switch_lable">Color</span>
                         <div class="product_color_switch">
-                            @foreach($product->productColors as $color)
+                            @foreach($product->colors as $color)
                                 <span class="{{$loop->index == 0?'active':''}}"
-                                      data-color="{{$color->getColorCode()}}"></span>
+                                      data-color="{{$color->color_code}}"></span>
                             @endforeach
                         </div>
                     </div>
                     <div class="pr_switch_wrap">
                         <span class="switch_lable">Size</span>
                         <div class="product_size_switch">
-                            @foreach($product->productSizes as $size)
-                                <span>{{$size->getSize()}}</span>
+                            @foreach($product->sizes as $size)
+                                <span>{{$size->name}}</span>
                             @endforeach
                         </div>
                     </div>

@@ -204,6 +204,8 @@ class ClientController extends Controller
         $products = Product::query()->where('status', 1)->when($slug != null, function ($query) use ($slug) {
             $category = Category::where('slug', $slug)->first();
             $query->whereCategoryId($category->id);
+        })->when($request->search_key != null, function ($query) use ($request) {
+            $query->where('name', 'like', "%{$request->search_key}%");
         })->when($request->brands != null, function ($query) use ($request) {
             $query->whereIn('brand_id', $request->brands);
         })->when($request->price_first != null && $request->price_second != null, function ($query) use ($request) {
@@ -212,7 +214,7 @@ class ClientController extends Controller
             $query->join('product_color', 'product_color.product_id', '=', 'products.id')->whereIn('color_id', $request->colors);
         })->when($request->sizes != null, function ($query) use ($request) {
             $query->join('product_size', 'product_size.product_id', '=', 'products.id')->whereIn('size_id', $request->sizes);
-        })->get();
+        })->paginate(5);
 
         $brands = Brand::where('status', 1)->get();
         $colors = Color::all();
@@ -228,13 +230,16 @@ class ClientController extends Controller
     {
         $product = Product::find($id);
         $images = Image::where('product_id', $id)->get();
-        return view('client.pages.product-detail', compact('product', 'images'));
+        $relatedProducts = Product::whereCategoryId($product->category_id)->get();
+        return view('client.pages.product-detail', compact('product', 'images', 'relatedProducts'));
     }
 
     public function quickViewProduct($id)
     {
         $product = Product::find($id);
         $images = Image::where('product_id', $id)->get();
+//        dd($images);
+
         return view('client.layouts.products.quick-view', compact('product', 'images'));
     }
 

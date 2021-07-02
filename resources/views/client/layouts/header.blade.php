@@ -85,8 +85,9 @@
                                 class="linearicons-magnifier"></i></a>
                         <div class="search_wrap">
                             <span class="close-search"><i class="ion-ios-close-empty"></i></span>
-                            <form>
-                                <input type="text" placeholder="Tìm kiếm" class="form-control" id="search_input">
+                            <form action="{{route('clients.products')}}">
+                                @csrf
+                                <input name="search_key" type="text" placeholder="Tìm kiếm sản phẩm" class="form-control" id="search_input">
                                 <button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
                             </form>
                         </div>
