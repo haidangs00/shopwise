@@ -10,24 +10,20 @@
                             <div class="col-12">
                                 <div class="quick_activity_wrap">
                                     <div class="single_quick_activity">
-                                        <h4>Total Income</h4>
-                                        <h3>$ <span class="counter">5,79,000</span> </h3>
-                                        <p>Saved 25%</p>
+                                        <h4>Doanh thu</h4>
+                                        <h3>VND <span class="counter">{{number_format($revenue)}}</span> </h3>
                                     </div>
                                     <div class="single_quick_activity">
-                                        <h4>Total Expences</h4>
-                                        <h3>$ <span class="counter">79,000</span> </h3>
-                                        <p>Saved 25%</p>
+                                        <h4>Tổng số danh mục sản phẩm</h4>
+                                        <h3><span class="counter">{{$totalCategory}}</span> </h3>
                                     </div>
                                     <div class="single_quick_activity">
-                                        <h4>Cash on Hand</h4>
-                                        <h3>$ <span class="counter">92,000</span> </h3>
-                                        <p>Saved 25%</p>
+                                        <h4>Số sản phẩm đang bán</h4>
+                                        <h3><span class="counter">{{$totalProduct}}</span> </h3>
                                     </div>
                                     <div class="single_quick_activity">
-                                        <h4>Net Profit Margin</h4>
-                                        <h3>$ <span class="counter">1,79,000</span> </h3>
-                                        <p>Saved 65%</p>
+                                        <h4>Số tài khoản khách hàng đăng ký</h4>
+                                        <h3><span class="counter">{{$totalUser}}</span> </h3>
                                     </div>
                                 </div>
                             </div>

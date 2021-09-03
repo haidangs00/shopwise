@@ -58,13 +58,13 @@
                                         <div class="form-group">
                                             <label for="status">Ngày bắt đầu:</label>
                                             <div class="input_wrap common_date_picker mb_20">
-                                                <input name="date_begin" value="{{date('m/d/Y',strtotime($banner->date_begin))}}" class="input_form" id="start_datepicker" placeholder="Ngày bắt đầu">
+                                                <input autocomplete="off" name="date_begin" value="{{date('m/d/Y',strtotime($banner->date_begin))}}" class="input_form" id="start_datepicker" placeholder="Ngày bắt đầu">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Ngày kết thúc:</label>
                                             <div class="input_wrap common_date_picker mb_20">
-                                                <input name="date_end" value="{{date('m/d/Y',strtotime($banner->date_end))}}" class="input_form" id="end_datepicker" placeholder="Ngày kết thúc">
+                                                <input autocomplete="off" name="date_end" value="{{date('m/d/Y',strtotime($banner->date_end))}}" class="input_form" id="end_datepicker" placeholder="Ngày kết thúc">
                                             </div>
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Cập nhập">

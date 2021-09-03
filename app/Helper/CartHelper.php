@@ -54,7 +54,6 @@ class CartHelper
             $this->items[$this->item_number + 1] = $item_add;
         }
 
-
         session(['cart' => $this->items]);
         return true;
     }

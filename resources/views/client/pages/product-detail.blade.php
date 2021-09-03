@@ -112,12 +112,6 @@
                             </div>
                         </form>
                         <hr/>
-                        <ul class="product-meta">
-                            <li>Nhãn hàng: <a href="{{route('clients.products', ['search_key' => $product->brand->name])}}">{{$product->brand->name}}</a></li>
-                            <li>Danh mục: <a href="{{route('clients.products', ['search_key' => $product->category->name])}}">{{$product->category->name}}</a></li>
-                            <li>Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">printed</a></li>
-                        </ul>
-
                         <div class="product_share">
                             <span>Share:</span>
                             <ul class="social_icons">

@@ -5,9 +5,13 @@ namespace App\Providers;
 use App\Helper\CompareHelper;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use App\Helper\CartHelper;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,9 +34,14 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             $view->with([
+                'userLogged' => Auth::guard('web')->user(),
                 'cart' => new CartHelper(),
                 'compare' => new CompareHelper(),
-                'activeCategories' => Category::where('status', 1)->withCount('products')->orderBy('name', 'ASC')->get()
+                'activeCategories' => Category::where('status', 1)->withCount('products')->orderBy('name', 'ASC')->get(),
+                'revenue' => Order::where('status', 2)->sum('total_price'),
+                'totalCategory' => Category::count(),
+                'totalProduct' => Product::count(),
+                'totalUser' => User::count(),
             ]);
         });
         view()->composer('client.layouts.banner', function ($view) {

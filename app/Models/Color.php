@@ -16,9 +16,9 @@ class Color extends Model
         'updated_at'
     ];
 
-    public function productColors()
+    public function products()
     {
-        return $this->hasMany('App\Models\ProductColor');
+        return $this->belongsToMany('App\Models\Product');
     }
 
 }

@@ -11,12 +11,12 @@
                             <div class="product_header">
                                 <div class="product_header_left">
                                     <div class="custom_select">
-                                        <select class="form-control form-control-sm">
-                                            <option value="order">Default sorting</option>
-                                            <option value="popularity">Sort by popularity</option>
-                                            <option value="date">Sort by newness</option>
-                                            <option value="price">Sort by price: low to high</option>
-                                            <option value="price-desc">Sort by price: high to low</option>
+                                        <select id="sort" class="form-control form-control-sm">
+                                            <option value="{{Request::url()}}?sort_by=none">Sắp xếp</option>
+                                            <option value="{{Request::url()}}?sort_by=gia_giam_dan">Theo giá: Giảm dần</option>
+                                            <option value="{{Request::url()}}?sort_by=gia_tang_dan">Theo giá: Tăng dần</option>
+                                            <option value="{{Request::url()}}?sort_by=kytu_az">Theo tên: A đến Z</option>
+                                            <option value="{{Request::url()}}?sort_by=kytu_za">Theo tên: Z đến A</option>
                                         </select>
                                     </div>
                                 </div>
@@ -26,14 +26,6 @@
                                                 class="ti-view-grid"></i></a>
                                         <a href="javascript:Void(0);" class="shorting_icon list active"><i
                                                 class="ti-layout-list-thumb"></i></a>
-                                    </div>
-                                    <div class="custom_select">
-                                        <select class="form-control form-control-sm">
-                                            <option value="">Showing</option>
-                                            <option value="9">9</option>
-                                            <option value="12">12</option>
-                                            <option value="18">18</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -217,18 +209,6 @@
                                 <button type="submit" class="btn btn-fill-out">Lọc</button>
                             </div>
                         </form>
-                        {{--                        <div class="widget">--}}
-                        {{--                            <div class="shop_banner">--}}
-                        {{--                                <div class="banner_img overlay_bg_20">--}}
-                        {{--                                    <img src="{{url('client')}}/images/sidebar_banner_img.jpg" alt="sidebar_banner_img">--}}
-                        {{--                                </div>--}}
-                        {{--                                <div class="shop_bn_content2 text_white">--}}
-                        {{--                                    <h5 class="text-uppercase shop_subtitle">New Collection</h5>--}}
-                        {{--                                    <h3 class="text-uppercase shop_title">Sale 30% Off</h3>--}}
-                        {{--                                    <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">Shop Now</a>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
                     </div>
                 </div>
             </div>

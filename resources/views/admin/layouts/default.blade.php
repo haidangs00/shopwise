@@ -9,6 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>{{$pageTitle ?? 'Unknown'}}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" href="{{url('backend')}}/images/favicon.png" type="image/png">
     <!-- Bootstrap CSS -->
@@ -115,16 +116,16 @@
 <script src="{{url('backend')}}/js/custom.js"></script>
 
 <!-- active_chart js -->
-{{--<script src="{{url('backend')}}/js/active_chart.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/apex_chart/radial_active.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/apex_chart/stackbar.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/apex_chart/area_chart.js"></script>--}}
-<!-- <script src="vendors/apex_chart/pie.js"></script> -->
-{{--<script src="{{url('backend')}}/vendors/apex_chart/bar_active_1.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/chartjs/chartjs_active.js"></script>--}}
+<script src="{{url('backend')}}/js/active_chart.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/radial_active.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/stackbar.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/area_chart.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/pie.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/bar_active_1.js"></script>
+<script src="{{url('backend')}}/vendors/chartjs/chartjs_active.js"></script>
 
 <!-- ck js -->
-<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+{{--<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>--}}
 <!-- alertjs -->
 <script src="{{url('backend')}}/alertifyjs/build/alertify.min.js"></script>
 <!-- script js -->

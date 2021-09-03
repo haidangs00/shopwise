@@ -86,6 +86,9 @@ Route::middleware('client')->group(function () {
     Route::get('/add-to-list/{id}', [WishListController::class, 'addToList'])->name('clients.add_to_list');
     Route::get('/remove-from-list/{id}', [WishListController::class, 'removeFromList'])->name('clients.remove_from_list');
     Route::post('/review-product', [ClientController::class, 'reviewProduct'])->name('clients.review_product');
+    Route::put('/change-password', [ClientController::class, 'changePassword'])->name('clients.change_password');
+    Route::put('/change-info', [ClientController::class, 'changeInfo'])->name('clients.change_info');
+    Route::get('/order-detail/{id}', [ClientController::class, 'orderDetail'])->name('clients.order_detail');
 
 });
 

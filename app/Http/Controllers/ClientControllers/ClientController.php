@@ -4,12 +4,14 @@ namespace App\Http\Controllers\ClientControllers;
 
 use App\Helper\CartHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Password\UpdatePasswordRequest;
 use App\Http\Requests\User\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Contact\StoreRequest as ContactStoreRequest;
 use App\Http\Requests\Checkout\StoreRequest as CheckoutStoreRequest;
 use App\Http\Requests\User\ResetPasswordRequest;
+use App\Http\Requests\User\UpdateInfoRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Brand;
@@ -31,6 +33,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Socialite;
@@ -78,7 +81,9 @@ class ClientController extends Controller
 
     public function account()
     {
-        return view('client.pages.my-account');
+        $userId = Auth::guard('web')->user()->id;
+        $orders = Order::whereUserId($userId)->get();
+        return view('client.pages.my-account', compact('orders'));
     }
 
     public function logout()
@@ -200,8 +205,29 @@ class ClientController extends Controller
 
     public function products(Request $request, $slug = null)
     {
-//        dd($request->all());
-        $products = Product::query()->where('status', 1)->when($slug != null, function ($query) use ($slug) {
+        $sort_by = 'id';
+        $sort_value = 'DESC';
+
+        if ($request->sort_by) {
+            $sort = $request->sort_by;
+            if ($sort == 'gia_giam_dan') {
+                $sort_by = 'promotional_price';
+                $sort_value = 'DESC';
+            } elseif ($sort == 'gia_tang_dan') {
+                $sort_by = 'promotional_price';
+                $sort_value = 'ASC';
+            } elseif ($sort == 'kytu_az') {
+                $sort_by = 'name';
+                $sort_value = 'ASC';
+            } elseif ($sort == 'kytu_za') {
+                $sort_by = 'name';
+                $sort_value = 'DESC';
+            } else {
+                $sort_by = 'id';
+                $sort_value = 'DESC';
+            }
+        }
+        $products = Product::select('products.*')->where('status', 1)->when($slug != null, function ($query) use ($slug) {
             $category = Category::where('slug', $slug)->first();
             $query->whereCategoryId($category->id);
         })->when($request->search_key != null, function ($query) use ($request) {
@@ -211,17 +237,17 @@ class ClientController extends Controller
         })->when($request->price_first != null && $request->price_second != null, function ($query) use ($request) {
             $query->whereBetween('promotional_price', [$request->price_first, $request->price_second])->orderBy('promotional_price', 'ASC');
         })->when($request->colors != null, function ($query) use ($request) {
-            $query->join('product_color', 'product_color.product_id', '=', 'products.id')->whereIn('color_id', $request->colors);
+            $query->join('product_color', 'product_color.product_id', '=', 'products.id')->whereIn('color_id', $request->colors)->groupBy('product_color.product_id');
         })->when($request->sizes != null, function ($query) use ($request) {
-            $query->join('product_size', 'product_size.product_id', '=', 'products.id')->whereIn('size_id', $request->sizes);
-        })->paginate(5);
+            $query->join('product_size', 'product_size.product_id', '=', 'products.id')->whereIn('size_id', $request->sizes)->groupBy('product_size.product_id');
+        })->orderBy($sort_by, $sort_value)->paginate(5)->appends(request()->query());
 
         $brands = Brand::where('status', 1)->get();
         $colors = Color::all();
         $sizes = Size::all();
 
-        $minPrice = Product::min('promotional_price');
-        $maxPrice = Product::max('promotional_price');
+        $minPrice = $request->price_first ?? Product::min('promotional_price');
+        $maxPrice = $request->price_second ?? Product::max('promotional_price');
 
         return view('client.pages.products', compact('products', 'brands', 'colors', 'sizes', 'minPrice', 'maxPrice'));
     }
@@ -322,17 +348,17 @@ class ClientController extends Controller
     public function recoverPassword(ForgotPasswordRequest $request)
     {
         $now = Carbon::now()->format('d-m-Y');
-        $title = 'Lấy lại mật khẩu tài khoản Shopwise '.$now;
+        $title = 'Lấy lại mật khẩu tài khoản Shopwise ' . $now;
         $user = User::whereEmail($request->email)->first();
 
-        if($user) {
+        if ($user) {
             $toName = 'Shopwise';
             $toMail = $request->email;
             $token = \Str::random();
             $user->token = $token;
             $user->save();
 
-            $link = url('/reset-password?email='.$toMail.'&token='.$token);
+            $link = url('/reset-password?email=' . $toMail . '&token=' . $token);
 
             $data = array('title' => $title, 'link' => $link, 'email' => $toMail);
 
@@ -357,7 +383,7 @@ class ClientController extends Controller
     {
         $token = \Str::random();
         $user = User::whereEmail($request->email)->whereToken($request->token)->first();
-        if($user) {
+        if ($user) {
             $user->password = bcrypt($request->new_password);
             $user->token = $token;
             $user->save();
@@ -367,4 +393,34 @@ class ClientController extends Controller
             return response()->json(['message' => 'Vui lòng nhập lại email vì link đã hết hạn!', 'status' => false]);
         }
     }
+
+    public function changePassword(UpdatePasswordRequest $requestPassword)
+    {
+        if (Hash::check($requestPassword->password, Auth::guard('web')->user()->password)) {
+            $user = User::find(Auth::guard('web')->user()->id);
+            $user->password = bcrypt($requestPassword->npassword);
+            $user->save();
+
+            return response()->json(['message' => 'Cập nhập mật khẩu thành công!', 'status' => true, 'redirect' => route('clients.account')]);
+        }
+        return response()->json(['message' => 'Mật khẩu hiện tại không đúng!', 'status' => false]);
+    }
+
+    public function changeInfo(UpdateInfoRequest $request)
+    {
+        $user = User::find(Auth::guard('web')->user()->id);
+        $updated = $user->update($request->all());
+
+        if ($updated) {
+            return response()->json(['message' => 'Cập nhập thành công!', 'status' => true, 'redirect' => route('clients.account')]);
+        }
+        return response()->json(['message' => 'Cập nhập thất bại!', 'status' => false]);
+    }
+
+    public function orderDetail($orderId)
+    {
+        $order = Order::find($orderId);
+        return view('client.pages.order-detail', compact('order'));
+    }
+
 }

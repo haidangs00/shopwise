@@ -56,6 +56,7 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
+//        dd($request->all());
         if ($request->file !== null) {
             $image = substr($request->file, strlen(url('/uploads')));
             $image = trim($image, '/');
@@ -78,7 +79,7 @@ class ProductController extends Controller
             }
             if ($request->has('colors')) {
                 foreach ($request->colors as $color) {
-                    DB::table('product_color')->create([
+                    DB::table('product_color')->insert([
                         'color_id' => $color,
                         'product_id' => $product->id
                     ]);
@@ -86,7 +87,7 @@ class ProductController extends Controller
             }
             if ($request->has('sizes')) {
                 foreach ($request->sizes as $size) {
-                    DB::table('product_size')->create([
+                    DB::table('product_size')->insert([
                         'size_id' => $size,
                         'product_id' => $product->id
                     ]);
@@ -162,7 +163,7 @@ class ProductController extends Controller
         if ($request->has('colors')) {
             DB::table('product_color')->where('product_id', $id)->delete();
             foreach ($request->colors as $color) {
-                DB::table('product_color')->create([
+                DB::table('product_color')->insert([
                     'color_id' => $color,
                     'product_id' => $product->id
                 ]);
@@ -171,7 +172,7 @@ class ProductController extends Controller
         if ($request->has('sizes')) {
             DB::table('product_size')->where('product_id', $id)->delete();
             foreach ($request->sizes as $size) {
-                DB::table('product_size')->create([
+                DB::table('product_size')->insert([
                     'size_id' => $size,
                     'product_id' => $product->id
                 ]);

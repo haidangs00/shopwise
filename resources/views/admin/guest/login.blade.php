@@ -4,8 +4,8 @@
         <div class="container-fluid" style="background-color: #f7faff">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="container" style="min-height:100vh;">
-                        <div class="row justify-content-center" style="position: relative; top: 50%; transform: translateY(50%);">
+                    <div class="container" style="">
+                        <div class="row justify-content-center" style="padding-top: 120px">
                             <div class="col-lg-4 col-md-6 col-8">
                                 <!-- sign_in  -->
                                 <div class="modal-content cs_modal">
@@ -27,7 +27,6 @@
                                             </div>
                                             <button type="submit" class="btn_1 full_width text-center">Đăng nhập
                                             </button>
-                                            <p>Chưa có tài khoản? <a href="{{route('admins.register')}}"> Đăng ký</a>
                                             </p>
                                             <div class="text-center">
                                                 <a href="#" data-toggle="modal" data-target="#forgot_password"

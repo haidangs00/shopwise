@@ -116,9 +116,9 @@ $(document).ready(function () {
         let form = $(this);
 
         //Update content ckedittor
-        for ( instance in CKEDITOR.instances ) {
-            CKEDITOR.instances[instance].updateElement();
-        }
+        // for ( instance in CKEDITOR.instances ) {
+        //     CKEDITOR.instances[instance].updateElement();
+        // }
 
         $.ajax({
             url: form.attr('action'),

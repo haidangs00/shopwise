@@ -131,23 +131,23 @@
 <script src="{{url('backend')}}/js/custom.js"></script>
 
 <!-- active_chart js -->
-{{--<script src="{{url('backend')}}/js/active_chart.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/apex_chart/radial_active.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/apex_chart/stackbar.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/apex_chart/area_chart.js"></script>--}}
-<!-- <script src="vendors/apex_chart/pie.js"></script> -->
-{{--<script src="{{url('backend')}}/vendors/apex_chart/bar_active_1.js"></script>--}}
-{{--<script src="{{url('backend')}}/vendors/chartjs/chartjs_active.js"></script>--}}
+<script src="{{url('backend')}}/js/active_chart.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/radial_active.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/stackbar.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/area_chart.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/pie.js"></script>
+<script src="{{url('backend')}}/vendors/apex_chart/bar_active_1.js"></script>
+<script src="{{url('backend')}}/vendors/chartjs/chartjs_active.js"></script>
 
 <!-- ck js -->
-<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-<script>
-    // Ckeditor
-    CKEDITOR.replace('content-ckeditor', {
-        filebrowserUploadUrl: "{{route('ckeditor_upload', ['_token' => csrf_token() ])}}",
-        filebrowserUploadMethod: 'form'
-    });
-</script>
+{{--<script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>--}}
+{{--<script>--}}
+{{--    // Ckeditor--}}
+{{--    CKEDITOR.replace('content-ckeditor', {--}}
+{{--        filebrowserUploadUrl: "{{route('ckeditor_upload', ['_token' => csrf_token() ])}}",--}}
+{{--        filebrowserUploadMethod: 'form'--}}
+{{--    });--}}
+{{--</script>--}}
 
 <!-- script js -->
 <script src="{{url('backend')}}/js/script.js"></script>

@@ -29,7 +29,7 @@
                                 <th scope="col">Tên khách hàng</th>
                                 <th scope="col">Số điện thoại</th>
                                 <th scope="col">Địa chỉ</th>
-                                <th scope="col">Tổng tiền</th>
+                                <th scope="col">Tổng tiền(VND)</th>
                                 <th scope="col">Trạng thái</th>
                                 <th scope="col">Hành động</th>
                             </tr>
@@ -40,7 +40,7 @@
                                     <td>{{$order->user->name}}</td>
                                     <td>{{$order->phone}}</td>
                                     <td>{{$order->address}}</td>
-                                    <td>{{$order->total_price}}</td>
+                                    <td>{{number_format($order->total_price)}}</td>
                                     <td>
                                         @if($order->status == 0)
                                             <a href="#" class="status_processing">Chờ xử lý</a>

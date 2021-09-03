@@ -471,3 +471,7 @@ a.btn_reply.inactive:hover {
     background-color: transparent;
     color: #ccc !important;
 }
+
+.QA_section .QA_table .table thead th, .QA_section .QA_table tbody th, .QA_section .QA_table tbody td {
+    padding: 5px 10px;
+}

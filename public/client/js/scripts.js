@@ -662,7 +662,7 @@ PAGE JS
 
 	$('.product_color_switch span,.product_size_switch span').on("click", function() {
 		let id = $(this).attr('data-id');
-		let name = 'size[]';
+		let name = 'sizes[]';
         $(this).toggleClass('active');
         $(this).siblings('input#size-'+id).attr('value', (_, attr) => attr === '' ? id : '');
         $(this).siblings('input#size-'+id).attr('name', (_, attr) => attr === '' ? name : '');

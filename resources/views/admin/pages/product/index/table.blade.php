@@ -4,8 +4,6 @@
         <th scope="col">Ảnh</th>
         <th scope="col">Tên</th>
         <th scope="col">Tên danh mục</th>
-        <th scope="col">Màu</th>
-        <th scope="col">Size</th>
         <th scope="col">Nhãn hàng</th>
         <th scope="col">Giá gốc</th>
         <th scope="col">Giâ khuyến mãi</th>
@@ -24,16 +22,6 @@
                 </td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->category->name}}</td>
-                <td>
-                    @foreach($product->colors()->get() as $color)
-                        <span class="pro-color" style="background-color: {{$color->color_code}}"></span>
-                    @endforeach
-                </td>
-                <td>
-                    @foreach($product->sizes()->get() as $size)
-                        <span class="pro-size">{{$size->name}}</span>
-                    @endforeach
-                </td>
                 <td>{{$product->brand->name}}</td>
                 <td>{{$product->regular_price}}</td>
                 <td>{{$product->promotional_price}}</td>

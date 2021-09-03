@@ -204,5 +204,13 @@ $(document).ready(function () {
         });
     });
 
+    // Change select sort products
+    $(document).on('change', '#sort', function (e) {
+        let url = $(this).val();
+        if (url) {
+            window.location = url;
+        }
+        return false;
+    });
 
 });
