@@ -160,7 +160,7 @@ $(document).ready(function () {
                 let err = JSON.parse(xhr.responseText);
                 $.each(err.errors, function (field_name, error) {
                     form.find('[error-for=' + field_name + ']').text(error);
-                })
+                });
             }
         });
     });
@@ -194,7 +194,7 @@ $(document).ready(function () {
                 success: function (response) {
                     if (response.status) {
                         alertify.success(response.message);
-                        location.reload();
+                        setTimeout(location.reload.bind(location), 1500);
                     } else alertify.error(response.message);
                 }
             });

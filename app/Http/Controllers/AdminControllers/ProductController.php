@@ -56,7 +56,7 @@ class ProductController extends Controller
      */
     public function store(StoreRequest $request)
     {
-//        dd($request->all());
+//        dd($request->imageList);
         if ($request->file !== null) {
             $image = substr($request->file, strlen(url('/uploads')));
             $image = trim($image, '/');
@@ -135,7 +135,7 @@ class ProductController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(StoreRequest $request, $id)
     {
@@ -208,6 +208,7 @@ class ProductController extends Controller
     {
         $product = Product::find($productId);
         $updated = $product->update(['status' => $request->status]);
+
         if ($updated) {
             return response()->json(['message' => 'Cập nhập trạng thái thành công!', 'status' => true]);
         }

@@ -21,8 +21,8 @@ class CreateOrdersTable extends Migration
             $table->integer('total_price');
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(0)->comment('processing:0, shipping:1 , finish: 2 ,cancelled:3');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('payment_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('payment_id')->constrained('payments');
             $table->timestamps();
         });
     }

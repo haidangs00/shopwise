@@ -45,7 +45,7 @@
                                                 <label  for="radio-2" class="radio-label">Inactive</label>
                                             </div>
                                         </div>
-                                        <input type="submit" class="btn btn-primary" value="Cập nhập">
+                                        <input type="submit" class="btn btn-primary btn-updated" value="Cập nhập">
                                     </form>
                                 </div>
                             </div>

@@ -14,10 +14,10 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('banners')->truncate();
+        DB::table('banners')->delete();
         DB::table('banners')->insert([
-            ['name' => 'Woman Fashion', 'image' => 'banner1.jpg', 'note' => 'Get up to 50% off Today Only!', 'status' => 1],
-            ['name' => 'Man Fashion', 'image' => 'banner2.jpg', 'note' => 'Get up to 50% off Today Only!', 'status' => 1],
+            ['name' => 'Thời trang nữ', 'image' => 'banner1.jpg', 'note' => 'Giảm ngay 50% trong ngày hôm nay!', 'status' => 1, 'date_end' => '2022-09-28'],
+            ['name' => 'Thời trang nam', 'image' => 'banner2.jpg', 'note' => 'Giảm ngay 50% trong ngày hôm nay!', 'status' => 1, 'date_end' => '2022-09-28'],
 
         ]);
     }

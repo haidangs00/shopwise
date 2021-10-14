@@ -14,7 +14,7 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admins')->truncate();
+        DB::table('admins')->delete();
         DB::table('admins')->insert([
             ['name' => 'Root', 'phone' => '123456789', 'avatar' => 'user.png', 'status' => 1, 'user_name' => 'root', 'password' => bcrypt(1)],
         ]);

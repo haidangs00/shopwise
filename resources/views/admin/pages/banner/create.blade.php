@@ -40,7 +40,7 @@
                                             </a>
                                             <input class="form-control" type="hidden" name="file" id="image">
                                             <div class="image-wrap">
-                                                <img id="img-show" alt="">
+                                                <img class="img-fluid" id="img-show" alt="">
                                             </div>
                                         </div>
                                         <div class="form-group">

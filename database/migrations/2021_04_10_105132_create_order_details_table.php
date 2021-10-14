@@ -19,8 +19,8 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('price');
             $table->tinyInteger('color_id');
             $table->tinyInteger('size_id');
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
+            $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
         });
     }

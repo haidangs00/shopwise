@@ -14,7 +14,7 @@ class AdminRoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admin_role')->truncate();
+        DB::table('admin_role')->delete();
         DB::table('admin_role')->insert([
             ['admin_id' => 1, 'role_id' => 1],
         ]);

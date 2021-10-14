@@ -41,7 +41,7 @@
                                             </a>
                                             <input class="form-control" type="hidden" name="file" id="image">
                                             <div>
-                                                <img id="img-show" src="{{url('uploads')}}/{{$banner->image}}" alt="{{$banner->name}}">
+                                                <img class="img-fluid" id="img-show" src="{{url('uploads')}}/{{$banner->image}}" alt="{{$banner->name}}">
                                             </div>
                                         </div>
                                         <div class="form-group">

@@ -14,7 +14,7 @@ class SizeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sizes')->truncate();
+        DB::table('sizes')->delete();
         DB::table('sizes')->insert([
             ['name' => 'S'],
             ['name' => 'M'],

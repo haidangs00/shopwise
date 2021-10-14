@@ -47,9 +47,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('client.layouts.banner', function ($view) {
             $view->with([
                 'banners' => Banner::where('status', 1)
-                    ->where('date_begin', '<=', Carbon::now())
+//                    ->where('date_begin', '<=', Carbon::now())
                     ->where('date_end', '>=', Carbon::now())
-                    ->latest()
+                    ->latest('id')
                     ->get()
             ]);
         });

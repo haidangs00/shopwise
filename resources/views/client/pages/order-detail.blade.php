@@ -9,16 +9,16 @@
                         <h4>Chi tiết hóa đơn</h4>
                     </div>
                     <div class="form-group">
-                        <input disabled type="text" class="form-control" name="name" value="{{Auth::user()->name}}"
+                        <input disabled type="text" class="form-control" name="name" value="{{$order->user->name}}"
                                placeholder="Họ tên *">
                     </div>
                     <div class="form-group">
                         <input disabled type="text" class="form-control" name="address"
-                               value="{{Auth::user()->address}}"
+                               value="{{$order->address}}"
                                placeholder="Địa chỉ *">
                     </div>
                     <div class="form-group">
-                        <input disabled class="form-control" type="text" name="phone" value="{{Auth::user()->phone}}"
+                        <input disabled class="form-control" type="text" name="phone" value="{{$order->phone}}"
                                placeholder="Điện thoại *">
                     </div>
                     <div class="form-group">

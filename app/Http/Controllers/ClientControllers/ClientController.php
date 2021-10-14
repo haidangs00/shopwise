@@ -41,6 +41,12 @@ use Session;
 
 class ClientController extends Controller
 {
+    public function index()
+    {
+        $products = Product::all()->random(8);
+        return view('client.pages.index', compact('products'));
+    }
+
     public function login()
     {
         $url_prev = url()->previous();
@@ -167,7 +173,6 @@ class ClientController extends Controller
                 'total_price' => $cart->total_price,
                 'total_quantity' => $cart->total_quantity,
                 'description' => $request->description,
-                'ship_id' => 1,
                 'payment_id' => $request->payment
             ]);
 

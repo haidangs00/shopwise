@@ -14,7 +14,7 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('brands')->truncate();
+        DB::table('brands')->delete();
         DB::table('brands')->insert([
             ['name' => 'Gucci'],
             ['name' => 'Chanel'],

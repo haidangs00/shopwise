@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->truncate();
+        DB::table('categories')->delete();
         DB::table('categories')->insert([
             ['name' => 'Thời trang nam', 'slug' => 'thoi-trang-nam'],
             ['name' => 'Thời trang nữ', 'slug' => 'thoi-trang-nu'],

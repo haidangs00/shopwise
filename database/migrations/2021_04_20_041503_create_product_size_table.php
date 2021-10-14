@@ -15,8 +15,8 @@ class CreateProductSizeTable extends Migration
     {
         Schema::create('product_size', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('size_id');
+            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('size_id')->constrained('sizes');
             $table->timestamps();
         });
     }

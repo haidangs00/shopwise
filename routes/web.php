@@ -40,9 +40,7 @@ use Illuminate\Support\Facades\Route;
 | Client Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return view('client.pages.index');
-})->name('clients.home');
+Route::get('/', [ClientController::class, 'index'])->name('clients.home');
 
 Route::middleware('guest:web')->group(function () {
     Route::get('/login', [ClientController::class, 'login'])->name('clients.login');

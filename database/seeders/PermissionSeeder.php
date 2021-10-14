@@ -14,7 +14,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->truncate();
+        DB::table('permissions')->delete();
         DB::table('permissions')->insert([
             ['name' => 'user', 'display_name' => 'Quản lý khách hàng'],
             ['name' => 'admin', 'display_name' => 'Quản lý quản trị viên'],

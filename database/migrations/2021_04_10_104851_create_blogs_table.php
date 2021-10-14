@@ -20,7 +20,7 @@ class CreateBlogsTable extends Migration
             $table->text('content');
             $table->text('summary')->nullable();
             $table->tinyInteger('status')->default(1)->comment('active:1, inactive:0');
-            $table->unsignedBigInteger('blog_category_id');
+            $table->foreignId('blog_category_id')->constrained('blog_categories');
             $table->timestamps();
         });
     }

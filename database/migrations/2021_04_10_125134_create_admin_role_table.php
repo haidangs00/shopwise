@@ -15,8 +15,8 @@ class CreateAdminRoleTable extends Migration
     {
         Schema::create('admin_role', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('admin_id');
-            $table->unsignedBigInteger('role_id');
+            $table->foreignId('admin_id')->constrained('admins');
+            $table->foreignId('role_id')->constrained('roles');
             $table->timestamps();
         });
     }
