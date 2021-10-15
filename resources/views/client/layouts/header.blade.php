@@ -4,23 +4,23 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="d-flex align-items-center justify-content-center justify-content-md-start">
-                        <div class="lng_dropdown mr-2">
-                            <select name="countries" class="custome_select">
-                                <option value='fn' data-image="{{url('client')}}/images/vn.png" data-title="France">
-                                    Tiếng Việt
-                                </option>
-                                <option value='en' data-image="{{url('client')}}/images/eng.png" data-title="English">
-                                    Tiếng Anh
-                                </option>
-                            </select>
-                        </div>
-                        <div class="mr-3">
-                            <select name="countries" class="custome_select">
-                                <option value='USD' data-title="USD">USD</option>
-                                <option value='EUR' data-title="EUR">EUR</option>
-                                <option value='GBR' data-title="GBR">GBR</option>
-                            </select>
-                        </div>
+{{--                        <div class="lng_dropdown mr-2">--}}
+{{--                            <select name="countries" class="custome_select">--}}
+{{--                                <option value='fn' data-image="{{url('client')}}/images/vn.png" data-title="France">--}}
+{{--                                    Tiếng Việt--}}
+{{--                                </option>--}}
+{{--                                <option value='en' data-image="{{url('client')}}/images/eng.png" data-title="English">--}}
+{{--                                    Tiếng Anh--}}
+{{--                                </option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                        <div class="mr-3">--}}
+{{--                            <select name="countries" class="custome_select">--}}
+{{--                                <option value='USD' data-title="USD">USD</option>--}}
+{{--                                <option value='EUR' data-title="EUR">EUR</option>--}}
+{{--                                <option value='GBR' data-title="GBR">GBR</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
                         <ul class="contact_detail text-center text-lg-left">
                             <li><i class="ti-mobile"></i><span>123-456-7890</span></li>
                         </ul>

@@ -11,22 +11,24 @@
                             <div class="heading_s1">
                                 <h3>Đăng nhập</h3>
                             </div>
-                            <form class="form-action" method="post">
+                            <form class="form-action needs-validation" novalidate method="post">
                                 @csrf
                                 <input type="hidden" name="action" value="{{$url_prev}}">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập">
-                                    <span class="error-msg" error-for="user_name"></span>
+                                    <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required>
+                                    <div class="invalid-feedback" error-for="user_name">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="password" placeholder="Mật khẩu">
-                                    <span class="error-msg" error-for="password"></span>
+                                    <input class="form-control" type="password" name="password" placeholder="Mật khẩu" required>
+                                    <div class="invalid-feedback" error-for="password">
+                                    </div>
                                 </div>
                                 <div class="login_footer form-group">
                                     <div class="chek-form">
                                         <div class="custome-checkbox">
                                             <input class="form-check-input" type="checkbox" name="remember" id="exampleCheckbox1" value="">
-                                            <label class="form-check-label" for="exampleCheckbox1"><span>Lưu tài khoản</span></label>
+                                            <label style="color: #687188 !important" class="form-check-label" for="exampleCheckbox1"><span>Lưu tài khoản</span></label>
                                         </div>
                                     </div>
                                     <a href="{{route('clients.forgot_password')}}">Quên mật khẩu?</a>

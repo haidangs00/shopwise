@@ -10,10 +10,10 @@
                         <div class="box_right d-flex lms_block">
                             <div class="serach_field_2">
                                 <div class="search_inner">
-                                    <form class="js-search-form" action="{{route('products.index')}}"
+                                    <form class="js-search-form" method="get" action="{{route('products.index')}}"
                                           data-container="#js_list_products">
                                         <div class="search_field">
-                                            <input type="text" name="search_key" placeholder="Tìm kiếm...">
+                                            <input class="js-search-key" type="text" name="search_key" placeholder="Tìm kiếm...">
                                         </div>
                                         <button type="submit"> <i class="ti-search"></i> </button>
                                     </form>

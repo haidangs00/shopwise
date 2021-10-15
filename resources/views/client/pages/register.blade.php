@@ -10,42 +10,49 @@
                             <div class="heading_s1">
                                 <h3>Đăng ký tài khoản</h3>
                             </div>
-                            <form class="form-action" method="post">
+                            <form class="form-action needs-validation" method="post" novalidate>
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="name" placeholder="Họ tên">
-                                    <span class="error-msg" error-for="name"></span>
+                                    <input type="text" class="form-control" name="name" placeholder="Họ tên" required>
+                                    <div class="invalid-feedback" error-for="name">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="email" placeholder="Email">
-                                    <span class="error-msg" error-for="email"></span>
+                                    <input type="text" class="form-control" name="email" placeholder="Email" required>
+                                    <div class="invalid-feedback" error-for="email">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="phone" placeholder="Số điện thoại">
-                                    <span class="error-msg" error-for="phone"></span>
+                                    <input type="text" class="form-control" name="phone" placeholder="Số điện thoại" required>
+                                    <div class="invalid-feedback" error-for="phone">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="address" placeholder="Địa chỉ">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập">
-                                    <span class="error-msg" error-for="user_name"></span>
+                                    <input type="text" class="form-control" name="user_name" placeholder="Tên đăng nhập" required>
+                                    <div class="invalid-feedback" error-for="user_name">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="password" placeholder="Mật khẩu">
-                                    <span class="error-msg" error-for="password"></span>
+                                    <input class="form-control" type="password" name="password" placeholder="Mật khẩu" required>
+                                    <div class="invalid-feedback" error-for="password">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="re_password" placeholder="Xác nhận mật khẩu">
-                                    <span class="error-msg" error-for="re_password"></span>
+                                    <input class="form-control" type="password" name="re_password" placeholder="Xác nhận mật khẩu" required>
+                                    <div class="invalid-feedback" error-for="re_password">
+                                    </div>
                                 </div>
                                 <div class="login_footer form-group">
                                     <div class="chek-form">
                                         <div class="custome-checkbox">
-                                            <input class="form-check-input" type="checkbox" name="check" id="exampleCheckbox2">
+                                            <input class="form-check-input" type="checkbox" name="check" id="exampleCheckbox2" required>
                                             <label class="form-check-label" for="exampleCheckbox2"><span>Tôi đồng ý với các điều khoản & chính sách.</span></label>
                                         </div>
-                                        <span class="error-msg" error-for="check"></span>
+                                        <div class="invalid-feedback" error-for="check">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">

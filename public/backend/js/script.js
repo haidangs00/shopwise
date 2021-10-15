@@ -165,14 +165,15 @@ $(document).ready(function () {
         });
     });
 
-    $('.js-search-form').on('submit', function (e) {
-        e.preventDefault();
-        let form = $(this);
+    $('.js-search-key').on('keyup', function (e) {
+        // e.preventDefault();
+        let form = $('.js-search-form');
+        let key = $(this).val();
 
         $.ajax({
             url: form.attr('action'),
             type: form.attr('method'),
-            data: form.serialize(),
+            data: { search_key: key },
             success: function (response) {
                 if (response.status) {
                     $(form.data('container')).html(response.data);

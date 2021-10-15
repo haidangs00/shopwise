@@ -16,8 +16,8 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->delete();
         DB::table('categories')->insert([
-            ['name' => 'Thời trang nam', 'slug' => 'thoi-trang-nam'],
-            ['name' => 'Thời trang nữ', 'slug' => 'thoi-trang-nu'],
+            ['name' => 'Thời trang nữ', 'slug' => 'thoi-trang-nam'],
+            ['name' => 'Thời trang nam', 'slug' => 'thoi-trang-nu'],
             ['name' => 'Thời trang trẻ em', 'slug' => 'thoi-trang-tre-em'],
 
         ]);

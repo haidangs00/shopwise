@@ -131,7 +131,7 @@
 <!-- scripts js -->
 <script src="{{url('client')}}/js/scripts.js"></script>
 <script src="{{url('client')}}/js/customs.js"></script>
-
+<script src="{{url('client')}}/js/form-valid.js"></script>
 
 </body>
 

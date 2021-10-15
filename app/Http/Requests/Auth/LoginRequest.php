@@ -34,7 +34,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'user_name.required' => 'Vui lòng nhập tên đăng nhập',
-            'user_name.regex' => 'Tên đăng nhập không hợp lệ',
+//            'user_name.regex' => 'Tên đăng nhập không hợp lệ',
 
             'password.required' => 'Vui lòng nhập mật khẩu'
         ];
